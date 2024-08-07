@@ -16,14 +16,18 @@ def _connect_to_db(db_name):
     """
     Pass in user login details to MySQL
     """
-    cnx = mysql.connector.connect(
-        host=HOST,
-        user=USER,
-        password=PASSWORD,
-        auth_plugin='mysql_native_password',
-        database=db_name
-    )
-    return cnx
+    try:
+
+        cnx = mysql.connector.connect(
+            host=HOST,
+            user=USER,
+            password=PASSWORD,
+            auth_plugin='mysql_native_password',
+            database=db_name
+        )
+        return cnx
+    except Exception as e:
+        print(f'failed to connect + {str(e)}')
 
 
 def connect_db(query):
@@ -31,7 +35,7 @@ def connect_db(query):
     Connects to database and passes in query
     """
     try:
-        db_name = 'pokemon-game'
+        db_name = 'pokemon_game'
         db_connection = _connect_to_db(db_name)
         cur = db_connection.cursor(dictionary=True)
         print("Connected to DB: %s" % db_name)
@@ -46,3 +50,6 @@ def connect_db(query):
             db_connection.close()
             print('DB connection is closed')
         return result
+
+if __name__ == '__main__':
+    pass
