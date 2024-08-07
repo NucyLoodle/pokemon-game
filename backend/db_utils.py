@@ -3,9 +3,9 @@ Functions to connect to and query the database
 """
 
 import mysql.connector
-from backend.config import HOST, USER, PASSWORD
-from flask import request, jsonify
-from datetime import datetime
+from config import HOST, USER, PASSWORD
+#from flask import request, jsonify
+#from datetime import datetime
 
 
 class DbConnectionError(Exception):
@@ -31,7 +31,7 @@ def connect_db(query):
     Connects to database and passes in query
     """
     try:
-        db_name = 'Plant_base'
+        db_name = 'pokemon-game'
         db_connection = _connect_to_db(db_name)
         cur = db_connection.cursor(dictionary=True)
         print("Connected to DB: %s" % db_name)
