@@ -1,8 +1,20 @@
+import requests
+from pprint import pprint as pp
+
+
+
 """
 Functions to create the initial battle between player and CPU
 """
 
-# get three pokemon from the pokeAPI
+# get the three starter pokemon from the pokeAPI
+
+id = "1"
+api_url = "https://pokeapi.co/api/v2/pokemon/{0}".format(id)
+response = requests.get(url=api_url)
+data = response.json()
+pp(data)
+
 """later: display pokemon stats, type, and randomise available moves"""
 # ask player to choose their pokemon
 # up to four moves are allocated to the player's pokemon randomly
