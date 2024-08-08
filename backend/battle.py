@@ -33,21 +33,28 @@ api_url = "https://pokeapi.co/api/v2/pokemon/4"
 response = requests.get(api_url)
 data = response.json()['moves']
 
-def get_moves_level_zero():
+def get_initial_moves():
+    names = []
     for i in range(len(data)):
-        print(i)
-    #return data['moves'][0]['name']
+        if data[i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data[i]['version_group_details'][0]['level_learned_at'] == 1:
+            names.append(data[i]['move']['name'])
+    return names
+            
 
-print(get_moves_level_zero())
+print(get_initial_moves())
 
 
+
+#print(data[1]['version_group_details'][0]['move_learn_method']['name']) 
+
+#pp(data[104]['move']['name']) 
 """
 useful queries
 
 pp(data[0]['move']['name']) 
-# gets the name of the first move
+#gets the name of the first move
 
-pp(data[0]['version_group_details'][1]['level_learned_at'])
+pp(data[0]['version_group_details'][0]['level_learned_at'])
 # gets the level the first move is learned at
 
 pp(data[0]['version_group_details'][1]['move_learn_method']['name'])
