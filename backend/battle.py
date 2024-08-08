@@ -26,19 +26,20 @@ later: display pokemon stats, type, and randomise available moves"""
 
 # ask player to choose their pokemon
 print("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.")
+
 # up to four moves are allocated to the player's pokemon randomly
 # filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
 
-api_url = "https://pokeapi.co/api/v2/pokemon/4"
+api_url = "https://pokeapi.co/api/v2/pokemon/1"
 response = requests.get(api_url)
 data = response.json()['moves']
 
 def get_initial_moves():
-    names = []
+    move_names = []
     for i in range(len(data)):
         if data[i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data[i]['version_group_details'][0]['level_learned_at'] == 1:
-            names.append(data[i]['move']['name'])
-    return names
+            move_names.append(data[i]['move']['name'])
+    return move_names
             
 
 print(get_initial_moves())
