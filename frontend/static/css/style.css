@@ -1,0 +1,8 @@
+/* Box Model Hack */
+*{
+    box-sizing: border-box;
+  }
+
+  p {
+    color: red;
+  }
