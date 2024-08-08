@@ -1,4 +1,5 @@
 import requests
+import json
 from pprint import pprint as pp
 
 
@@ -8,16 +9,52 @@ Functions to create the initial battle between player and CPU
 """
 
 # get the three starter pokemon from the pokeAPI
+"""
+later: display images of pokemon
+image = data['sprites']['front_default']
+
 
 id = "1"
 api_url = "https://pokeapi.co/api/v2/pokemon/{0}".format(id)
 response = requests.get(url=api_url)
 data = response.json()
-pp(data)
 
-"""later: display pokemon stats, type, and randomise available moves"""
+
+name = data['name']
+
+later: display pokemon stats, type, and randomise available moves"""
+
 # ask player to choose their pokemon
+print("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.")
 # up to four moves are allocated to the player's pokemon randomly
+# filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
+
+api_url = "https://pokeapi.co/api/v2/pokemon/4"
+response = requests.get(api_url)
+data = response.json()['moves']
+
+def get_moves_level_zero():
+    for i in range(len(data)):
+        print(i)
+    #return data['moves'][0]['name']
+
+print(get_moves_level_zero())
+
+
+"""
+useful queries
+
+pp(data[0]['move']['name']) 
+# gets the name of the first move
+
+pp(data[0]['version_group_details'][1]['level_learned_at'])
+# gets the level the first move is learned at
+
+pp(data[0]['version_group_details'][1]['move_learn_method']['name'])
+# gets the way the move is learned
+
+"""
+
 # store this pokemon in the db
 # cpu randomly chooses pokemon from remaining two. 
 # up to four moves are allocated to the cpu pokemon randomly
