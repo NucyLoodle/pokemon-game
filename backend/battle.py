@@ -36,7 +36,8 @@ def get_initial_moves(pokemon_name):
     return move_names
             
 # up to four moves are allocated to the player's pokemon
-print(f"The moves that {user_pokemon_name} has are {get_initial_moves(user_pokemon_name)}")
+user_pokemon_moves = get_initial_moves(user_pokemon_name)
+print(f"The moves that {user_pokemon_name} has are {user_pokemon_moves}")
 
 # store this pokemon in the db
 
