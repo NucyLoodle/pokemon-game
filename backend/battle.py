@@ -19,10 +19,6 @@ later: display pokemon stats, type, and randomise available moves"""
 user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
 # user_pokemon_name = "charmander" # for running the functions
-# get response from API
-#api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
-#response = requests.get(api_url)
-#data = response.json()
 
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
