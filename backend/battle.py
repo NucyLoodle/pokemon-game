@@ -39,6 +39,15 @@ def get_initial_moves(pokemon_name):
 user_pokemon_moves = get_initial_moves(user_pokemon_name)
 print(f"The moves that {user_pokemon_name} has are {user_pokemon_moves}")
 
+# get pokemon hp
+
+def get_hp_stat(pokemon_name):
+    api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+    response = requests.get(api_url)
+    data = response.json()
+    hp_stat = data['stats'][0]['base_stat']
+    return hp_stat
+
 # store this pokemon in the db
 
 # cpu randomly chooses pokemon from remaining two.
@@ -56,11 +65,11 @@ print(f"The moves for {cpu_pokemon_name} are {cpu_pokemon_moves}")
 
 
 
-
-
 # cpu goes first
 # cpu chooses random move from available moves
-# each move will have mocked damage
+# each move will have mocked random damage 
+
+
 """later: calculate damage using https://wikimedia.org/api/rest_v1/media/math/render/svg/4445736b8e1e8be597cf7901e4ad0be60b54d1ab"""
 # if damage occurs, reduce HP of player's pokemon accordingly
 # player goes next
