@@ -35,12 +35,6 @@ def get_initial_moves(pokemon_name):
             move_names.append(data['moves'][i]['move']['name'])
     return move_names
             
-# up to four moves are allocated to the player's pokemon
-user_pokemon_moves = get_initial_moves(user_pokemon_name)
-print(f"The moves that {user_pokemon_name} has are {user_pokemon_moves}")
-
-# get pokemon hp
-
 def get_hp_stat(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
     response = requests.get(api_url)
@@ -48,12 +42,9 @@ def get_hp_stat(pokemon_name):
     hp_stat = data['stats'][0]['base_stat']
     return hp_stat
 
-user_pokemon_hp = get_hp_stat(user_pokemon_name)
-print(f"The hp for {user_pokemon_name} is {user_pokemon_hp}")
-# store this pokemon in the db
-
 # cpu randomly chooses pokemon from remaining two.
 """later: cpu chooses pokemon with type advantage"""
+
 def cpu_pokemon_choice(user_pokemon_name):
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
@@ -61,15 +52,12 @@ def cpu_pokemon_choice(user_pokemon_name):
 
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
-# up to four moves are allocated to the cpu pokemon 
-cpu_pokemon_moves = get_initial_moves(cpu_pokemon_name)
-print(f"The moves for {cpu_pokemon_name} are {cpu_pokemon_moves}")
-
+# up to four moves are allocated to the pokemon
 # get pokemon hp
-cpu_pokemon_hp = get_hp_stat(cpu_pokemon_name)
-print(f"The hp for {cpu_pokemon_name} is {cpu_pokemon_hp}")
+"""later: store user's pokemon in the db"""
 
-
+user_pokemon = dict(name = f"{user_pokemon_name}", hp = f"{get_hp_stat(user_pokemon_name)}", moves = f"{get_initial_moves(user_pokemon_name)}" )
+cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = f"{get_hp_stat(cpu_pokemon_name)}", moves = f"{get_initial_moves(cpu_pokemon_name)}" )
 
 # cpu goes first
 # cpu chooses random move from available moves
