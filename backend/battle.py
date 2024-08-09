@@ -72,6 +72,8 @@ def cpu_turn():
     else:
         print(f"{user_pokemon['name']} fainted!")
 
+    return user_pokemon['hp']
+
 def user_turn():
     user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
     user_damage = damage()
@@ -84,6 +86,8 @@ def user_turn():
         print(" ")
     else:
         print(f"{cpu_pokemon['name']} fainted!")
+
+    return cpu_pokemon['hp']
 
 
 
@@ -102,12 +106,13 @@ def battle():
     #while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
     
     while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
+        cpu_turn()
+        user_turn()
+        if user_pokemon['hp'] < 0 or cpu_pokemon['hp'] < 0:  
+            break
         
-        if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:  
-            cpu_turn()
-
-        if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
-            user_turn()
+        
+            
             
 
         
