@@ -1,6 +1,7 @@
 import requests
 import json
 from pprint import pprint as pp
+import random
 
 
 
@@ -38,7 +39,8 @@ print(f"The moves that {user_pokemon_name} has are {get_initial_moves()}")
 # cpu randomly chooses pokemon from remaining two.
 def cpu_pokemon_choice():
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
-    return available_pokemon
+    cpu_pokemon_name = random.choice(available_pokemon)
+    return cpu_pokemon_name
 
 print(cpu_pokemon_choice())
 
