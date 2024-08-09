@@ -63,8 +63,6 @@ cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_na
 def damage():
     return random.randint(1, 10)
 
-print(cpu_pokemon['moves'])
-
 def battle():
 
     # cpu goes first
