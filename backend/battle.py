@@ -15,10 +15,6 @@ starter_pokemon = ['bulbasaur', 'charmander', 'squirtle']
 later: display images of pokemon
 later: display pokemon stats, type, and randomise available moves"""
 
-# ask player to choose their pokemon
-user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
-
-# user_pokemon_name = "charmander" # for running the functions
 
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
@@ -48,14 +44,7 @@ def cpu_pokemon_choice(user_pokemon_name):
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
     return cpu_pokemon_name
-
-cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
-
-"""later: store user's pokemon in the db"""
-
-user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
-cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
-
+    
 def damage():
     return random.randint(1, 10)
 
@@ -107,14 +96,16 @@ def battle():
             break
         
         
-            
-            
+# ask player to choose their pokemon
+user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
-        
-        
-    
+# user_pokemon_name = "charmander" # for running the functions
+cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
-        
+"""later: store user's pokemon in the db"""
+
+user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
+cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
 
 battle()
 
