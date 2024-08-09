@@ -31,12 +31,13 @@ def get_initial_moves():
             move_names.append(data['moves'][i]['move']['name'])
     return move_names
             
-# up to four moves are allocated to the player's pokemon randomly
+# up to four moves are allocated to the player's pokemon
 print(f"The moves that {user_pokemon_name} has are {get_initial_moves()}")
 
 # store this pokemon in the db
 
 # cpu randomly chooses pokemon from remaining two.
+"""later: cpu chooses pokemon with type advantage"""
 def cpu_pokemon_choice():
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
@@ -45,8 +46,8 @@ def cpu_pokemon_choice():
 print(cpu_pokemon_choice())
 
 
-# up to four moves are allocated to the cpu pokemon randomly
-"""later: cpu chooses pokemon with type advantage"""
+# up to four moves are allocated to the cpu pokemon 
+
 
 
 # cpu goes first
