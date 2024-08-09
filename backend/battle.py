@@ -6,13 +6,6 @@ import random
 Functions to create the initial battle between player and CPU
 """
 
-# get the three starter pokemon from the pokeAPI
-starter_pokemon = ['bulbasaur', 'charmander', 'squirtle']
-"""
-later: display images of pokemon
-later: display pokemon stats, type, and randomise available moves"""
-
-
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
     response = requests.get(api_url)
@@ -102,7 +95,11 @@ user_pokemon_name = input("Now, which Pokemon do you want? The three available P
 # user_pokemon_name = "charmander" # for running the functions
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
-"""later: store user's pokemon in the db"""
+"""
+later: store user's pokemon in the db
+later: display images of pokemon
+later: display pokemon stats, type, and randomise available moves when user chooses
+"""
 
 """
 Get stats for pokemon
