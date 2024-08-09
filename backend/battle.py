@@ -1,9 +1,6 @@
 import requests
-import json
 from pprint import pprint as pp
 import random
-
-
 
 """
 Functions to create the initial battle between player and CPU
@@ -88,14 +85,17 @@ def battle():
     # player chposes random move from avaible moves
     # if damage occurs, reduce HP of cpu's pokemon accordingly
     # repeat until hp of either pokemon reaches 0
-   
+    # declare winner
+
     while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
         cpu_turn()
         user_turn()
         if user_pokemon['hp'] < 0 or cpu_pokemon['hp'] < 0:  
             break
-        
-        
+
+"""
+Get user input and determine cpu pokemon
+"""               
 # ask player to choose their pokemon
 user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
@@ -104,6 +104,9 @@ cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 """later: store user's pokemon in the db"""
 
+"""
+Get stats for pokemon
+"""
 user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
 cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
 
@@ -114,5 +117,5 @@ battle()
 
 
 
-# declare winner
+
 """later: introduce xp, level up pokemon, battle again"""
