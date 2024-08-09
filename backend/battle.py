@@ -9,6 +9,7 @@ Functions to create the initial battle between player and CPU
 """
 
 # get the three starter pokemon from the pokeAPI
+starter_pokemon = ['bulbasaur', 'charmander', 'squirtle']
 """
 later: display images of pokemon
 later: display pokemon stats, type, and randomise available moves"""
@@ -33,7 +34,15 @@ def get_initial_moves():
 print(f"The moves that {pokemon_name} has are {get_initial_moves()}")
 
 # store this pokemon in the db
-# cpu randomly chooses pokemon from remaining two. 
+
+# cpu randomly chooses pokemon from remaining two.
+def cpu_pokemon_choice():
+    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != pokemon_name]
+    return available_pokemon
+
+print(cpu_pokemon_choice())
+
+
 # up to four moves are allocated to the cpu pokemon randomly
 """later: cpu chooses pokemon with type advantage"""
 
