@@ -15,10 +15,10 @@ later: display images of pokemon
 later: display pokemon stats, type, and randomise available moves"""
 
 # ask player to choose their pokemon
-pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
+user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
 # get response from API
-api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+api_url = f"https://pokeapi.co/api/v2/pokemon/{user_pokemon_name}"
 response = requests.get(api_url)
 data = response.json()
 
@@ -31,13 +31,13 @@ def get_initial_moves():
     return move_names
             
 # up to four moves are allocated to the player's pokemon randomly
-print(f"The moves that {pokemon_name} has are {get_initial_moves()}")
+print(f"The moves that {user_pokemon_name} has are {get_initial_moves()}")
 
 # store this pokemon in the db
 
 # cpu randomly chooses pokemon from remaining two.
 def cpu_pokemon_choice():
-    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != pokemon_name]
+    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     return available_pokemon
 
 print(cpu_pokemon_choice())
