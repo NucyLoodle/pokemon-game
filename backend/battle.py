@@ -51,8 +51,6 @@ def cpu_pokemon_choice(user_pokemon_name):
 
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
-
-
 """later: store user's pokemon in the db"""
 
 user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
@@ -60,6 +58,34 @@ cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_na
 
 def damage():
     return random.randint(1, 10)
+
+def cpu_turn():
+    cpu_move = random.choice(cpu_pokemon['moves'])
+    cpu_damage = damage()
+    print(" ")
+    print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+    print(" ")
+    user_pokemon['hp']-= cpu_damage
+    if user_pokemon['hp'] > 0:
+        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+        print(" ")
+    else:
+        print(f"{user_pokemon['name']} fainted!")
+
+def user_turn():
+    user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
+    user_damage = damage()
+    print(" ")
+    print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
+    print(" ")
+    cpu_pokemon['hp']-= user_damage
+    if cpu_pokemon['hp'] > 0:
+        print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
+        print(" ")
+    else:
+        print(f"{cpu_pokemon['name']} fainted!")
+
+
 
 def battle():
 
@@ -78,30 +104,10 @@ def battle():
     while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
         
         if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:  
-            cpu_move = random.choice(cpu_pokemon['moves'])
-            cpu_damage = damage()
-            print(" ")
-            print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-            print(" ")
-            user_pokemon['hp']-= cpu_damage
-            if user_pokemon['hp'] > 0:
-                print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
-                print(" ")
-            else:
-                print(f"{user_pokemon['name']} fainted!")
+            cpu_turn()
 
         if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
-            user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
-            user_damage = damage()
-            print(" ")
-            print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
-            print(" ")
-            cpu_pokemon['hp']-= user_damage
-            if cpu_pokemon['hp'] > 0:
-                print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
-                print(" ")
-            else:
-                print(f"{cpu_pokemon['name']} fainted!")
+            user_turn()
             
 
         
