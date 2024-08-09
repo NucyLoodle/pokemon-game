@@ -44,10 +44,9 @@ def get_hp_stat(pokemon_name):
     hp_stat = data['stats'][0]['base_stat']
     return hp_stat
 
-# cpu randomly chooses pokemon from remaining two.
-"""later: cpu chooses pokemon with type advantage"""
-
 def cpu_pokemon_choice(user_pokemon_name):
+    # cpu randomly chooses pokemon from remaining two.
+    """later: cpu chooses pokemon with type advantage"""
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
     return cpu_pokemon_name
@@ -58,19 +57,42 @@ cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 """later: store user's pokemon in the db"""
 
-user_pokemon = dict(name = f"{user_pokemon_name}", hp = f"{get_hp_stat(user_pokemon_name)}", moves = f"{get_initial_moves(user_pokemon_name)}" )
-cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = f"{get_hp_stat(cpu_pokemon_name)}", moves = f"{get_initial_moves(cpu_pokemon_name)}" )
+user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = f"{get_initial_moves(user_pokemon_name)}" )
+cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
 
-# cpu goes first
-# cpu chooses random move from available moves
-# each move will have mocked random damage 
+def damage():
+    return random.randint(1, 10)
+
+print(cpu_pokemon['moves'])
+
+def battle():
+
+    # cpu goes first
+    # cpu chooses random move from available moves
+    # each move will have mocked random damage 
+    """later: calculate damage using https://wikimedia.org/api/rest_v1/media/math/render/svg/4445736b8e1e8be597cf7901e4ad0be60b54d1ab"""
+    # if damage occurs, reduce HP of player's pokemon accordingly
+    # player goes next
+    # player chposes random move from avaible moves
+    # if damage occurs, reduce HP of cpu's pokemon accordingly
+    # repeat until hp of either pokemon reaches 0
+
+    while user_pokemon['hp'] > 0 and cpu_pokemon['hp'] > 0:
+        cpu_move = random.choice(cpu_pokemon['moves'])
+        print(cpu_move)
+        print(f"{cpu_pokemon['name']} used {cpu_move}!")
+        cpu_damage = damage()
+        print(cpu_damage)
+        user_pokemon['hp']-= cpu_damage
+        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+        return
+
+battle()
 
 
-"""later: calculate damage using https://wikimedia.org/api/rest_v1/media/math/render/svg/4445736b8e1e8be597cf7901e4ad0be60b54d1ab"""
-# if damage occurs, reduce HP of player's pokemon accordingly
-# player goes next
-# player chposes random move from avaible moves
-# if damage occurs, reduce HP of cpu's pokemon accordingly
-# repeat until hp of either pokemon reaches 0
+
+
+
+
 # declare winner
 """later: introduce xp, level up pokemon, battle again"""
