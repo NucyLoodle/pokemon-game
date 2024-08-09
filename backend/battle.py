@@ -50,7 +50,8 @@ def cpu_pokemon_choice(user_pokemon_name):
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 # up to four moves are allocated to the cpu pokemon 
-print(f"The moves for {cpu_pokemon_name} are {get_initial_moves(cpu_pokemon_name)}")
+cpu_pokemon_moves = get_initial_moves(cpu_pokemon_name)
+print(f"The moves for {cpu_pokemon_name} are {cpu_pokemon_moves}")
 
 
 
