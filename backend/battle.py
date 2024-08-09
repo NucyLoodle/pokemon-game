@@ -16,9 +16,9 @@ later: display images of pokemon
 later: display pokemon stats, type, and randomise available moves"""
 
 # ask player to choose their pokemon
-# user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
+user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
-user_pokemon_name = "charmander" # for running the functions
+# user_pokemon_name = "charmander" # for running the functions
 # get response from API
 #api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
 #response = requests.get(api_url)
@@ -82,20 +82,26 @@ def battle():
         if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:  
             cpu_move = random.choice(cpu_pokemon['moves'])
             cpu_damage = damage()
+            print(" ")
             print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+            print(" ")
             user_pokemon['hp']-= cpu_damage
             if user_pokemon['hp'] > 0:
                 print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+                print(" ")
             else:
                 print(f"{user_pokemon['name']} fainted!")
 
         if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
-            user_move = random.choice(user_pokemon['moves'])
+            user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
             user_damage = damage()
+            print(" ")
             print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
+            print(" ")
             cpu_pokemon['hp']-= user_damage
             if cpu_pokemon['hp'] > 0:
                 print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
+                print(" ")
             else:
                 print(f"{cpu_pokemon['name']} fainted!")
             
