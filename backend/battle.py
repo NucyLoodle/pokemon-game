@@ -89,10 +89,7 @@ def user_turn():
 
     return cpu_pokemon['hp']
 
-
-
 def battle():
-
     # cpu goes first
     # cpu chooses random move from available moves
     # each move will have mocked random damage 
@@ -102,9 +99,7 @@ def battle():
     # player chposes random move from avaible moves
     # if damage occurs, reduce HP of cpu's pokemon accordingly
     # repeat until hp of either pokemon reaches 0
-
-    #while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
-    
+   
     while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
         cpu_turn()
         user_turn()
