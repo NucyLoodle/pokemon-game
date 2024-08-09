@@ -31,13 +31,13 @@ pokemon_name = input("Now, which Pokemon do you want? The three available Pokemo
 
 api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
 response = requests.get(api_url)
-data = response.json()['moves']
+data = response.json()
 
 def get_initial_moves():
     move_names = []
     for i in range(len(data)):
-        if data[i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data[i]['version_group_details'][0]['level_learned_at'] == 1:
-            move_names.append(data[i]['move']['name'])
+        if data['moves'][i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data['moves'][i]['version_group_details'][0]['level_learned_at'] == 1:
+            move_names.append(data['moves'][i]['move']['name'])
     return move_names
             
 
