@@ -48,6 +48,8 @@ def get_hp_stat(pokemon_name):
     hp_stat = data['stats'][0]['base_stat']
     return hp_stat
 
+user_pokemon_hp = get_hp_stat(user_pokemon_name)
+print(f"The hp for {user_pokemon_name} is {user_pokemon_hp}")
 # store this pokemon in the db
 
 # cpu randomly chooses pokemon from remaining two.
@@ -62,6 +64,10 @@ cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 # up to four moves are allocated to the cpu pokemon 
 cpu_pokemon_moves = get_initial_moves(cpu_pokemon_name)
 print(f"The moves for {cpu_pokemon_name} are {cpu_pokemon_moves}")
+
+# get pokemon hp
+cpu_pokemon_hp = get_hp_stat(cpu_pokemon_name)
+print(f"The hp for {cpu_pokemon_name} is {cpu_pokemon_hp}")
 
 
 
