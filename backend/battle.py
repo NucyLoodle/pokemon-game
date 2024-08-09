@@ -77,15 +77,36 @@ def battle():
     # if damage occurs, reduce HP of cpu's pokemon accordingly
     # repeat until hp of either pokemon reaches 0
 
-    while user_pokemon['hp'] > 0 and cpu_pokemon['hp'] > 0:
-        cpu_move = random.choice(cpu_pokemon['moves'])
-        print(cpu_move)
-        print(f"{cpu_pokemon['name']} used {cpu_move}!")
-        cpu_damage = damage()
-        print(cpu_damage)
-        user_pokemon['hp']-= cpu_damage
-        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
-        return
+    #while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
+    
+    while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
+        
+        if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:  
+            cpu_move = random.choice(cpu_pokemon['moves'])
+            cpu_damage = damage()
+            print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+            user_pokemon['hp']-= cpu_damage
+            if user_pokemon['hp'] > 0:
+                print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+            else:
+                print(f"{user_pokemon['name']} fainted!")
+
+        if user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
+            user_move = random.choice(user_pokemon['moves'])
+            user_damage = damage()
+            print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
+            cpu_pokemon['hp']-= user_damage
+            if cpu_pokemon['hp'] > 0:
+                print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
+            else:
+                print(f"{cpu_pokemon['name']} fainted!")
+            
+
+        
+        
+    
+
+        
 
 battle()
 
