@@ -29,6 +29,7 @@ def get_initial_moves(pokemon_name):
     response = requests.get(api_url)
     data = response.json()
     # filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
+    """later: up to four moves are allocated to the pokemon"""
     move_names = []
     for i in range(len(data)):
         if data['moves'][i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data['moves'][i]['version_group_details'][0]['level_learned_at'] == 1:
@@ -36,6 +37,7 @@ def get_initial_moves(pokemon_name):
     return move_names
             
 def get_hp_stat(pokemon_name):
+    # get pokemon hp
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
     response = requests.get(api_url)
     data = response.json()
@@ -52,8 +54,8 @@ def cpu_pokemon_choice(user_pokemon_name):
 
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
-# up to four moves are allocated to the pokemon
-# get pokemon hp
+
+
 """later: store user's pokemon in the db"""
 
 user_pokemon = dict(name = f"{user_pokemon_name}", hp = f"{get_hp_stat(user_pokemon_name)}", moves = f"{get_initial_moves(user_pokemon_name)}" )
