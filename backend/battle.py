@@ -57,7 +57,7 @@ cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 """later: store user's pokemon in the db"""
 
-user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = f"{get_initial_moves(user_pokemon_name)}" )
+user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
 cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
 
 def damage():
