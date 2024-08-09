@@ -18,12 +18,16 @@ later: display pokemon stats, type, and randomise available moves"""
 # ask player to choose their pokemon
 user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
-# get response from API
-api_url = f"https://pokeapi.co/api/v2/pokemon/{user_pokemon_name}"
-response = requests.get(api_url)
-data = response.json()
 
-def get_initial_moves():
+# get response from API
+#api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+#response = requests.get(api_url)
+#data = response.json()
+
+def get_initial_moves(pokemon_name):
+    api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
+    response = requests.get(api_url)
+    data = response.json()
     # filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
     move_names = []
     for i in range(len(data)):
@@ -32,7 +36,7 @@ def get_initial_moves():
     return move_names
             
 # up to four moves are allocated to the player's pokemon
-print(f"The moves that {user_pokemon_name} has are {get_initial_moves()}")
+print(f"The moves that {user_pokemon_name} has are {get_initial_moves(user_pokemon_name)}")
 
 # store this pokemon in the db
 
@@ -43,8 +47,9 @@ def cpu_pokemon_choice():
     cpu_pokemon_name = random.choice(available_pokemon)
     return cpu_pokemon_name
 
-print(cpu_pokemon_choice())
+cpu_pokemon_name = cpu_pokemon_choice()
 
+print(get_initial_moves(cpu_pokemon_name))
 
 # up to four moves are allocated to the cpu pokemon 
 
