@@ -16,9 +16,9 @@ later: display images of pokemon
 later: display pokemon stats, type, and randomise available moves"""
 
 # ask player to choose their pokemon
-user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
+# user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
-
+user_pokemon_name = "charmander" # for running the functions
 # get response from API
 #api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
 #response = requests.get(api_url)
@@ -42,16 +42,17 @@ print(f"The moves that {user_pokemon_name} has are {get_initial_moves(user_pokem
 
 # cpu randomly chooses pokemon from remaining two.
 """later: cpu chooses pokemon with type advantage"""
-def cpu_pokemon_choice():
+def cpu_pokemon_choice(user_pokemon_name):
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
     return cpu_pokemon_name
 
-cpu_pokemon_name = cpu_pokemon_choice()
-
-print(get_initial_moves(cpu_pokemon_name))
+cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 # up to four moves are allocated to the cpu pokemon 
+print(f"The moves for {cpu_pokemon_name} are {get_initial_moves(cpu_pokemon_name)}")
+
+
 
 
 
