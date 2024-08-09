@@ -25,12 +25,11 @@ name = data['name']
 later: display pokemon stats, type, and randomise available moves"""
 
 # ask player to choose their pokemon
-print("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.")
-
+pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 # up to four moves are allocated to the player's pokemon randomly
 # filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
 
-api_url = "https://pokeapi.co/api/v2/pokemon/1"
+api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
 response = requests.get(api_url)
 data = response.json()['moves']
 
