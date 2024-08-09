@@ -24,10 +24,14 @@ user_pokemon_name = input("Now, which Pokemon do you want? The three available P
 #response = requests.get(api_url)
 #data = response.json()
 
-def get_initial_moves(pokemon_name):
+def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
     response = requests.get(api_url)
     data = response.json()
+    return data
+
+def get_initial_moves(pokemon_name):
+    data = get_response_from_api(pokemon_name)
     # filter data by level-learned-at: 1 and mover_learn_method: name: "level-up"
     """later: up to four moves are allocated to the pokemon"""
     move_names = []
@@ -38,9 +42,7 @@ def get_initial_moves(pokemon_name):
             
 def get_hp_stat(pokemon_name):
     # get pokemon hp
-    api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
-    response = requests.get(api_url)
-    data = response.json()
+    data = get_response_from_api(pokemon_name)
     hp_stat = data['stats'][0]['base_stat']
     return hp_stat
 
