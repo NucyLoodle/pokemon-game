@@ -9,7 +9,7 @@ app = Flask(__name__ ,
 def main():
     return render_template('index.html')
     
-@app.route("/battle")
+@app.route("/battle/", methods=['GET', 'POST'])
 def battle_page():
     return render_template('battle.html')
 
