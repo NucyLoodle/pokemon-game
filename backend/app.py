@@ -9,7 +9,9 @@ app = Flask(__name__ ,
 def main():
     return render_template('index.html')
     
-
+@app.route("/battle")
+def battle_page():
+    return render_template('battle.html')
 
 
 if __name__ == '__main__':
