@@ -1,10 +1,10 @@
-const choiceForm = document.getElementById("userPokemonChoice")
+const choiceForm = document.getElementById("choosePokemon")
 console.log(choiceForm)
-const choiceButtons = document.querySelectorAll(".choiceMade")
+const launchGame = document.getElementById("launchGame")
 
-choiceButtons.forEach(function(button){
-    button.addEventListener("click", function() {
+
+launchGame.addEventListener("click", function() {
         choiceForm.style.display = "none"
         
     })
-})
+
