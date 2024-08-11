@@ -29,6 +29,7 @@ def get_hp_stat(pokemon_name):
     return hp_stat
 
 def cpu_pokemon_choice(user_pokemon_name):
+    starter_pokemon =["bulbasaur", "charmander", "squirtle"]
     # cpu randomly chooses pokemon from remaining two.
     """later: cpu chooses pokemon with type advantage"""
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
