@@ -28,9 +28,9 @@ def get_user_choice():
     pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}"
 
     #return battle.battle(cpu_pokemon, user_pokemon)
-    return render_template('battle.html', userChoice=user_choice, pokemonStats=pokemon_hp, pokemonMoves=pokemon_moves)
+    return render_template('battle.html', userChoice=user_choice, pokemonHp=pokemon_hp, pokemonMoves=pokemon_moves)
 
-#def display_info():
+#def take_turns():
 
 
 
