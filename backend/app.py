@@ -9,11 +9,15 @@ app = Flask(__name__ ,
 def main():
     return render_template('index.html')
     
-@app.route("/battle/", methods=['GET', 'POST'])
+@app.route("/battle/")
 def battle_page():
+    return render_template('battle.html')
+
+@app.route("/battle/", methods=['GET', 'POST'])
+def get_user_choice():
     user_pokemon_name = request.form['userPokemonChoice']
     print(user_pokemon_name)
-    return render_template('battle.html')
+    return user_pokemon_name
 
 
 if __name__ == '__main__':
