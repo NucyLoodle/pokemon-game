@@ -23,7 +23,12 @@ def get_user_choice():
     user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = battle.get_hp_stat(cpu_pokemon_name), moves = battle.get_initial_moves(cpu_pokemon_name) )
     
-    return battle.battle(cpu_pokemon, user_pokemon)
+    data = user_pokemon_name
+    #return battle.battle(cpu_pokemon, user_pokemon)
+    return render_template('battle.html', dataToRender=data)
+
+#def display_info():
+
 
 
 if __name__ == '__main__':
