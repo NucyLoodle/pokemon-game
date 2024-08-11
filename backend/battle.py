@@ -1,7 +1,7 @@
 import requests
 from pprint import pprint as pp
 import random
-from app import user_pokemon_name
+
 
 """
 Functions to create the initial battle between player and CPU
@@ -95,7 +95,7 @@ Get user input and determine cpu pokemon
 # user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
 # user_pokemon_name = "charmander" # for running the functions
-cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
+# cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
 
 """
 later: store user's pokemon in the db
