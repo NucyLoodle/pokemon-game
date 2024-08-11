@@ -12,22 +12,22 @@
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
-		<section class = "pokemon-choice-buttons">
+		<section id= "userPokemonChoice">
             <p>Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.</p>
-
-
             <form class = "userinput" method ="POST" action="/battle">
                 <button type = "submit" name = "userPokemonChoice" value="bulbasaur">Bulbasaur</button>
                 <button type = "submit" name = "userPokemonChoice" value="charmander">Charmander</button>
-                <button type = "submit" name = "userPokemonChoice" value="squirtle">Squirtle</button>
-                
+                <button type = "submit" name = "userPokemonChoice" value="squirtle">Squirtle</button>    
             </form>
+        </section>
+
+        <section id="stats"></section>
 
             <p>{{ userChoice }}</p>
             <p>{{ pokemonHp }}</p>
             <p>{{ pokemonMoves }}</p>
 
-        </section>
+        
 
 		<script type="text/javascript" src="../js/battle.js"></script>
 	</body>
