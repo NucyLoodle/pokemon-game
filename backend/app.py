@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import battle
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -16,8 +17,12 @@ def battle_page():
 @app.route("/battle/", methods=['GET', 'POST'])
 def get_user_choice():
     user_pokemon_name = request.form['userPokemonChoice']
-    print(user_pokemon_name)
-    return user_pokemon_name
+    cpu_pokemon_name = battle.cpu_pokemon_choice(user_pokemon_name)
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = battle.get_hp_stat(cpu_pokemon_name), moves = battle.get_initial_moves(cpu_pokemon_name) )
+    #print(user_pokemon_name)
+
+    return battle.battle(cpu_pokemon, user_pokemon)
 
 
 if __name__ == '__main__':
