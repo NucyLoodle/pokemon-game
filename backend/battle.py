@@ -83,8 +83,8 @@ def battle(cpu_pokemon, user_pokemon):
     # declare winner
 
     while user_pokemon['hp'] >= 0 and cpu_pokemon['hp'] >= 0:
-        cpu_turn()
-        user_turn()
+        cpu_turn(cpu_pokemon, user_pokemon)
+        user_turn(cpu_pokemon, user_pokemon)
         if user_pokemon['hp'] < 0 or cpu_pokemon['hp'] < 0:  
             break
 
