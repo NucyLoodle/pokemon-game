@@ -17,15 +17,17 @@ def battle_page():
 @app.route("/battle/", methods=['GET', 'POST'])
 def get_user_choice():
     user_pokemon_name = request.form['userPokemonChoice']
-    print(f"the user has chosen {user_pokemon_name}")
+    #print(f"the user has chosen {user_pokemon_name}")
 
     cpu_pokemon_name = battle.cpu_pokemon_choice(user_pokemon_name)
     user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = battle.get_hp_stat(cpu_pokemon_name), moves = battle.get_initial_moves(cpu_pokemon_name) )
     
-    data = user_pokemon_name
+    user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
+
+
     #return battle.battle(cpu_pokemon, user_pokemon)
-    return render_template('battle.html', dataToRender=data)
+    return render_template('battle.html', userChoice=user_choice)
 
 #def display_info():
 
