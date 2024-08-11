@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -11,6 +11,8 @@ def main():
     
 @app.route("/battle/", methods=['GET', 'POST'])
 def battle_page():
+    user_pokemon_name = request.form['userPokemonChoice']
+    print(user_pokemon_name)
     return render_template('battle.html')
 
 
