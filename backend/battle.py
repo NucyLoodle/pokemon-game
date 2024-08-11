@@ -1,6 +1,7 @@
 import requests
 from pprint import pprint as pp
 import random
+from app import user_pokemon_name
 
 """
 Functions to create the initial battle between player and CPU
@@ -39,7 +40,7 @@ def cpu_pokemon_choice(user_pokemon_name):
 def damage():
     return random.randint(1, 10)
 
-def cpu_turn():
+def cpu_turn(cpu_pokemon, user_pokemon):
     cpu_move = random.choice(cpu_pokemon['moves'])
     cpu_damage = damage()
     print(" ")
@@ -54,7 +55,7 @@ def cpu_turn():
 
     return user_pokemon['hp']
 
-def user_turn():
+def user_turn(cpu_pokemon, user_pokemon):
     user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
     user_damage = damage()
     print(" ")
@@ -69,7 +70,7 @@ def user_turn():
 
     return cpu_pokemon['hp']
 
-def battle():
+def battle(cpu_pokemon, user_pokemon):
     # cpu goes first
     # cpu chooses random move from available moves
     # each move will have mocked random damage 
@@ -91,7 +92,7 @@ def battle():
 Get user input and determine cpu pokemon
 """               
 # ask player to choose their pokemon
-user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
+# user_pokemon_name = input("Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.").lower()
 
 # user_pokemon_name = "charmander" # for running the functions
 cpu_pokemon_name = cpu_pokemon_choice(user_pokemon_name)
@@ -105,10 +106,9 @@ later: display pokemon stats, type, and randomise available moves when user choo
 """
 Get stats for pokemon
 """
-user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
-cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+#user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
+#cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
 
-battle()
 
 
 
