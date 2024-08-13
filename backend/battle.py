@@ -1,11 +1,22 @@
 import requests
 from pprint import pprint as pp
 import random
+from flask import request
 
 
 """
 Functions to create the initial battle between player and CPU
 """
+def get_user_choice():
+    user_pokemon_name = request.form['userPokemonChoice']
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
+    user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
+    pokemon_hp = f"{user_pokemon_name.capitalize()}'s hp is {user_pokemon['hp']}."
+    pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}."
+
+    string = f"{user_choice} {pokemon_hp} {pokemon_moves}"
+    return string   
+
 
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
