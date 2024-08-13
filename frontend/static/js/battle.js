@@ -28,6 +28,9 @@ form.addEventListener('submit', function(e) {
 
 });
 
+new_para = gamePlay.appendChild(document.createElement("p"))
+
+
 
 // const choiceSection = document.getElementById("userPokemonChoice")
 // console.log(choiceSection)
