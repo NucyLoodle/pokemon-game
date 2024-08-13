@@ -20,14 +20,16 @@ def battle_page():
 @app.route("/battle", methods=['POST'])
 def get_user_choice():
     user_pokemon_name = request.form['userPokemonChoice']
-    print(user_pokemon_name)
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
     user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
-    return user_choice
+    pokemon_hp = f"{user_pokemon_name.capitalize()}'s hp is {user_pokemon['hp']}."
+    pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}."
+
+    string = f"{user_choice} {pokemon_hp} {pokemon_moves}"
+    return string
    
 
-    # user_pokemon_name = request.form['userPokemonChoice']
-    # user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
-    # return user_choice
+
 
 
 # def get_user_choice():
@@ -35,12 +37,11 @@ def get_user_choice():
 #     #print(f"the user has chosen {user_pokemon_name}")
 
 #     cpu_pokemon_name = battle.cpu_pokemon_choice(user_pokemon_name)
-#     user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
+#     
 #     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = battle.get_hp_stat(cpu_pokemon_name), moves = battle.get_initial_moves(cpu_pokemon_name) )
     
 #     user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
-#     pokemon_hp = f"{user_pokemon_name.capitalize()}'s hp is {user_pokemon['hp']}"
-#     pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}"
+#     
 
 #     #return battle.battle(cpu_pokemon, user_pokemon)
 #     return render_template('battle.html', userChoice=user_choice, pokemonHp=pokemon_hp, pokemonMoves=pokemon_moves)
