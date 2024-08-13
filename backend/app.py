@@ -21,7 +21,9 @@ def battle_page():
 def get_user_data():
     return battle.get_user_choice()
 
-# def take_turns():
+def cpu_move():
+    return battle.cpu_move()
+    
     
     
     
