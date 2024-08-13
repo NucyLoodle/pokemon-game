@@ -17,7 +17,6 @@ def get_user_choice():
     string = f"{user_choice} {pokemon_hp} {pokemon_moves}"
     return string   
 
-
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
     response = requests.get(api_url)
@@ -51,12 +50,20 @@ def cpu_pokemon_choice(user_pokemon_name):
 def damage():
     return random.randint(1, 10)
 
-def cpu_turn(cpu_pokemon, user_pokemon):
+def cpu_move(cpu_pokemon, user_pokemon):
     cpu_move = random.choice(cpu_pokemon['moves'])
     cpu_damage = damage()
-    print(" ")
-    print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-    print(" ")
+    string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+    return string
+
+
+
+def cpu_turn(cpu_pokemon, user_pokemon):
+    # cpu_move = random.choice(cpu_pokemon['moves'])
+    # cpu_damage = damage()
+    # print(" ")
+    # print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+    # print(" ")
     user_pokemon['hp']-= cpu_damage
     if user_pokemon['hp'] > 0:
         print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
@@ -65,6 +72,8 @@ def cpu_turn(cpu_pokemon, user_pokemon):
         print(f"{user_pokemon['name']} fainted!")
 
     return user_pokemon['hp']
+
+
 
 def user_turn(cpu_pokemon, user_pokemon):
     user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
