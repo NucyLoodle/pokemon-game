@@ -15,24 +15,14 @@ def main():
     
 @app.route("/battle")
 def battle_page():
-    return render_template('battle.html')
-
-# @app.route("/battle", methods=['POST'])
-# def get_user_choice(user_pokemon_name):
-#     user_pokemon_name = request.form['userPokemonChoice']
-#     user_pokemon = dict(name = f"{user_pokemon_name}", hp = battle.get_hp_stat(user_pokemon_name), moves = battle.get_initial_moves(user_pokemon_name) )
-#     user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
-#     pokemon_hp = f"{user_pokemon_name.capitalize()}'s hp is {user_pokemon['hp']}."
-#     pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}."
-
-#     string = f"{user_choice} {pokemon_hp} {pokemon_moves}"
-#     return string
-   
+    return render_template('battle.html') 
 
 @app.route("/battle", methods=['POST'])
 def get_user_data():
     return battle.get_user_choice()
-#def take_turns():
+
+# def take_turns():
+    
     
     
 
