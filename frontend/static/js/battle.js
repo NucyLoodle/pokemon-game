@@ -13,24 +13,47 @@
 //     })
 // })
 
-const form = document.getElementById('form')
-form.addEventListener('submit', (e) => {
-    e.preventDefault()
+// const form = document.getElementById('form')
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault()
     
-})
+// })
 
 
-function getUserChoice() {
-     const url = '/battle'
-     fetch(url, { 
-        method: 'post', 
-        // body: formData
-    })
-     .then(response => response)  
-     .then(data => {
+// function getUserChoice() {
+//      const url = '/battle'
+//      fetch(url, { 
+//         method: 'post', 
+//         // body: formData
+//     })
+//      .then(response => response)  
+//      .then(data => {
         
-         console.log(data.text);
-         document.getElementById("stats").innerHTML = data
-     })
+//          console.log(data.text);
+//          document.getElementById("stats").innerHTML = data
+//      })
     
-}
+// }
+
+const form = document.getElementById('form')
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Create a form with user input.
+    const formData = new FormData(this); 
+    // Add the name and value of the pressed button to the form.
+    formData.append(e.submitter.name, e.submitter.value); 
+
+    // Send a fetch request of type POST.
+    const url = '/battle';
+    fetch(url, { 
+        method: 'post', 
+        body: formData
+    })
+        .then(response => response.text()) // Read the response as text.
+        .then(data => {
+            console.log(data);
+            document.getElementById('stats').innerText = data
+        });
+
+});
