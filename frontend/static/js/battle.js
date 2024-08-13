@@ -28,7 +28,13 @@ form.addEventListener('submit', function(e) {
 
 });
 
-new_para = gamePlay.appendChild(document.createElement("p"))
+launchGame.addEventListener('click', function(e) {
+    console.log(launchGame)
+    new_para = gamePlay.appendChild(document.createElement("p"))
+    launchGame.style.display = "none"
+    document.getElementById('stats').style.display = "none"
+})
+
 
 
 
