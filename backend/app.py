@@ -17,12 +17,13 @@ def main():
 def battle_page():
     return render_template('battle.html') 
 
-@app.route("/battle", methods=['POST'])
+@app.route("/battle", methods=['POST', 'GET'])
 def get_user_data():
     return battle.get_user_choice()
 
-def cpu_move():
-    return battle.cpu_move()
+@app.route("/battle", methods=['POST', 'GET'])
+def cpu_pokemon():
+    return battle.cpu_pokemon_choice()
     
     
     
