@@ -30,6 +30,11 @@ def get_user_pokemon():
 def cpu_pokemon():
     return battle.cpu_pokemon_choice(session['pokemon_name'])
 
+@app.route("/battle/cpumove", methods=['GET', 'POST'])
+def cpu_move():
+    return battle.cpu_move(cpu_pokemon)
+
+
 
 
 
