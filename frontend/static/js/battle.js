@@ -24,10 +24,12 @@ form.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data);
             pokemonStats = document.getElementById('stats')
+            user_pokemon = data[0]['name']
             // pokemonName = data['name']
             // pokemonMoves = data['moves'].join(', ')
-            pokemonStats.innerText = data
-                // `You have chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
+            pokemonStats.innerText = 
+                `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
+                The cpu has chosen ${data[1]['name']}. ${data[1]['name']}'s hp is ${data[1]['hp']}. ${data[1]['name']}'s moves are ${data[1]['moves'].join(', ')}.`
         });
 
     choiceSection.style.display = "none"
