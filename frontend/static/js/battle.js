@@ -2,7 +2,7 @@ const form = document.getElementById('form')
 const choiceSection = document.getElementById("userPokemonChoice")
 const launchGame = document.getElementById("launchGame")
 const launchGameForm = document.getElementById("launchGameForm")
-//launchGame.style.display = "none"
+launchGame.style.display = "none"
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -24,21 +24,21 @@ form.addEventListener('submit', function(e) {
         .then(data => {
             //console.log(data);
             pokemonStats = document.getElementById('stats')
-            // pokemonName = data['name']
+            pokemonName = data['name']
             // pokemonMoves = data['moves'].join(', ')
             pokemonStats.innerText = 
                 `You have chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
         });
 
-    //choiceSection.style.display = "none"
-    //launchGame.style.display = "block"
+    choiceSection.style.display = "none"
+    launchGame.style.display = "block"
 
 });
 
 launchGameForm.addEventListener('submit', function(e) {
     
-    //launchGame.style.display = "none"
-    //document.getElementById('stats').style.display = "none"
+    launchGame.style.display = "none"
+    document.getElementById('stats').style.display = "none"
 
     e.preventDefault();
 
