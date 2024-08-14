@@ -24,10 +24,10 @@ form.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data);
             pokemonStats = document.getElementById('stats')
-            pokemonName = data['name']
+            // pokemonName = data['name']
             // pokemonMoves = data['moves'].join(', ')
-            pokemonStats.innerText = 
-                `You have chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
+            pokemonStats.innerText = data
+                // `You have chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
         });
 
     choiceSection.style.display = "none"
@@ -60,8 +60,6 @@ launchGameForm.addEventListener('submit', function(e) {
             new_para.innerText = 
                 `The cpu has chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
         });
-
-
 })
 
 
