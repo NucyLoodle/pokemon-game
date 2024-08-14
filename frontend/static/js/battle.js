@@ -11,9 +11,6 @@ form.addEventListener('submit', function(e) {
     const formData = new FormData(this); 
     // Add the name and value of the pressed button to the form.
     formData.append(e.submitter.name, e.submitter.value); 
-    console.log(e.submitter.name)
-    console.log(e.submitter.value)
-
     // Send a fetch request of type POST.
     const url = '/battle';
     fetch(url, { 
@@ -46,9 +43,6 @@ launchGameForm.addEventListener('submit', function(e) {
     const cpuFormData = new FormData(this); 
     // Add the name and value of the pressed button to the form.
     cpuFormData.append(e.submitter.name, e.submitter.value); 
-    console.log(e.submitter.name)
-    console.log(e.submitter.value)
-
     // Send a fetch request of type POST.
     const url = '/battle/launch';
     fetch(url, { 
@@ -58,9 +52,7 @@ launchGameForm.addEventListener('submit', function(e) {
         .then(response => response.json()) // Read the response as json.
         .then(data => {
             new_para = gamePlay.appendChild(document.createElement("p"))
-            pokemonName = data['name']
-            new_para.innerText = 
-                `The cpu has chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
+            
         });
 })
 
