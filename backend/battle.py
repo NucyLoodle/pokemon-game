@@ -68,6 +68,7 @@ def cpu_pokemon_choice(user_pokemon_name):
     """later: cpu chooses pokemon with type advantage"""
     available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
     cpu_pokemon_name = random.choice(available_pokemon)
+    session['cpu_pokemon_name'] = cpu_pokemon_name
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
     return cpu_pokemon
     
