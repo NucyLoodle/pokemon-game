@@ -78,7 +78,8 @@ def cpu_move(cpu_pokemon):
     cpu_move = random.choice(cpu_pokemon['moves'])
     cpu_damage = damage()
     string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-    return string
+    #return string
+    return cpu_move, cpu_damage
 
 
 
