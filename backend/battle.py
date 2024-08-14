@@ -39,18 +39,22 @@ def get_hp_stat(pokemon_name):
     hp_stat = data['stats'][0]['base_stat']
     return hp_stat
 
-def cpu_pokemon_choice(user_pokemon_name):
-    starter_pokemon =["bulbasaur", "charmander", "squirtle"]
-    # cpu randomly chooses pokemon from remaining two.
-    """later: cpu chooses pokemon with type advantage"""
-    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
-    cpu_pokemon_name = random.choice(available_pokemon)
-    return cpu_pokemon_name
+def cpu_pokemon_choice():
+    
+    launch_battle_button = request.form['launchBattle']
+    if launch_battle_button== "letsBattle":
+        starter_pokemon =["bulbasaur", "charmander", "squirtle"]
+        # cpu randomly chooses pokemon from remaining two.
+        """later: cpu chooses pokemon with type advantage"""
+        available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
+        cpu_pokemon_name = random.choice(available_pokemon)
+        
+        return cpu_pokemon_name
     
 def damage():
     return random.randint(1, 10)
 
-def cpu_move(cpu_pokemon, user_pokemon):
+def cpu_move(cpu_pokemon):
     cpu_move = random.choice(cpu_pokemon['moves'])
     cpu_damage = damage()
     string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
