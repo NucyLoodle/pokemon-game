@@ -51,6 +51,7 @@ launchGameForm.addEventListener('submit', function(e) {
     })
         .then(response => response.json()) // Read the response as json.
         .then(data => {
+            console.log(data)
             new_para = gamePlay.appendChild(document.createElement("p"))
             
         });
