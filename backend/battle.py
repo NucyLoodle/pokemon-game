@@ -64,30 +64,37 @@ def get_hp_stat(pokemon_name):
 def damage():
     return random.randint(1, 10)
 
-def cpu_move(cpu_pokemon):
-    cpu_move = random.choice(cpu_pokemon['moves'])
-    cpu_damage = damage()
-    string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-    #return string
-    return cpu_move, cpu_damage
+def cpu_turn():
+    cpu_pokemon_name = session['cpu_pokemon_name']
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+
+    if request.form['launchBattle']:
+        cpu_move = random.choice(cpu_pokemon['moves'])
+        cpu_damage = damage()
+        string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+        #return string
+        cpu_move_damage = []
+        cpu_move_damage.append(cpu_move)
+        cpu_move_damage.append(cpu_damage)
+        return cpu_move_damage
 
 
 
-def cpu_turn(cpu_pokemon, user_pokemon):
-    cpu_move = random.choice(cpu_pokemon['moves'])
-    cpu_damage = damage()
-    # print(" ")
-    # print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-    # print(" ")
-    user_pokemon['hp']-= cpu_damage
-    if user_pokemon['hp'] > 0:
-        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
-        print(" ")
-        return [cpu_move,user_pokemon['hp']]
-    else:
-        print(f"{user_pokemon['name']} fainted!")
+# def cpu_turn(cpu_pokemon, user_pokemon):
+#     cpu_move = random.choice(cpu_pokemon['moves'])
+#     cpu_damage = damage()
+#     # print(" ")
+#     # print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+#     # print(" ")
+#     user_pokemon['hp']-= cpu_damage
+#     if user_pokemon['hp'] > 0:
+#         print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+#         print(" ")
+        
+#     else:
+#         print(f"{user_pokemon['name']} fainted!")
 
-    return user_pokemon['hp']
+#     return [cpu_move,user_pokemon['hp']]
 
 
 
