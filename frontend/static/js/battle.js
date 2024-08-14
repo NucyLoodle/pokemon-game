@@ -22,7 +22,7 @@ form.addEventListener('submit', function(e) {
     })
         .then(response => response.json()) // Read the response as json.
         .then(data => {
-            //console.log(data);
+            console.log(data);
             pokemonStats = document.getElementById('stats')
             pokemonName = data['name']
             // pokemonMoves = data['moves'].join(', ')
@@ -38,8 +38,6 @@ form.addEventListener('submit', function(e) {
 launchGameForm.addEventListener('submit', function(e) {
     
     launchGame.style.display = "none"
-    document.getElementById('stats').style.display = "none"
-
     e.preventDefault();
 
     // Create a form with user input.
