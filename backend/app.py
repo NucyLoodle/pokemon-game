@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify, after_this_request
-from flask_cors import CORS
+from flask import Flask, render_template, request, session
+from flask_session import Session
 import battle
 
 app = Flask(__name__ ,
@@ -8,6 +8,7 @@ app = Flask(__name__ ,
             template_folder='../frontend/templates')
 
 # CORS(app)
+app.secret_key = 'BAD_SECRET_KEY'
 
 @app.route("/")
 def main():
@@ -19,12 +20,20 @@ def battle_page():
 
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_data():
+    # user_pokemon_name = request.form['userPokemonChoice']
+    # session['pokemon_name'] = user_pokemon_name
+    # print(session['pokemon_name'])
     return battle.get_user_choice()
 
-@app.route("/battle", methods=['POST', 'GET'])
+@app.route("/battle/launch", methods=['GET', 'POST'])
 def cpu_pokemon():
-    return battle.cpu_pokemon_choice()
-    
+    launch_battle_button = request.form['launchBattle']
+    print(launch_battle_button)
+
+    # if session['pokemon_name']:
+    #return launch_battle_button
+    return battle.cpu_pokemon_choice(session['pokemon_name'])
+    #     return f"hello {session['pokemon_name']}"
     
     
     
