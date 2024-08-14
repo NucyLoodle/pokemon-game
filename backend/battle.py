@@ -73,20 +73,21 @@ def cpu_move(cpu_pokemon):
 
 
 
-# def cpu_turn(cpu_pokemon, user_pokemon):
-#     # cpu_move = random.choice(cpu_pokemon['moves'])
-#     # cpu_damage = damage()
-#     # print(" ")
-#     # print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
-#     # print(" ")
-#     user_pokemon['hp']-= cpu_damage
-#     if user_pokemon['hp'] > 0:
-#         print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
-#         print(" ")
-#     else:
-#         print(f"{user_pokemon['name']} fainted!")
+def cpu_turn(cpu_pokemon, user_pokemon):
+    cpu_move = random.choice(cpu_pokemon['moves'])
+    cpu_damage = damage()
+    # print(" ")
+    # print(f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+    # print(" ")
+    user_pokemon['hp']-= cpu_damage
+    if user_pokemon['hp'] > 0:
+        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+        print(" ")
+        return [cpu_move,user_pokemon['hp']]
+    else:
+        print(f"{user_pokemon['name']} fainted!")
 
-#     return user_pokemon['hp']
+    return user_pokemon['hp']
 
 
 
