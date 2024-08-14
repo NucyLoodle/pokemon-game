@@ -19,11 +19,12 @@ def battle_page():
     return render_template('battle.html') 
 
 @app.route("/battle", methods=['POST', 'GET'])
-def get_user_data():
+def get_user_pokemon():
     # user_pokemon_name = request.form['userPokemonChoice']
     # session['pokemon_name'] = user_pokemon_name
     # print(session['pokemon_name'])
     return battle.get_user_choice()
+
 
 @app.route("/battle/launch", methods=['GET', 'POST'])
 def cpu_pokemon():
