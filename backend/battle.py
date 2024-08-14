@@ -36,15 +36,6 @@ def get_user_choice():
     #print(session['pokemon_name'])
     return user_pokemon
 
-# def get_user_stats(user_pokemon_name):
-    
-#     user_choice = f"You have chosen {user_pokemon_name.capitalize()}."
-#     pokemon_hp = f"{user_pokemon_name.capitalize()}'s hp is {user_pokemon['hp']}."
-#     pokemon_moves = f"{user_pokemon_name.capitalize()}'s moves are {', '.join(user_pokemon['moves'])}."
-
-#     string = f"{user_choice} {pokemon_hp} {pokemon_moves}"
-#     print(string)
-#     return string
 
 
 def get_response_from_api(pokemon_name):
@@ -72,16 +63,13 @@ def get_hp_stat(pokemon_name):
 
 
 def cpu_pokemon_choice(user_pokemon_name):
-    
-    # launch_battle_button = request.form['launchBattle']
-    # if launch_battle_button == "letsBattle":
-        starter_pokemon =["bulbasaur", "charmander", "squirtle"]
-        # cpu randomly chooses pokemon from remaining two.
-        """later: cpu chooses pokemon with type advantage"""
-        available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
-        cpu_pokemon_name = random.choice(available_pokemon)
-        
-        return cpu_pokemon_name
+    launch_battle_button = request.form['launchBattle']   
+    starter_pokemon =["bulbasaur", "charmander", "squirtle"]
+    """later: cpu chooses pokemon with type advantage"""
+    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
+    cpu_pokemon_name = random.choice(available_pokemon)
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+    return cpu_pokemon
     
 def damage():
     return random.randint(1, 10)

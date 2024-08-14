@@ -28,19 +28,8 @@ def get_user_pokemon():
 
 @app.route("/battle/launch", methods=['GET', 'POST'])
 def cpu_pokemon():
-    launch_battle_button = request.form['launchBattle']
-    print(launch_battle_button)
-
-    # if session['pokemon_name']:
-    #return launch_battle_button
     return battle.cpu_pokemon_choice(session['pokemon_name'])
-    #     return f"hello {session['pokemon_name']}"
-    
-    
-    
 
-#     #return battle.battle(cpu_pokemon, user_pokemon)
-#     return render_template('battle.html', userChoice=user_choice, pokemonHp=pokemon_hp, pokemonMoves=pokemon_moves)
 
 
 
