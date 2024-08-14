@@ -53,11 +53,12 @@ launchGameForm.addEventListener('submit', function(e) {
         method: 'post', 
         body: cpuFormData
     })
-        .then(response => response.text()) // Read the response as text.
+        .then(response => response.json()) // Read the response as json.
         .then(data => {
-            console.log(data);
-            document.getElementById('gamePlay').innerText = data
-            //new_para = gamePlay.appendChild(document.createElement("p"))
+            new_para = gamePlay.appendChild(document.createElement("p"))
+            pokemonName = data['name']
+            new_para.innerText = 
+                `The cpu has chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
         });
 
 
