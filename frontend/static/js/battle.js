@@ -46,7 +46,7 @@ launchGameForm.addEventListener('submit', function(e) {
     console.log(e.submitter.value)
 
     // Send a fetch request of type POST.
-    const url = '/battle';
+    const url = '/battle/launch';
     fetch(url, { 
         method: 'post', 
         body: cpuFormData
@@ -54,7 +54,7 @@ launchGameForm.addEventListener('submit', function(e) {
         .then(response => response.text()) // Read the response as text.
         .then(data => {
             console.log(data);
-            //document.getElementById('gamePlay').innerText = data
+            document.getElementById('gamePlay').innerText = data
             //new_para = gamePlay.appendChild(document.createElement("p"))
         });
 
