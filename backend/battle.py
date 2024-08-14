@@ -37,6 +37,37 @@ def get_user_choice():
     return user_pokemon
 
 
+def cpu_pokemon_choice(user_pokemon_name):
+    launch_battle_button = request.form['launchBattle']   
+    starter_pokemon =["bulbasaur", "charmander", "squirtle"]
+    """later: cpu chooses pokemon with type advantage"""
+    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
+    cpu_pokemon_name = random.choice(available_pokemon)
+    session['cpu_pokemon_name'] = cpu_pokemon_name
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+    return cpu_pokemon
+
+
+
+def get_pokemon():
+    user_pokemon_name = request.form['userPokemonChoice']
+    session['pokemon_name'] = user_pokemon_name
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
+    # launch_battle_button = request.form['launchBattle']   
+    starter_pokemon =["bulbasaur", "charmander", "squirtle"]
+    """later: cpu chooses pokemon with type advantage"""
+    available_pokemon = [pokemon for pokemon in starter_pokemon if pokemon != user_pokemon_name]
+    cpu_pokemon_name = random.choice(available_pokemon)
+    session['cpu_pokemon_name'] = cpu_pokemon_name
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+    poke_list = []
+    poke_list.append(user_pokemon)
+    poke_list.append(cpu_pokemon)
+    print(poke_list)
+    return poke_list
+
+
+
 
 def get_response_from_api(pokemon_name):
     api_url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name}"
