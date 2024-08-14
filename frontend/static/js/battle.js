@@ -1,7 +1,8 @@
 const form = document.getElementById('form')
 const choiceSection = document.getElementById("userPokemonChoice")
 const launchGame = document.getElementById("launchGame")
-launchGame.style.display = "none"
+const launchGameForm = document.getElementById("launchGameForm")
+//launchGame.style.display = "none"
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -10,6 +11,8 @@ form.addEventListener('submit', function(e) {
     const formData = new FormData(this); 
     // Add the name and value of the pressed button to the form.
     formData.append(e.submitter.name, e.submitter.value); 
+    console.log(e.submitter.name)
+    console.log(e.submitter.value)
 
     // Send a fetch request of type POST.
     const url = '/battle';
@@ -23,16 +26,39 @@ form.addEventListener('submit', function(e) {
             document.getElementById('stats').innerText = data
         });
 
-    choiceSection.style.display = "none"
-    launchGame.style.display = "block"
+    //choiceSection.style.display = "none"
+    //launchGame.style.display = "block"
 
 });
 
-launchGame.addEventListener('click', function(e) {
-    console.log(launchGame)
-    new_para = gamePlay.appendChild(document.createElement("p"))
-    launchGame.style.display = "none"
-    document.getElementById('stats').style.display = "none"
+launchGameForm.addEventListener('submit', function(e) {
+    
+    //launchGame.style.display = "none"
+    //document.getElementById('stats').style.display = "none"
+
+    e.preventDefault();
+
+    // Create a form with user input.
+    const cpuFormData = new FormData(this); 
+    // Add the name and value of the pressed button to the form.
+    cpuFormData.append(e.submitter.name, e.submitter.value); 
+    console.log(e.submitter.name)
+    console.log(e.submitter.value)
+
+    // Send a fetch request of type POST.
+    const url = '/battle';
+    fetch(url, { 
+        method: 'post', 
+        body: cpuFormData
+    })
+        .then(response => response.text()) // Read the response as text.
+        .then(data => {
+            console.log(data);
+            //document.getElementById('gamePlay').innerText = data
+            //new_para = gamePlay.appendChild(document.createElement("p"))
+        });
+
+
 })
 
 
