@@ -20,10 +20,14 @@ form.addEventListener('submit', function(e) {
         method: 'post', 
         body: formData
     })
-        .then(response => response.text()) // Read the response as text.
+        .then(response => response.json()) // Read the response as json.
         .then(data => {
-            console.log(data);
-            document.getElementById('stats').innerText = data
+            //console.log(data);
+            pokemonStats = document.getElementById('stats')
+            // pokemonName = data['name']
+            // pokemonMoves = data['moves'].join(', ')
+            pokemonStats.innerText = 
+                `You have chosen ${pokemonName}. ${pokemonName}'s hp is ${data['hp']}. ${pokemonName}'s moves are ${data['moves'].join(', ')}.`
         });
 
     //choiceSection.style.display = "none"
