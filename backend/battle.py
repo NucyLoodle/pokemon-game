@@ -79,8 +79,8 @@ def cpu_turn():
         cpu_move_dict = dict(cpu_pokemon_name, cpu_move, cpu_damage)
         user_pokemon_dict = dict(user_pokemon_name, user_pokemon['hp'])
         data = []
-        data.append(cpu_move_dict)
         data.append(user_pokemon_dict)
+        data.append(cpu_move_dict)
         
         return data
 
