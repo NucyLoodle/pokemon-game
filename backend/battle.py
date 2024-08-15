@@ -74,6 +74,7 @@ def cpu_turn():
         string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
         #return string
         cpu_move_damage = []
+        cpu_move_damage.append(cpu_pokemon_name)
         cpu_move_damage.append(cpu_move)
         cpu_move_damage.append(cpu_damage)
         return cpu_move_damage
