@@ -67,17 +67,22 @@ def damage():
 def cpu_turn():
     cpu_pokemon_name = session['cpu_pokemon_name']
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+    user_pokemon_name = session['pokemon_name']
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = get_hp_stat(user_pokemon_name), moves = get_initial_moves(user_pokemon_name) )
 
     if request.form['launchBattle']:
         cpu_move = random.choice(cpu_pokemon['moves'])
         cpu_damage = damage()
         string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
         #return string
-        cpu_move_damage = []
-        cpu_move_damage.append(cpu_pokemon_name)
-        cpu_move_damage.append(cpu_move)
-        cpu_move_damage.append(cpu_damage)
-        return cpu_move_damage
+        user_pokemon['hp']-= cpu_damage
+        cpu_move_dict = dict(cpu_pokemon_name, cpu_move, cpu_damage)
+        user_pokemon_dict = dict(user_pokemon_name, user_pokemon['hp'])
+        data = []
+        data.append(cpu_move_dict)
+        data.append(user_pokemon_dict)
+        
+        return data
 
 
 
