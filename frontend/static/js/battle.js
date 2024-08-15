@@ -21,7 +21,7 @@ form.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data);
             pokemonStats = document.getElementById('stats')
-            user_pokemon = data[0]['name']
+            // user_pokemon = data[0]['name']
             // pokemonName = data['name']
             // pokemonMoves = data['moves'].join(', ')
             pokemonStats.innerText = 
@@ -53,6 +53,8 @@ launchGameForm.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data)
             new_para = gamePlay.appendChild(document.createElement("p"))
+            // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+            // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
             
         });
 })
