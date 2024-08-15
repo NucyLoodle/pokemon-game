@@ -76,8 +76,8 @@ def cpu_turn():
         string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
         #return string
         user_pokemon['hp']-= cpu_damage
-        cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", move = f"{cpu_move}", damage = cpu_damage)
-        user_pokemon_dict = dict(name = f"{user_pokemon_name}", move = f"{user_pokemon['moves']}", hp = user_pokemon['hp'])
+        cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", move = cpu_move, damage = cpu_damage)
+        user_pokemon_dict = dict(name = f"{user_pokemon_name}", moves = user_pokemon['moves'], hp = user_pokemon['hp'])
         cpu_move_result = []
         cpu_move_result.append(user_pokemon_dict)
         cpu_move_result.append(cpu_pokemon_dict)
