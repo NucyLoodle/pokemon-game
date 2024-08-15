@@ -26,7 +26,7 @@ form.addEventListener('submit', function(e) {
             // pokemonMoves = data['moves'].join(', ')
             pokemonStats.innerText = 
                 `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
-                The cpu has chosen ${data[1]['name']}. ${data[1]['name']}'s hp is ${data[1]['hp']}. ${data[1]['name']}'s moves are ${data[1]['moves'].join(', ')}.`
+                The cpu has chosen ${data[1]['name']}.`
         });
 
     choiceSection.style.display = "none"
@@ -52,10 +52,28 @@ launchGameForm.addEventListener('submit', function(e) {
         .then(response => response.json()) // Read the response as json.
         .then(data => {
             console.log(data)
+            console.log(data[0]['moves'])
             new_para = gamePlay.appendChild(document.createElement("p"))
-            // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-            // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
-            
+            new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
+            ${data[0]['name']}'s hp was reduced to ${data[0]['hp']}.
+            Choose your next move!`
+
+            new_form = gamePlay.appendChild(document.createElement("form"))
+            new_form.setAttribute("method", "POST")
+            new_form.setAttribute("action", "/battle/turn")
+            new_button_1 = new_form.appendChild(document.createElement("button"))
+            new_button_1.setAttribute("type", "submit")
+            new_button_1.setAttribute("name", "chooseMove")
+            new_button_1.setAttribute("value", `${data[0]['moves'][0]}`)
+            new_button_1.textContent = `${data[0]['moves'][0]}`
+
+            new_button_2 = new_form.appendChild(document.createElement("button"))
+            new_button_2.setAttribute("type", "submit")
+            new_button_2.setAttribute("name", "chooseMove")
+            new_button_2.setAttribute("value", `${data[0]['moves'][1]}`)
+            new_button_2.textContent =  `${data[0]['moves'][1]}`
+
+
         });
 })
 
