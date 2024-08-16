@@ -65,6 +65,7 @@ def damage():
     return random.randint(1, 10)
 
 def cpu_turn():
+    user_status = "alive"
     cpu_pokemon_name = session['cpu_pokemon_name']
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
     user_pokemon_name = session['pokemon_name']
@@ -84,8 +85,21 @@ def cpu_turn():
         session['user_hp'] = user_pokemon['hp']
         # print(user_pokemon_dict)
         # print(cpu_pokemon_dict)
+
+    if user_pokemon['hp'] > 0:
+        print(f"{user_pokemon['name']}'s hp was reduced to {user_pokemon['hp']} ")
+        print(" ")
+        cpu_move_result.append(user_status)
+
         
-        return cpu_move_result
+    else:
+        print(f"{user_pokemon['name']} fainted!")
+        user_status = "fainted"
+        cpu_move_result.append(user_status)
+
+    return cpu_move_result
+        
+        
 
 
 
@@ -124,6 +138,7 @@ def cpu_turn():
 
 
 def user_turn():
+    cpu_status = "alive"
     cpu_pokemon_name = session['cpu_pokemon_name']
     user_pokemon_name = session['pokemon_name']
     user_pokemon = dict(name = f"{user_pokemon_name}", hp = session['user_hp'], moves = get_initial_moves(user_pokemon_name) )
@@ -139,6 +154,16 @@ def user_turn():
     user_move_result.append(user_pokemon_dict)
     user_move_result.append(cpu_pokemon_dict)
     session['cpu_hp'] = cpu_pokemon['hp']
+
+    if cpu_pokemon['hp'] > 0:
+        print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
+        print(" ")
+        user_move_result.append(cpu_status)
+    else:
+        print(f"{cpu_pokemon['name']} fainted!")
+        cpu_status = "fainted"
+        user_move_result.append(cpu_status)
+
     return user_move_result
 
 
