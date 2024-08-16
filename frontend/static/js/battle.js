@@ -2,6 +2,7 @@ const form = document.getElementById('form')
 const choiceSection = document.getElementById("userPokemonChoice")
 const launchGame = document.getElementById("launchGame")
 const launchGameForm = document.getElementById("launchGameForm")
+const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 
 form.addEventListener('submit', function(e) {
@@ -54,7 +55,6 @@ launchGameForm.addEventListener('submit', function(e) {
             console.log(data)
             console.log(data[0]['moves'])
 
-            gamePlay = document.getElementById("gamePlay")
             new_para = gamePlay.appendChild(document.createElement("p"))
             new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
             ${data[0]['name']}'s hp was reduced to ${data[0]['hp']}.
@@ -79,34 +79,34 @@ launchGameForm.addEventListener('submit', function(e) {
 
             new_form.addEventListener('submit', function(e) {
 
-            e.preventDefault();
-            console.log("hey")
+                e.preventDefault();
+                
             
-        
-            // Create a form with user input.
-            const userFormData = new FormData(this); 
-            // Add the name and value of the pressed button to the form.
-            userFormData.append(e.submitter.name, e.submitter.value); 
-            console.log(e.submitter.name)
-            console.log(e.submitter.value)
-            // Send a fetch request of type POST.
-            const url = '/battle/launch/turn';
-            fetch(url, { 
-                method: 'post', 
-                body: userFormData
+                // Create a form with user input.
+                const userFormData = new FormData(this); 
+                // Add the name and value of the pressed button to the form.
+                userFormData.append(e.submitter.name, e.submitter.value); 
+                console.log(e.submitter.name)
+                console.log(e.submitter.value)
+                // Send a fetch request of type POST.
+                const url = '/battle/launch/turn';
+                fetch(url, { 
+                    method: 'post', 
+                    body: userFormData
+                })
+                    .then(response => response.json()) // Read the response as json.
+                    .then(data => {
+                        console.log(data)
+                        console.log(data[0]['moves'])
+            
+                        new_para = new_form.appendChild(document.createElement("p"))
+            
+                        new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+                        ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
+                    });
             })
-                .then(response => response.json()) // Read the response as json.
-                .then(data => {
-                    console.log(data)
-                    console.log(data[0]['moves'])
-        
-                    new_para = new_form.appendChild(document.createElement("p"))
-        
-                    new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-                    ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
-                });
-        })
-            gamePlay.appendChild(new_form)    
+            gamePlay.appendChild(new_form)  
         });
 })
+
 
