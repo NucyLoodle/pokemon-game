@@ -53,12 +53,15 @@ launchGameForm.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data)
             console.log(data[0]['moves'])
+
+            gamePlay = document.getElementById("gamePlay")
             new_para = gamePlay.appendChild(document.createElement("p"))
             new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
             ${data[0]['name']}'s hp was reduced to ${data[0]['hp']}.
             Choose your next move!`
 
-            new_form = gamePlay.appendChild(document.createElement("form"))
+            const new_form = document.createElement("form")
+
             new_form.setAttribute("method", "POST")
             new_form.setAttribute("action", "/battle/launch/turn")
             new_form.setAttribute("id", "battleForm")
@@ -74,44 +77,79 @@ launchGameForm.addEventListener('submit', function(e) {
             new_button_2.setAttribute("value", `${data[0]['moves'][1]}`)
             new_button_2.textContent = `${data[0]['moves'][1]}`
 
+            new_form.addEventListener('submit', function(e) {
+
+            e.preventDefault();
+            console.log("hey")
+            
+        
+            // Create a form with user input.
+            const userFormData = new FormData(this); 
+            // Add the name and value of the pressed button to the form.
+            userFormData.append(e.submitter.name, e.submitter.value); 
+            console.log(e.submitter.name)
+            console.log(e.submitter.value)
+            // Send a fetch request of type POST.
+            const url = '/battle/launch/turn';
+            fetch(url, { 
+                method: 'post', 
+                body: userFormData
+            })
+                .then(response => response.json()) // Read the response as json.
+                .then(data => {
+                    console.log(data)
+                    // console.log(data[0]['moves'])
+        
+                    // new_para = new_form.appendChild(document.createElement("p"))
+        
+                    // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+                    // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.
+                    
+        
+        
+                });
+        })
+
+            gamePlay.appendChild(new_form)
+
             
         });
 })
 
-new_form = document.getElementById("battleForm")
-console.log(new_form)
-new_form.addEventListener('submit', function(e) {
+// const newForm = document.getElementById("battleForm")
+// console.log(newForm)
+// newForm.addEventListener('submit', function(e) {
 
-    e.preventDefault();
-    console.log("hey")
+//     e.preventDefault();
+//     console.log("hey")
     
 
-    // // Create a form with user input.
-    // const userFormData = new FormData(this); 
-    // // Add the name and value of the pressed button to the form.
-    // userFormData.append(e.submitter.name, e.submitter.value); 
-    // console.log(e.submitter.name)
-    // console.log(e.submitter.value)
-    // // Send a fetch request of type POST.
-    // const url = '/battle/launch';
-    // fetch(url, { 
-    //     method: 'post', 
-    //     body: userFormData
-    // })
-    //     .then(response => response.json()) // Read the response as json.
-    //     .then(data => {
-    //         console.log(data)
-    //         // console.log(data[0]['moves'])
+//     // Create a form with user input.
+//     const userFormData = new FormData(this); 
+//     // Add the name and value of the pressed button to the form.
+//     userFormData.append(e.submitter.name, e.submitter.value); 
+//     console.log(e.submitter.name)
+//     console.log(e.submitter.value)
+//     // Send a fetch request of type POST.
+//     const url = '/battle/launch/turn';
+//     fetch(url, { 
+//         method: 'post', 
+//         body: userFormData
+//     })
+//         .then(response => response.json()) // Read the response as json.
+//         .then(data => {
+//             console.log(data)
+//             // console.log(data[0]['moves'])
 
-    //         // new_para = new_form.appendChild(document.createElement("p"))
+//             // new_para = new_form.appendChild(document.createElement("p"))
 
-    //         // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-    //         // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.
+//             // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+//             // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.
             
 
 
-    //     });
-})
+//         });
+// })
 
 
 
