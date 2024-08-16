@@ -129,18 +129,17 @@ def user_turn():
     user_pokemon = dict(name = f"{user_pokemon_name}", hp = session['user_hp'], moves = get_initial_moves(user_pokemon_name) )
     cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
     
-    if request.form['chooseMove']:
-        user_move_choice = request.form['chooseMove']
-        user_damage = damage()
-        cpu_pokemon['hp']-=user_damage
+    user_move_choice = request.form['chooseMove']
+    user_damage = damage()
+    cpu_pokemon['hp']-=user_damage
 
-        cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", moves = cpu_pokemon['moves'], hp = cpu_pokemon['hp'])
-        user_pokemon_dict = dict(name = f"{user_pokemon_name}", move = user_move_choice, damage = user_damage)
-        user_move_result = []
-        user_move_result.append(user_pokemon_dict)
-        user_move_result.append(cpu_pokemon_dict)
-        session['cpu_hp'] = cpu_pokemon['hp']
-        return user_move_result
+    cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", moves = cpu_pokemon['moves'], hp = cpu_pokemon['hp'])
+    user_pokemon_dict = dict(name = f"{user_pokemon_name}", move = user_move_choice, damage = user_damage)
+    user_move_result = []
+    user_move_result.append(user_pokemon_dict)
+    user_move_result.append(cpu_pokemon_dict)
+    session['cpu_hp'] = cpu_pokemon['hp']
+    return user_move_result
 
 
 # def battle(cpu_pokemon, user_pokemon):
