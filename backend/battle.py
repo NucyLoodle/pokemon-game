@@ -73,7 +73,7 @@ def cpu_turn():
     if request.form['launchBattle']:
         cpu_move = random.choice(cpu_pokemon['moves'])
         cpu_damage = damage()
-        string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
+        # string = (f"{cpu_pokemon['name']} used {cpu_move}, causing {cpu_damage} damage!")
         #return string
         user_pokemon['hp']-= cpu_damage
         cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", move = cpu_move, damage = cpu_damage)
@@ -81,8 +81,9 @@ def cpu_turn():
         cpu_move_result = []
         cpu_move_result.append(user_pokemon_dict)
         cpu_move_result.append(cpu_pokemon_dict)
-        print(user_pokemon_dict)
-        print(cpu_pokemon_dict)
+        session['user_hp'] = user_pokemon['hp']
+        # print(user_pokemon_dict)
+        # print(cpu_pokemon_dict)
         
         return cpu_move_result
 
@@ -106,20 +107,41 @@ def cpu_turn():
 
 
 
-def user_turn(cpu_pokemon, user_pokemon):
-    user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
-    user_damage = damage()
-    print(" ")
-    print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
-    print(" ")
-    cpu_pokemon['hp']-= user_damage
-    if cpu_pokemon['hp'] > 0:
-        print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
-        print(" ")
-    else:
-        print(f"{cpu_pokemon['name']} fainted!")
+# def user_turn(cpu_pokemon, user_pokemon):
+#     user_move = input(f"What will you do? Choose from {user_pokemon['moves']}.  ")
+#     user_damage = damage()
+#     print(" ")
+#     print(f"{user_pokemon['name']} used {user_move}, causing {user_damage} damage!")
+#     print(" ")
+#     cpu_pokemon['hp']-= user_damage
+#     if cpu_pokemon['hp'] > 0:
+#         print(f"{cpu_pokemon['name']}'s hp was reduced to {cpu_pokemon['hp']} ")
+#         print(" ")
+#     else:
+#         print(f"{cpu_pokemon['name']} fainted!")
 
-    return cpu_pokemon['hp']
+#     return cpu_pokemon['hp']
+
+
+def user_turn():
+    cpu_pokemon_name = session['cpu_pokemon_name']
+    user_pokemon_name = session['pokemon_name']
+    user_pokemon = dict(name = f"{user_pokemon_name}", hp = session['user_hp'], moves = get_initial_moves(user_pokemon_name) )
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = get_hp_stat(cpu_pokemon_name), moves = get_initial_moves(cpu_pokemon_name) )
+    
+    if request.form['chooseMove']:
+        user_move_choice = request.form['chooseMove']
+        user_damage = damage()
+        cpu_pokemon['hp']-=user_damage
+
+        cpu_pokemon_dict = dict(name = f"{cpu_pokemon_name}", moves = cpu_pokemon['moves'], hp = cpu_pokemon['hp'])
+        user_pokemon_dict = dict(name = f"{user_pokemon_name}", move = user_move_choice, damage = user_damage)
+        user_move_result = []
+        user_move_result.append(user_pokemon_dict)
+        user_move_result.append(cpu_pokemon_dict)
+        session['cpu_hp'] = cpu_pokemon['hp']
+        return user_move_result
+
 
 # def battle(cpu_pokemon, user_pokemon):
 #     # cpu goes first
