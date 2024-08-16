@@ -26,7 +26,9 @@ def get_user_cpu_pokemon():
 def cpu_move():
     return battle.cpu_turn()
 
-
+@app.route("/battle/launch/turn", methods=['GET', 'POST'])
+def user_move():
+    return battle.user_turn()
 
 
 if __name__ == '__main__':
