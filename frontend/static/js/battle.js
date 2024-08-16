@@ -98,72 +98,15 @@ launchGameForm.addEventListener('submit', function(e) {
                 .then(response => response.json()) // Read the response as json.
                 .then(data => {
                     console.log(data)
-                    // console.log(data[0]['moves'])
+                    console.log(data[0]['moves'])
         
-                    // new_para = new_form.appendChild(document.createElement("p"))
+                    new_para = new_form.appendChild(document.createElement("p"))
         
-                    // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-                    // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.
-                    
-        
-        
+                    new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+                    ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
                 });
         })
-
-            gamePlay.appendChild(new_form)
-
-            
+            gamePlay.appendChild(new_form)    
         });
 })
 
-// const newForm = document.getElementById("battleForm")
-// console.log(newForm)
-// newForm.addEventListener('submit', function(e) {
-
-//     e.preventDefault();
-//     console.log("hey")
-    
-
-//     // Create a form with user input.
-//     const userFormData = new FormData(this); 
-//     // Add the name and value of the pressed button to the form.
-//     userFormData.append(e.submitter.name, e.submitter.value); 
-//     console.log(e.submitter.name)
-//     console.log(e.submitter.value)
-//     // Send a fetch request of type POST.
-//     const url = '/battle/launch/turn';
-//     fetch(url, { 
-//         method: 'post', 
-//         body: userFormData
-//     })
-//         .then(response => response.json()) // Read the response as json.
-//         .then(data => {
-//             console.log(data)
-//             // console.log(data[0]['moves'])
-
-//             // new_para = new_form.appendChild(document.createElement("p"))
-
-//             // new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-//             // ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.
-            
-
-
-//         });
-// })
-
-
-
-
-// const choiceSection = document.getElementById("userPokemonChoice")
-// console.log(choiceSection)
-// const choiceButtons = document.querySelectorAll("#choosePokemon")
-// console.log(choiceButtons)
-// const launchGame = document.getElementById("launchGame")
-// launchGame.style.display = "none"
-
-
-// choiceButtons.forEach(function(button){
-//     button.addEventListener("click", function() {
-//         //choiceSection.style.display = "none"
-//         launchGame.style.display = "block"
-//     })
