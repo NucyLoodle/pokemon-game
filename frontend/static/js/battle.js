@@ -4,7 +4,8 @@ const launchGame = document.getElementById("launchGame")
 const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
-
+let cpu_status = ""
+let user_status = ""
 
 function getPokemonStats() {
 
@@ -61,34 +62,48 @@ function cpuTurn(){
         fetch(url, { 
             method: 'post', 
             body: cpuFormData
-        })
+        }) 
+        
             .then(response => response.json()) // Read the response as json.
             .then(data => {
-            
-                //console.log(data)
-                //console.log(data[0]['moves'])
-    
+
+                let user_status = data[2]
                 new_para = launchGameForm.appendChild(document.createElement("p"))
-                new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
-                ${data[0]['name']}'s hp was reduced to ${data[0]['hp']}.
-                Choose your next move!`
-    
+                if (user_status == 'alive'){
+                    
+                    new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
+                    ${data[0]['name']}'s hp was reduced to ${data[0]['hp']}.
+                    Choose your next move!`
+        
+                    
+                    launchGameForm.setAttribute("action", "/battle/launch/turn")
+                    
+                    new_button_1 = launchGameForm.appendChild(document.createElement("button"))
+                    new_button_1.setAttribute("type", "submit")
+                    new_button_1.setAttribute("name", "chooseMove")
+                    new_button_1.setAttribute("value", `${data[0]['moves'][0]}`)
+                    new_button_1.textContent = `${data[0]['moves'][0]}`
+        
+                    new_button_2 = launchGameForm.appendChild(document.createElement("button"))
+                    new_button_2.setAttribute("type", "submit")
+                    new_button_2.setAttribute("name", "chooseMove")
+                    new_button_2.setAttribute("value", `${data[0]['moves'][1]}`)
+                    new_button_2.textContent = `${data[0]['moves'][1]}`
+
+                } else {
+                    new_para.innerText = `${data[1]['name']} used ${data[1]['move']} causing ${data[1]['damage']} damage.
+                    ${data[0]['name']} fainted!`
+
+                }
+                // console.log(data[2])
+                //console.log(data[0]['moves'])
+                console.log(`The user status is ${user_status}`)
+                return user_status
                 
-                launchGameForm.setAttribute("action", "/battle/launch/turn")
-                
-                new_button_1 = launchGameForm.appendChild(document.createElement("button"))
-                new_button_1.setAttribute("type", "submit")
-                new_button_1.setAttribute("name", "chooseMove")
-                new_button_1.setAttribute("value", `${data[0]['moves'][0]}`)
-                new_button_1.textContent = `${data[0]['moves'][0]}`
-    
-                new_button_2 = launchGameForm.appendChild(document.createElement("button"))
-                new_button_2.setAttribute("type", "submit")
-                new_button_2.setAttribute("name", "chooseMove")
-                new_button_2.setAttribute("value", `${data[0]['moves'][1]}`)
-                new_button_2.textContent = `${data[0]['moves'][1]}`
             })
     })
+    // console.log(obj)
+    // return user_status
 }
 
 function userTurn(){
@@ -104,35 +119,43 @@ function userTurn(){
             method: 'post', 
             body: userFormData
         })
+        
             .then(response => response.json()) // Read the response as json.
             .then(data => {
-                // console.log(data)
-                // console.log(data[0]['moves'])
-    
                 new_para = launchGameForm.appendChild(document.createElement("p"))
-    
-                new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
-                ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
+                let cpu_status = data[2]
+
+                if (cpu_status == "alive"){
+                    new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+                    ${data[1]['name']}'s hp was reduced to ${data[1]['hp']}.`
+                } else {
+                    new_para.innerText = `${data[0]['name']} used ${data[0]['move']} causing ${data[0]['damage']} damage.
+                    ${data[1]['name']}' fainted!`
+                }
+                console.log(`The cpu status is ${cpu_status}`)
+                return cpu_status
             });
+            
     })
+
+    
 }
 
 
-
-
-
-
-
-
-
-
-
+// function battle(cpu_status, user_status) {
+//     while (cpu_status == "alive" && user_status == "alive") {
+//         cpuTurn()
+//         userTurn()
+//     }
+// }
 
 
 
 getPokemonStats()
-cpuTurn()
-userTurn()
+
+// battle()
+
+
 
 
 
