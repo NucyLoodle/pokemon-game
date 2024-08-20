@@ -2,43 +2,37 @@
 Functions to create the initial battle between player and CPU
 */
 
-// let userPokemonName = "";
 
+const form = document.getElementById('form')
+const choiceSection = document.getElementById("userPokemonChoice")
+const launchGame = document.getElementById("launchGame")
+const launchGameForm = document.getElementById("launchGameForm")
+const gamePlay = document.getElementById("gamePlay")
+launchGame.style.display = "none"
 
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-function getInitialMoves(pokemonName) {
-    const apiUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+  // Create a form with user input.
+  const formData = new FormData(this); 
+  // Add the name and value of the pressed button to the form.
+  formData.append(e.submitter.name, e.submitter.value); 
+  // Send a fetch request of type POST.
+  const url = '/battle';
+  fetch(url, { 
+      method: 'post', 
+      body: formData
+  })
+      .then(response => response.json()) // Read the response as json.
+      .then(data => {
+          console.log(data);
+          pokemonStats = document.getElementById('stats')
+          // user_pokemon = data[0]['name']
+          // pokemonName = data['name']
+          // pokemonMoves = data['moves'].join(', ')
+          pokemonStats.innerText = 
+              `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
+              The cpu has chosen ${data[1]['name']}.`
+      });
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then (data => {
-            let dataLength = Object.keys(data).length;
-            let moveNames = []
-
-            for (let i = 0; i < dataLength; i++) {
-                if (data['moves'][i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" && data['moves'][i]['version_group_details'][0]['level_learned_at'] == 1) {
-                    moveNames.push(data['moves'][i]['move']['name'])
-                }        
-            }
-            console.log(moveNames)
-        })   
-}
-
-function getPokemon() {
-    
-    const userChoiceForm = document.getElementById('userPokemonChoice')
-    userChoiceForm.addEventListener('click', function(e) {
-    const isButton = e.target.nodeName === 'BUTTON';
-    if (!isButton) {
-        return;
-    }
-    let userPokemonName = e.target.id
-
-    return userPokemonName
-    }) 
-       
-}
-
-getPokemon()
-// console.log(userPokemonName)
-// getResponseFromApi('ditto')
+});
