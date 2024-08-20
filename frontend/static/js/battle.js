@@ -56,8 +56,14 @@ form.addEventListener('submit', function(e) {
             `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
             The cpu has chosen ${data[1]['name']}.`
         // console.log(cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp))
-        launchGame.style.display = "block"
-        //launchGame.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
+        form.style.display = "none";
+        launchGame.style.display = "block";
+        launchGameForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+          launchGameForm.style.display = "none";
+          newPara = gamePlay.appendChild(document.createElement("p"))
+          newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
+        })
       });
 
 });
