@@ -15,11 +15,12 @@ function moveDamage() {
   return Math.floor(Math.random() * 10);
 }
 
-function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp) {
+function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName) {
   let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
   let cpuDamage = moveDamage()
   userPokemonHp -= cpuDamage
-  return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!`
+  return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
+          ${userPokemonName}'s hp was reduced to ${userPokemonHp}!`
 }
 
 function createButtonsForUser(userPokemonMoves) {
@@ -39,10 +40,11 @@ function createButtonsForUser(userPokemonMoves) {
 
 }
 
-function userTurn(userPokemonName, cpuPokemonHp, userMove) {
+function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   let userDamage = moveDamage()
   cpuPokemonHp -= userDamage
-  return `${userPokemonName} used ${userMove} causing ${userDamage} damage!`
+  return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
+          ${cpuPokemonName}'s hp was reduced to ${cpuPokemonHp}.`
   
 }
 
@@ -89,7 +91,7 @@ form.addEventListener('submit', function(e) {
           // gamePlay.after(newSection)
            
           const newPara = gamePlay.appendChild(document.createElement("p"))
-          newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
+          newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
           gamePlay.style.display = "block"
           createButtonsForUser(userPokemonMoves)
           
@@ -110,12 +112,15 @@ form.addEventListener('submit', function(e) {
 
           newPara = gamePlay.appendChild(document.createElement("p"))
           newPara.setAttribute("id", "newPara")
-          newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove)
+          newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, userPokemonName)
           const oldButtons = gamePlay.querySelectorAll('button')
           const OldPara = document.getElementById('oldPara') 
           oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
           OldPara.style.display = "none"
         })
+
+        
+        // todo: make this loop!
         
 
 
