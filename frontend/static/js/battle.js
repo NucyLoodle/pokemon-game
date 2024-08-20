@@ -9,6 +9,7 @@ const launchGame = document.getElementById("launchGame")
 const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
+gamePlay.style.display = "none"
 
 function moveDamage() {
   return Math.floor(Math.random() * 10);
@@ -21,6 +22,25 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp) {
   return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!`
 }
 
+function createButtonsForUser(userPokemonMoves) {
+  newPara = gamePlay.appendChild(document.createElement("p"))
+  newPara.innerText = "Choose your next move!"
+  newButtonOne = document.createElement("button")
+  newButtonOne.setAttribute("id", `${[userPokemonMoves[0]]}`)
+  newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
+  newButtonOne.textContent = `${[userPokemonMoves[0]]}`
+  newPara.after(newButtonOne)
+  
+  newButtonTwo = document.createElement("button")
+  newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
+  newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
+  newPara.after(newButtonTwo)
+
+}
+
+function userTurn(userPokemonName, userPokemonMoves, cpuPokemonHp) {
+
+}
 
 
 form.addEventListener('submit', function(e) {
@@ -44,7 +64,7 @@ form.addEventListener('submit', function(e) {
         const cpuPokemonName = data[1]['name']
         let userPokemonHp = data[0]['hp']
         let cpuPokemonHp = data[1]['hp']
-        let userPokemonMoves = data[0]['moves'].join(', ')
+        let userPokemonMoves = data[0]['moves']
         let cpuPokemonMoves = data[1]['moves']
         // console.log(cpuPokemonMoves)
         
@@ -54,12 +74,29 @@ form.addEventListener('submit', function(e) {
         // console.log(cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp))
         form.style.display = "none";
         launchGame.style.display = "block";
+        
         launchGameForm.addEventListener("submit", function(e) {
           e.preventDefault();
           launchGameForm.style.display = "none";
           newPara = gamePlay.appendChild(document.createElement("p"))
           newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
+          gamePlay.style.display = "block"
+          createButtonsForUser(userPokemonMoves)
         })
+
+        gamePlay.addEventListener('click', (event) => {
+          const isButton = event.target.nodeName === 'BUTTON';
+          if (!isButton) {
+            return;
+          }
+        
+          console.dir(event.target.value);
+        })
+        
+
+
+        
+        userTurn(userPokemonName, userPokemonMoves, cpuPokemonHp)
       });
 
 });
