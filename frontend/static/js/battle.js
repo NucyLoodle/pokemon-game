@@ -12,7 +12,6 @@ launchGame.style.display = "none"
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-
   // Create a form with user input.
   const formData = new FormData(this); 
   // Add the name and value of the pressed button to the form.
@@ -26,10 +25,14 @@ form.addEventListener('submit', function(e) {
       .then(response => response.json()) // Read the response as json.
       .then(data => {
           console.log(data);
-          pokemonStats = document.getElementById('stats')
-          // user_pokemon = data[0]['name']
-          // pokemonName = data['name']
-          // pokemonMoves = data['moves'].join(', ')
+          let pokemonStats = document.getElementById('stats')
+          const userPokemonName = data[0]['name']
+          const cpuPokemonName = data[1]['name']
+          let userPokemonHp = data[0]['hp']
+          let cpuPokemonHp = data[1]['hp']
+          let userPokemonMoves = data[0]['moves'].join(', ')
+          let cpuPokemonMoves = data[1]['moves'].join(', ')
+          
           pokemonStats.innerText = 
               `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
               The cpu has chosen ${data[1]['name']}.`
