@@ -16,12 +16,8 @@ function moveDamage() {
 
 function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp) {
   let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
-  // console.log(cpuMove)
   let cpuDamage = moveDamage()
-  // console.log(cpuDamage)
   userPokemonHp -= cpuDamage
-
-  // console.log(userPokemonHp)
   return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!`
 }
 
