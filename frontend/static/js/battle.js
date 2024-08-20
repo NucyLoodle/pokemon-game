@@ -10,6 +10,9 @@ const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 
+function moveDamage() {
+  return Math.random() * 10;
+}
 
 function cpuTurn(cpuPokemonMoves) {
   let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
