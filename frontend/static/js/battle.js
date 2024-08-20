@@ -26,7 +26,6 @@ function createButtonsForUser(userPokemonMoves) {
   newPara = gamePlay.appendChild(document.createElement("p"))
   newPara.innerText = "Choose your next move!"
   newButtonOne = document.createElement("button")
-  newButtonOne.setAttribute("id", `${[userPokemonMoves[0]]}`)
   newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
   newButtonOne.textContent = `${[userPokemonMoves[0]]}`
   newPara.after(newButtonOne)
@@ -38,8 +37,11 @@ function createButtonsForUser(userPokemonMoves) {
 
 }
 
-function userTurn(userPokemonName, userPokemonMoves, cpuPokemonHp) {
-
+function userTurn(userPokemonName, cpuPokemonHp, userMove) {
+  let userDamage = moveDamage()
+  cpuPokemonHp -= userDamage
+  return `${userPokemonName} used ${userMove} causing ${userDamage} damage!`
+  
 }
 
 
@@ -89,14 +91,17 @@ form.addEventListener('submit', function(e) {
           if (!isButton) {
             return;
           }
-        
-          console.dir(event.target.value);
+          const userMove = event.target.value
+
+          //console.log(event.target.value);
+          newPara = gamePlay.appendChild(document.createElement("p"))
+          newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove)
+          gamePlay.querySelectorAll('button').style.display = "none" //hide user choice buttons after selection
         })
         
 
 
-        
-        userTurn(userPokemonName, userPokemonMoves, cpuPokemonHp)
+
       });
 
 });
