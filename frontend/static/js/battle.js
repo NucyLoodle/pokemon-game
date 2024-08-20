@@ -23,7 +23,8 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp) {
 }
 
 function createButtonsForUser(userPokemonMoves) {
-  newPara = gamePlay.appendChild(document.createElement("p"))
+  newSection = document.getElementById("moveSection")
+  newPara = newSection.appendChild(document.createElement("p"))
   newPara.innerText = "Choose your next move!"
   newButtonOne = document.createElement("button")
   newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
@@ -79,8 +80,14 @@ form.addEventListener('submit', function(e) {
         
         launchGameForm.addEventListener("submit", function(e) {
           e.preventDefault();
-          launchGameForm.style.display = "none";
-          newPara = gamePlay.appendChild(document.createElement("p"))
+          launchGameForm.style.display = "none"; // hides launch battle button
+
+
+          newSection = document.createElement("section")
+          newSection.setAttribute("id", "moveSection")
+          gamePlay.after(newSection)
+           
+          const newPara = newSection.appendChild(document.createElement("p"))
           newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
           gamePlay.style.display = "block"
           createButtonsForUser(userPokemonMoves)
@@ -96,7 +103,10 @@ form.addEventListener('submit', function(e) {
           //console.log(event.target.value);
           newPara = gamePlay.appendChild(document.createElement("p"))
           newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove)
-          gamePlay.querySelectorAll('button').style.display = "none" //hide user choice buttons after selection
+          const oldButtons = gamePlay.querySelectorAll('button')
+          const OldPara = gamePlay.querySelectorAll('p')
+          oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
+          OldPara.forEach(p => p.style.display = "none")
         })
         
 
