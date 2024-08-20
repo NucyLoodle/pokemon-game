@@ -20,15 +20,15 @@ def battle_page():
 
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
-    return battle.get_pokemon()
+    return battle.get_pokemon_data()
 
-@app.route("/battle/launch", methods=['GET', 'POST'])
-def cpu_move():
-    return battle.cpu_turn()
+# @app.route("/battle/launch", methods=['GET', 'POST'])
+# def cpu_move():
+#     return battle.cpu_turn()
 
-@app.route("/battle/launch/turn", methods=['GET', 'POST'])
-def user_move():
-    return battle.user_turn()
+# # @app.route("/battle/launch/turn", methods=['GET', 'POST'])
+# def user_move():
+#     return battle.user_turn()
 
 
 if __name__ == '__main__':
