@@ -11,12 +11,18 @@ const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 
 function moveDamage() {
-  return Math.random() * 10;
+  return Math.floor(Math.random() * 10);
 }
 
-function cpuTurn(cpuPokemonMoves) {
+function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp) {
   let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
-  console.log(cpuMove)
+  // console.log(cpuMove)
+  let cpuDamage = moveDamage()
+  // console.log(cpuDamage)
+  userPokemonHp -= cpuDamage
+
+  // console.log(userPokemonHp)
+  return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!`
 }
 
 
@@ -44,13 +50,15 @@ form.addEventListener('submit', function(e) {
         let cpuPokemonHp = data[1]['hp']
         let userPokemonMoves = data[0]['moves'].join(', ')
         let cpuPokemonMoves = data[1]['moves']
-        console.log(cpuPokemonMoves)
+        // console.log(cpuPokemonMoves)
         
         pokemonStats.innerText = 
             `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
             The cpu has chosen ${data[1]['name']}.`
-
-        cpuTurn(cpuPokemonMoves)
+        // console.log(cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp))
+        launchGame.style.display = "block"
+        //launchGame.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp)
       });
 
 });
+
