@@ -11,9 +11,6 @@ const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 
-let userPokemonHp;
-let cpuPokemonHp;
-
 function moveDamage() {
   return Math.floor(Math.random() * 10);
 }
@@ -51,22 +48,7 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   
 }
 
-// function getPokeData() {
-//   form.addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     // Create a form with user input.
-//     const formData = new FormData(this); 
-//     // Add the name and value of the pressed button to the form.
-//     formData.append(e.submitter.name, e.submitter.value); 
-//     // Send a fetch request of type POST.
-//     const url = '/battle';
-//     fetch(url, { 
-//         method: 'post', 
-//         body: formData
-//     })
-//     .then(response => response.json()) // Read the response as json.
-//   })
-// }
+
 
 
 function getUserPokemonName() {
@@ -81,21 +63,30 @@ function getUserPokemonName() {
   })
 }
 
-let userPokemonName = sessionStorage.getItem("userPokemanName")
+const getPokeData = () =>     
+  fetch("/battle")
+  .then((response) => response.json()
+  ); 
 
+const usePokeData = async () => {
+  const data = await getPokeData();
+  sessionStorage.setItem("userPokemonName", data[0]['name'])
+  sessionStorage.setItem("cpuPokemonName", data[1]['name'])
+  sessionStorage.setItem("userPokemonHp", data[0]['hp'])
+  sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
+  sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
+  sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
+}
+
+let userPokemonName = sessionStorage.getItem("userPokemanName")
+let userPokemonHp = sessionStorage.getItem("userPokemonHp")
+let userPokemonMoves = sessionStorage.getItem("userPokemonMoves")
+let cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
+let cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
+let cpuPokemonMoves = sessionStorage.getItem("cpuPokemonMoves")
 
 getUserPokemonName()
-
-// const usePokeData = async () => {
-//   const data = await getPokeData();
-//   sessionStorage.setItem("userPokemonName", data[0]['name'])
-//   sessionStorage.setItem("cpuPokemonName", data[1]['name'])
-//   sessionStorage.setItem("userPokemonHp", data[0]['hp'])
-//   sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
-//   sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
-//   sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
-// }
-
+usePokeData()
 
 
 // usePokeData()
