@@ -11,6 +11,48 @@ const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 
+function getUserPokemonName() {
+  choiceSection.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isButton = event.target.nodeName === 'BUTTON';
+    if (!isButton) {
+      return;
+    }
+    userPokemonName = event.target.value
+    sessionStorage.setItem("userPokemonName", userPokemonName)
+    let pokemonStats = document.getElementById('stats')
+    pokemonStats.innerText = 
+                `You have chosen ${userPokemonName}. ${userPokemonName}'s hp is ${userPokemonHp}. ${userPokemonName}'s moves are ${userPokemonMoves}.
+                
+                The cpu has chosen ${cpuPokemonName}.`
+            
+    form.style.display = "none";
+    launchGame.style.display = "block";  
+  })
+}
+
+const getPokeData = () =>     
+  fetch("/battle")
+  .then((response) => response.json()
+  ); 
+
+const usePokeData = async () => {
+  const data = await getPokeData();
+  sessionStorage.setItem("userPokemonName", data[0]['name'])
+  sessionStorage.setItem("cpuPokemonName", data[1]['name'])
+  sessionStorage.setItem("userPokemonHp", data[0]['hp'])
+  sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
+  sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
+  sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
+}
+
+let userPokemonName = sessionStorage.getItem("userPokemanName")
+let userPokemonHp = sessionStorage.getItem("userPokemonHp")
+let userPokemonMoves = sessionStorage.getItem("userPokemonMoves")
+let cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
+let cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
+let cpuPokemonMoves = sessionStorage.getItem("cpuPokemonMoves")
+
 function moveDamage() {
   return Math.floor(Math.random() * 10);
 }
@@ -49,49 +91,8 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
 }
 
 
-
-
-function getUserPokemonName() {
-  choiceSection.addEventListener('click', (event) => {
-    event.preventDefault();
-    const isButton = event.target.nodeName === 'BUTTON';
-    if (!isButton) {
-      return;
-    }
-    userPokemonName = event.target.value
-    sessionStorage.setItem("userPokemonName", userPokemonName)   
-  })
-}
-
-const getPokeData = () =>     
-  fetch("/battle")
-  .then((response) => response.json()
-  ); 
-
-const usePokeData = async () => {
-  const data = await getPokeData();
-  sessionStorage.setItem("userPokemonName", data[0]['name'])
-  sessionStorage.setItem("cpuPokemonName", data[1]['name'])
-  sessionStorage.setItem("userPokemonHp", data[0]['hp'])
-  sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
-  sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
-  sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
-}
-
-let userPokemonName = sessionStorage.getItem("userPokemanName")
-let userPokemonHp = sessionStorage.getItem("userPokemonHp")
-let userPokemonMoves = sessionStorage.getItem("userPokemonMoves")
-let cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
-let cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
-let cpuPokemonMoves = sessionStorage.getItem("cpuPokemonMoves")
-
 getUserPokemonName()
 usePokeData()
-
-
-// usePokeData()
-// let userPokemonName = sessionStorage.getItem("userPokemonName")
-// console.log(userPokemonName)
 
 
 
@@ -112,7 +113,7 @@ usePokeData()
   //       .then(data => {
           
   //         console.log(data);
-  //         let pokemonStats = document.getElementById('stats')
+  //         
   //         const userPokemonName = data[0]['name']
   //         const cpuPokemonName = data[1]['name']
   //         let userPokemonHp = data[0]['hp']
@@ -121,12 +122,7 @@ usePokeData()
   //         let cpuPokemonMoves = data[1]['moves']
   //         // console.log(cpuPokemonMoves)
           
-  //         pokemonStats.innerText = 
-  //             `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves'].join(', ')}.
-  //             The cpu has chosen ${data[1]['name']}.`
-  //         // console.log(cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp))
-  //         form.style.display = "none";
-  //         launchGame.style.display = "block";
+  //         
           
   //         launchGameForm.addEventListener("submit", function(e) {
   //           e.preventDefault();
