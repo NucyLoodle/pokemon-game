@@ -3,7 +3,7 @@ Functions to create the initial battle between player and CPU
 */
 
 
-const form = document.getElementById('form')
+// const form = document.getElementById('form')
 const choiceSection = document.getElementById("userPokemonChoice")
 const launchGame = document.getElementById("launchGame")
 const launchGameForm = document.getElementById("launchGameForm")
@@ -26,7 +26,7 @@ function getUserPokemonName() {
                 
                 The cpu has chosen ${cpuPokemonName}.`
             
-    form.style.display = "none";
+    choiceSection.style.display = "none";
     launchGame.style.display = "block";  
   })
 }
@@ -92,54 +92,21 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
 
 
 getUserPokemonName()
-usePokeData()
+usePokeData()          
+launchGameForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+  launchGameForm.style.display = "none"; // hides launch battle button
 
 
+  // newSection = document.createElement("section")
+  // newSection.setAttribute("id", "moveSection")
+  // gamePlay.after(newSection)
 
-
-  // form.addEventListener('submit', function(e) {
-  //   e.preventDefault();
-  //   // Create a form with user input.
-  //   const formData = new FormData(this); 
-  //   // Add the name and value of the pressed button to the form.
-  //   formData.append(e.submitter.name, e.submitter.value); 
-  //   // Send a fetch request of type POST.
-  //   const url = '/battle';
-  //   fetch(url, { 
-  //       method: 'post', 
-  //       body: formData
-  //   })
-  //       .then(response => response.json()) // Read the response as json.
-  //       .then(data => {
-          
-  //         console.log(data);
-  //         
-  //         const userPokemonName = data[0]['name']
-  //         const cpuPokemonName = data[1]['name']
-  //         let userPokemonHp = data[0]['hp']
-  //         let cpuPokemonHp = data[1]['hp']
-  //         let userPokemonMoves = data[0]['moves']
-  //         let cpuPokemonMoves = data[1]['moves']
-  //         // console.log(cpuPokemonMoves)
-          
-  //         
-          
-  //         launchGameForm.addEventListener("submit", function(e) {
-  //           e.preventDefault();
-  //           launchGameForm.style.display = "none"; // hides launch battle button
-            
-  
-  //           // newSection = document.createElement("section")
-  //           // newSection.setAttribute("id", "moveSection")
-  //           // gamePlay.after(newSection)
-             
-  //           const newPara = gamePlay.appendChild(document.createElement("p"))
-  //           newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
-  //           gamePlay.style.display = "block"
-  //           createButtonsForUser(userPokemonMoves)
-            
-            
-  //         })
+  const newPara = gamePlay.appendChild(document.createElement("p"))
+  newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+  gamePlay.style.display = "block"
+  createButtonsForUser(userPokemonMoves)       
+  })
 
   //         //loop from here
           
