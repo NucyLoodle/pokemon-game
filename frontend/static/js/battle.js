@@ -42,16 +42,16 @@ const usePokeData = async () => {
   sessionStorage.setItem("cpuPokemonName", data[1]['name'])
   sessionStorage.setItem("userPokemonHp", data[0]['hp'])
   sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
-  sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
-  sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
+  sessionStorage.setItem("userPokemonMoves", (data[0]['moves'].split(",")))
+  sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'].split(","))
 }
 
 let userPokemonName = sessionStorage.getItem("userPokemanName")
 let userPokemonHp = sessionStorage.getItem("userPokemonHp")
-let userPokemonMoves = sessionStorage.getItem("userPokemonMoves")
+let userPokemonMoves = sessionStorage.getItem("userPokemonMoves").split(",")
 let cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
 let cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
-let cpuPokemonMoves = sessionStorage.getItem("cpuPokemonMoves")
+let cpuPokemonMoves = sessionStorage.getItem("cpuPokemonMoves").split(",")
 
 function moveDamage() {
   return Math.floor(Math.random() * 10);
