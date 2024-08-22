@@ -99,7 +99,7 @@ function createButtonsForUser(userPokemonMoves) {
   newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
   newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
   newPara.after(newButtonTwo)
-  newPara.setAttribute("id", "oldPara")
+  newPara.setAttribute("class", "oldPara")
 }
 
 function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
@@ -139,6 +139,8 @@ launchGameForm.addEventListener("submit", function(e) {
 
 
   gamePlay.addEventListener('click', (event) => {
+
+    
     const isButton = event.target.nodeName === 'BUTTON';
     if (!isButton) {
       return;
@@ -146,12 +148,16 @@ launchGameForm.addEventListener("submit", function(e) {
     if (userPokemonHp >= 0 && cpuPokemonHp >= 0) {
       const userMove = event.target.value
       newPara = gamePlay.appendChild(document.createElement("p"))
-      newPara.setAttribute("id", "newPara")
+      newPara.setAttribute("class", "newPara")
       newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
+
+    
+
       const oldButtons = gamePlay.querySelectorAll('button')
-      const OldPara = document.getElementById('oldPara') 
+      //const OldPara = document.querySelectorAll('#oldPara')
+      const oldPara = document.querySelectorAll('.oldPara')
       oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      OldPara.style.display = "none"
+      oldPara.forEach(para => para.style.display = "none")
       gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
       createButtonsForUser(userPokemonMoves)
 
