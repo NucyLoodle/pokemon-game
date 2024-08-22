@@ -154,7 +154,9 @@ launchGameForm.addEventListener("submit", function(e) {
       OldPara.style.display = "none"
       gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
       createButtonsForUser(userPokemonMoves)
+
     } if (userPokemonHp < 0 || cpuPokemonHp < 0) {
+      OldPara.style.display = "none"
       console.log("stop the loop")
       return;
     }
