@@ -60,7 +60,12 @@ function moveDamage() {
 function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName) {
   let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
   let cpuDamage = moveDamage()
-  userPokemonHp -= cpuDamage
+  
+  
+  userPokemonHp = sessionStorage.getItem("userPokemonHp") - cpuDamage
+  
+  sessionStorage.setItem("userPokemonHp", userPokemonHp)
+
   return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
           ${userPokemonName}'s hp was reduced to ${userPokemonHp}!`
 }
@@ -84,7 +89,11 @@ function createButtonsForUser(userPokemonMoves) {
 
 function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   let userDamage = moveDamage()
-  cpuPokemonHp -= userDamage
+  
+
+  cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp") - userDamage
+  sessionStorage.setItem("cpuPokemonHp", cpuPokemonHp)
+
   return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
           ${cpuPokemonName}'s hp was reduced to ${cpuPokemonHp}.`
   
@@ -102,23 +111,23 @@ launchGameForm.addEventListener("submit", function(e) {
   createButtonsForUser(userPokemonMoves)       
   })
           
-  gamePlay.addEventListener('click', (event) => {
-    const isButton = event.target.nodeName === 'BUTTON';
-    if (!isButton) {
-      return;
-    }
-    const userMove = event.target.value
-    newPara = gamePlay.appendChild(document.createElement("p"))
-    newPara.setAttribute("id", "newPara")
-    newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
-    const oldButtons = gamePlay.querySelectorAll('button')
-    const OldPara = document.getElementById('oldPara') 
-    oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
-    OldPara.style.display = "none"
-    gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+gamePlay.addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+  const userMove = event.target.value
+  newPara = gamePlay.appendChild(document.createElement("p"))
+  newPara.setAttribute("id", "newPara")
+  newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
+  const oldButtons = gamePlay.querySelectorAll('button')
+  const OldPara = document.getElementById('oldPara') 
+  oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
+  OldPara.style.display = "none"
+  gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
 
 
-  })
+})
 
           
   
