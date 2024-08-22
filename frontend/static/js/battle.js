@@ -139,4 +139,8 @@ gamePlay.addEventListener('click', (event) => {
   oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
   OldPara.style.display = "none"
   gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+  createButtonsForUser(userPokemonMoves)
 })
+
+
+
