@@ -76,13 +76,15 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
   
   sessionStorage.setItem("userPokemonHp", userPokemonHp)
 
-  if (userPokemonHp > 0) {
+  while (userPokemonHp > 0) {
     return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
     ${userPokemonName}'s hp was reduced to ${userPokemonHp}!`
-  } else {
-    console.log(`${userPokemonName} fainted`)
-    return `${userPokemonName} fainted`
-  }
+  } 
+  console.log(`${userPokemonName} fainted`)
+  document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
+  document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
+  return `${userPokemonName} fainted`
+  
 
 
 }
@@ -104,24 +106,20 @@ function createButtonsForUser(userPokemonMoves) {
 
 function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   let userDamage = moveDamage()
-  
-
   cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp") - userDamage
   sessionStorage.setItem("cpuPokemonHp", cpuPokemonHp)
 
-  if (cpuPokemonHp > 0) {
+  while (cpuPokemonHp > 0) {
     return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
     ${cpuPokemonName}'s hp was reduced to ${cpuPokemonHp}.`
-  } else {
+  } 
     console.log(`${cpuPokemonName} fainted`)
-    return `${cpuPokemonName} fainted`
-  }
-
-
-  
+    document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
+    gamePlay.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
+    return `${cpuPokemonName} fainted` 
 }         
-// // //   // todo: update session storage during game
-// // //   // todo: make this loop!
+
+// to do: set up a flag
 
 
 /* Run the Game */          
@@ -131,16 +129,24 @@ getUserPokemonName()
 launchGameForm.addEventListener("submit", function(e) {
   e.preventDefault();
   launchGameForm.style.display = "none"; // hides launch battle button
-  const newPara = gamePlay.appendChild(document.createElement("p"))
-  newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
-  gamePlay.style.display = "block"
-  createButtonsForUser(userPokemonMoves)       
+  if (userPokemonHp >= 0 && cpuPokemonHp >= 0) {
+    const newPara = gamePlay.appendChild(document.createElement("p"))
+    newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+    gamePlay.style.display = "block"
+    createButtonsForUser(userPokemonMoves)
+  } console.log("end")
+
+    
+  // } else {
+  //   console.log("stop the loop")
+  // }
+
+         
   })
 
 
   gamePlay.addEventListener('click', (event) => {
 
-    
     const isButton = event.target.nodeName === 'BUTTON';
     if (!isButton) {
       return;
@@ -150,22 +156,21 @@ launchGameForm.addEventListener("submit", function(e) {
       newPara = gamePlay.appendChild(document.createElement("p"))
       newPara.setAttribute("class", "newPara")
       newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
+    }
+    
+      if (cpuPokemonHp > 0 && userPokemonHp > 0) {
+        const oldButtons = gamePlay.querySelectorAll('button')
+        //const OldPara = document.querySelectorAll('#oldPara')
+        const oldPara = document.querySelectorAll('.oldPara')
+        oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
+        oldPara.forEach(para => para.style.display = "none")
+        gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+        createButtonsForUser(userPokemonMoves)
+      } else {
+        console.log("stop the loop")
+      }
 
     
-
-      const oldButtons = gamePlay.querySelectorAll('button')
-      //const OldPara = document.querySelectorAll('#oldPara')
-      const oldPara = document.querySelectorAll('.oldPara')
-      oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      oldPara.forEach(para => para.style.display = "none")
-      gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
-      createButtonsForUser(userPokemonMoves)
-
-    } if (userPokemonHp < 0 || cpuPokemonHp < 0) {
-      OldPara.style.display = "none"
-      console.log("stop the loop")
-      return;
-    }
   })
 
 
