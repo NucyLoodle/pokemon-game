@@ -12,15 +12,12 @@ const gamePlay = document.getElementById("gamePlay")
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 
-
-let userPokemonName
-let userPokemonHp
-let userPokemonMoves
-let cpuPokemonName
-let cpuPokemonHp
-let cpuPokemonMoves
-
-
+let userPokemonName;
+let userPokemonHp;
+let userPokemonMoves;
+let cpuPokemonName;
+let cpuPokemonHp;
+let cpuPokemonMoves;
 
 function getUserPokemonName() { // ask user to choose between three pokemon
   form.addEventListener('submit', function(e) {
@@ -52,23 +49,18 @@ function getUserPokemonName() { // ask user to choose between three pokemon
             pokemonStats = document.getElementById('stats')
             pokemonStats.innerText = 
             `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves']}.
-  
             The cpu has chosen ${data[1]['name']}.`
-        
             choiceSection.style.display = "none";
             launchGame.style.display = "block";
           })
   })
 }
 
-
-
 function moveDamage() {
   return Math.floor(Math.random() * 10);
 }
 
 function createButtonsForUser(userPokemonMoves) {
-  //newSection = document.getElementById("moveSection")
   newPara = gamePlay.appendChild(document.createElement("p"))
   newPara.innerText = "Choose your next move!"
   newButtonOne = document.createElement("button")
@@ -86,17 +78,12 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
   if (cpuPokemonHp > 0 && userPokemonHp > 0) {
     let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
     let cpuDamage = moveDamage()
-    
-    
     userPokemonHp = sessionStorage.getItem("userPokemonHp") - cpuDamage
-    
     sessionStorage.setItem("userPokemonHp", userPokemonHp)
-
     if (userPokemonHp > 0) {
       createButtonsForUser(userPokemonMoves)
       return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
-      ${userPokemonName}'s hp was reduced to ${userPokemonHp}!`
-      
+      ${userPokemonName}'s hp was reduced to ${userPokemonHp}!` 
     } else {
       console.log(`${userPokemonName} fainted`)
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
@@ -106,14 +93,11 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
   }  
 }
 
-
-
 function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   if (userPokemonHp > 0 && cpuPokemonHp > 0) {
     let userDamage = moveDamage()
     cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp") - userDamage
-    sessionStorage.setItem("cpuPokemonHp", cpuPokemonHp)
-    
+    sessionStorage.setItem("cpuPokemonHp", cpuPokemonHp) 
     if (cpuPokemonHp > 0) {
       return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
       ${cpuPokemonName}'s hp was reduced to ${cpuPokemonHp}.`
@@ -124,9 +108,6 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
     }
   } 
 }         
-
-// to do: set up a flag
-
 
 /* Run the Game */          
 
@@ -157,7 +138,6 @@ launchGameForm.addEventListener("submit", function(e) {
 
 
 gamePlay.addEventListener('click', (event) => {
-
   const isButton = event.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
@@ -168,7 +148,6 @@ gamePlay.addEventListener('click', (event) => {
     newPara.setAttribute("class", "newPara")
     newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
     const oldButtons = gamePlay.querySelectorAll('button')
-    //const OldPara = document.querySelectorAll('#oldPara')
     const oldPara = document.querySelectorAll('.oldPara')
     oldButtons.forEach(button => button.style.display = "none") //hide user choice buttons after selection
     oldPara.forEach(para => para.style.display = "none")
@@ -179,12 +158,6 @@ if (sessionStorage.getItem("cpuPokemonHp")> 0) {
   gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
   }
 })    
-      
-    // if (cpuPokemonHp > 0) {
-    //   gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
-    // } else {
-    //   console.log("stop")
-    // }
       
 
 
