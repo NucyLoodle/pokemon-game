@@ -3,9 +3,14 @@
     box-sizing: border-box;
   }
 
-  p {
-    color: red;
-  }
+body {
+  height: 100vh;
+}
+
+p {
+  color: red;
+  margin-bottom: 5%;
+}
 
 
 #userPokemonChoice { 
