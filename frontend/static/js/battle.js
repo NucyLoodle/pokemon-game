@@ -9,8 +9,10 @@ const choiceSection = document.getElementById("userPokemonChoice")
 const launchGame = document.getElementById("launchGameSection")
 const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
+const pokemonStats = document.getElementById('stats')
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
+pokemonStats.style.display = "none"
 
 let userPokemonName;
 let userPokemonHp;
@@ -46,7 +48,7 @@ function getUserPokemonName() { // ask user to choose between three pokemon
             cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
             cpuPokemonMoves = (sessionStorage.getItem("cpuPokemonMoves")).split(",")
             
-            pokemonStats = document.getElementById('stats')
+            pokemonStats.style.display = "block"
             newPara = pokemonStats.appendChild(document.createElement("p"))
             newParaTwo = pokemonStats.appendChild(document.createElement("p"))
             newPara.innerText = 
