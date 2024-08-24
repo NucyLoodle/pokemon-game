@@ -6,3 +6,16 @@
   p {
     color: red;
   }
+
+
+#userPokemonChoice { 
+  display:flex;
+  flex-direction: column;
+}
+
+#form {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
