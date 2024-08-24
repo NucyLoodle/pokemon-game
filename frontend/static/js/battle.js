@@ -65,16 +65,21 @@ function moveDamage() {
 }
 
 function createButtonsForUser(userPokemonMoves) {
-  newPara = gamePlay.appendChild(document.createElement("p"))
+  newPara = document.createElement("p")
+  newPara.setAttribute("id", "fade-in-three")
+  gamePlay.appendChild(newPara)
   newPara.innerText = "Choose your next move!"
   newForm = gamePlay.appendChild(document.createElement("form"))
   newForm.setAttribute("id", "moveForm")
+  newForm.setAttribute("class", "fade-in four")
   newButtonOne = document.createElement("button")
   newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
+  newButtonOne.setAttribute("class", "fade-in four")
   newButtonOne.textContent = `${[userPokemonMoves[0]]}`
   newForm.append(newButtonOne)
   newButtonTwo = document.createElement("button")
   newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
+  newButtonTwo.setAttribute("class", "fade-in four")
   newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
   newForm.append(newButtonTwo)
   newPara.setAttribute("class", "oldPara")
@@ -92,6 +97,7 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
       ${userPokemonName}'s hp was reduced to ${userPokemonHp}!` 
     } else {
       console.log(`${userPokemonName} fainted`)
+      // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
       return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage! ${userPokemonName} fainted`
@@ -153,6 +159,7 @@ gamePlay.addEventListener('click', (event) => {
     const userMove = event.target.value
     newPara = gamePlay.appendChild(document.createElement("p"))
     newPara.setAttribute("class", "newPara")
+    newPara.setAttribute("class", "fade-in one")
     newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
     const oldButtons = gamePlay.querySelectorAll('button')
     const oldPara = document.querySelectorAll('.oldPara')
@@ -162,7 +169,9 @@ gamePlay.addEventListener('click', (event) => {
 
 if (sessionStorage.getItem("cpuPokemonHp")> 0) {
   console.log(sessionStorage.getItem("cpuPokemonHp"))
-  gamePlay.appendChild(document.createElement("p")).innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
+  para = gamePlay.appendChild(document.createElement("p"))
+  para.setAttribute("class", "fade-in two")
+  para.innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
   }
 })    
       
