@@ -47,9 +47,11 @@ function getUserPokemonName() { // ask user to choose between three pokemon
             cpuPokemonMoves = (sessionStorage.getItem("cpuPokemonMoves")).split(",")
             
             pokemonStats = document.getElementById('stats')
-            pokemonStats.innerText = 
-            `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves']}.
-            The cpu has chosen ${data[1]['name']}.`
+            newPara = pokemonStats.appendChild(document.createElement("p"))
+            newParaTwo = pokemonStats.appendChild(document.createElement("p"))
+            newPara.innerText = 
+            `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves']}.`
+            newParaTwo.innerText = `The cpu has chosen ${data[1]['name']}.`
             choiceSection.style.display = "none";
             launchGame.style.display = "block";
           })
