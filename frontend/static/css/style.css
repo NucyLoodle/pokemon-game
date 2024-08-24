@@ -8,7 +8,6 @@ body {
 }
 
 p {
-  color: red;
   margin-bottom: 5%;
 }
 
@@ -22,5 +21,10 @@ p {
   display:flex;
   flex-direction: row;
   justify-content: space-around;
+}
 
+#launchGameForm {
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
 }
