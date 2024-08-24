@@ -67,14 +67,16 @@ function moveDamage() {
 function createButtonsForUser(userPokemonMoves) {
   newPara = gamePlay.appendChild(document.createElement("p"))
   newPara.innerText = "Choose your next move!"
+  newForm = gamePlay.appendChild(document.createElement("form"))
+  newForm.setAttribute("id", "moveForm")
   newButtonOne = document.createElement("button")
   newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
   newButtonOne.textContent = `${[userPokemonMoves[0]]}`
-  newPara.after(newButtonOne)
+  newForm.append(newButtonOne)
   newButtonTwo = document.createElement("button")
   newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
   newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
-  newPara.after(newButtonTwo)
+  newForm.append(newButtonTwo)
   newPara.setAttribute("class", "oldPara")
 }
 
@@ -142,6 +144,7 @@ launchGameForm.addEventListener("submit", function(e) {
 
 
 gamePlay.addEventListener('click', (event) => {
+  event.preventDefault()
   const isButton = event.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
