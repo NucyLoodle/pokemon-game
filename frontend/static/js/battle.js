@@ -1,3 +1,16 @@
+document.querySelectorAll('#choosePokemon').forEach(button => button.style.display = 'none')
+
+window.onload = function(){
+  window.setTimeout(function(){
+    document.querySelectorAll('#choosePokemon').forEach(button => button.style.display = 'block');
+  }, 2000);
+}; // loads Pokemon Choice buttons with delay
+
+
+
+
+
+
 /*
 Functions to create the initial battle between player and CPU
 */
