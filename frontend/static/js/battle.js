@@ -34,6 +34,11 @@ let cpuPokemonName;
 let cpuPokemonHp;
 let cpuPokemonMoves;
 
+function handleMovesArray(a) {
+  a = a.map(function(x){ return x.toUpperCase(); })
+  return a.length == 1 ? a[0] : [ a.slice(0, a.length - 1).join(", "), a[a.length - 1] ].join(" and ")
+}
+
 function getUserPokemonName() { // ask user to choose between three pokemon
   form.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -61,20 +66,26 @@ function getUserPokemonName() { // ask user to choose between three pokemon
             cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
             cpuPokemonMoves = (sessionStorage.getItem("cpuPokemonMoves")).split(",")
             
+            
+
+
             pokemonStats.style.display = "block"
             newPara = pokemonStats.appendChild(document.createElement("p"))
             newParaTwo = pokemonStats.appendChild(document.createElement("p"))
-            newPara.innerText = 
+            newPara.innerText =            
             `You have chosen ${(data[0]['name'].toUpperCase())}. 
             ${(data[0]['name']).toUpperCase()}'s hp is ${data[0]['hp']}. 
-            ${data[0]['name'].toUpperCase()}'s moves are ${(data[0]['moves']).map(function(x){ return x.toUpperCase(); })}.`
-            
+            ${data[0]['name'].toUpperCase()}'s moves are ${handleMovesArray(data[0]['moves'])}.`
+
             newParaTwo.innerText = `The cpu has chosen ${data[1]['name'].toUpperCase()}.`
             choiceSection.style.display = "none";
             launchGame.style.display = "block";
           })
   })
 }
+
+
+
 
 function moveDamage() {
   return Math.floor(Math.random() * 10);
