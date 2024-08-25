@@ -20,20 +20,9 @@ app.secret_key = 'BAD_SECRET_KEY'
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        # username = request.form['username']
-        # password = request.form['password']
-
-        # # Retrieve the hashed password
-        # hash = password + app.secret_key
-        # hash = hashlib.sha1(hash.encode())
-        # password = hash.hexdigest()
-        # print(password)
         
-        
-        lgn.check_login_details()
-        
-        # Check if account exists using MySQL
-       
+        lgn.check_login_details()  
+        msg = (lgn.check_login_details())     
     return render_template('login.html', msg=msg)
 
 
