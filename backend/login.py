@@ -1,5 +1,7 @@
 import db_utils as db
 from flask import request
+import hashlib
+import main as m
 
 """
 Functions for logging in and registering new users
@@ -43,11 +45,18 @@ def check_login_details():
     Send message to be checked in frontend to determine redirection
     """
     update = request.form
-    
-    print(f"This is the data{update}")
-    username_exists = check_account_exists(update["username"])
+    username = request.form['username']
+    password = request.form['password']
+
+    hash = password + m.app.secret_key
+    hash = hashlib.sha1(hash.encode())
+    password = hash.hexdigest()
+    print(password)
+
+
+    username_exists = check_account_exists(username)
     if username_exists:
-        result = login_valid(update["username"], update["password"])
+        result = login_valid(username, password)
         if result:
             rtn_msg = "account found"
             print(rtn_msg)
