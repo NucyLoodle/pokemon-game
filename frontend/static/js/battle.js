@@ -107,13 +107,16 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
     if (userPokemonHp > 0) {
       createButtonsForUser(userPokemonMoves)
       return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
+
       ${userPokemonName}'s hp was reduced to ${userPokemonHp}!` 
     } else {
       console.log(`${userPokemonName} fainted`)
       // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage! ${userPokemonName} fainted`
+      return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage! 
+      ${userPokemonName} fainted!
+      ${cpuPokemonName} is the winner!`
     }
   }  
 }
@@ -129,7 +132,9 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
     } else {
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      return `${userPokemonName} used ${userMove} causing ${userDamage} damage! ${cpuPokemonName} fainted`
+      return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
+      ${cpuPokemonName} fainted!
+      ${userPokemonName} is the winner!`
     }
   } 
 }         
