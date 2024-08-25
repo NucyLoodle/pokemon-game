@@ -44,26 +44,23 @@ def check_login_details():
     Check database to see if both email and password exist for user
     Send message to be checked in frontend to determine redirection
     """
-    update = request.form
     username = request.form['username']
     password = request.form['password']
 
     hash = password + m.app.secret_key
     hash = hashlib.sha1(hash.encode())
     password = hash.hexdigest()
-    print(password)
-
-
+    #print(password)
     username_exists = check_account_exists(username)
     if username_exists:
         result = login_valid(username, password)
         if result:
             rtn_msg = "account found"
-            print(rtn_msg)
+            #print(rtn_msg)
         else:
             rtn_msg = "password incorrect"
-            print(rtn_msg)
+            #print(rtn_msg)
     else:
         rtn_msg = "account not found, please sign up"
-        print(rtn_msg)
+        #print(rtn_msg)
     return rtn_msg
