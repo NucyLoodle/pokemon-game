@@ -65,8 +65,10 @@ function getUserPokemonName() { // ask user to choose between three pokemon
             newPara = pokemonStats.appendChild(document.createElement("p"))
             newParaTwo = pokemonStats.appendChild(document.createElement("p"))
             newPara.innerText = 
-            `You have chosen ${data[0]['name']}. ${data[0]['name']}'s hp is ${data[0]['hp']}. ${data[0]['name']}'s moves are ${data[0]['moves']}.`
-            newParaTwo.innerText = `The cpu has chosen ${data[1]['name']}.`
+            `You have chosen ${(data[0]['name'].toUpperCase())}. 
+            ${(data[0]['name']).toUpperCase()}'s hp is ${data[0]['hp']}. 
+            ${data[0]['name'].toUpperCase()}'s moves are ${data[0]['moves']}.`
+            newParaTwo.innerText = `The cpu has chosen ${data[1]['name'].toUpperCase()}.`
             choiceSection.style.display = "none";
             launchGame.style.display = "block";
           })
@@ -106,17 +108,17 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
     sessionStorage.setItem("userPokemonHp", userPokemonHp)
     if (userPokemonHp > 0) {
       createButtonsForUser(userPokemonMoves)
-      return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage!
+      return `${cpuPokemonName.toUpperCase()} used ${cpuMove} causing ${cpuDamage} damage!
 
-      ${userPokemonName}'s hp was reduced to ${userPokemonHp}!` 
+      ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!` 
     } else {
-      console.log(`${userPokemonName} fainted`)
+      console.log(`${userPokemonName.toUpperCase()} fainted`)
       // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      return `${cpuPokemonName} used ${cpuMove} causing ${cpuDamage} damage! 
-      ${userPokemonName} fainted!
-      ${cpuPokemonName} is the winner!`
+      return `${cpuPokemonName.toUpperCase()} used ${cpuMove} causing ${cpuDamage} damage! 
+      ${userPokemonName.toUpperCase()} fainted!
+      ${cpuPokemonName.toUpperCase()} is the winner!`
     }
   }  
 }
@@ -127,14 +129,14 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
     cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp") - userDamage
     sessionStorage.setItem("cpuPokemonHp", cpuPokemonHp) 
     if (cpuPokemonHp > 0) {
-      return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
-      ${cpuPokemonName}'s hp was reduced to ${cpuPokemonHp}.`
+      return `${userPokemonName.toUpperCase()} used ${userMove} causing ${userDamage} damage! 
+      ${cpuPokemonName.toUpperCase()}'s hp was reduced to ${cpuPokemonHp}.`
     } else {
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
-      return `${userPokemonName} used ${userMove} causing ${userDamage} damage! 
-      ${cpuPokemonName} fainted!
-      ${userPokemonName} is the winner!`
+      return `${userPokemonName.toUpperCase()} used ${userMove} causing ${userDamage} damage! 
+      ${cpuPokemonName.toUpperCase()} fainted!
+      ${userPokemonName.toUpperCase()} is the winner!`
     }
   } 
 }         
