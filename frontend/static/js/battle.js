@@ -83,29 +83,27 @@ function createButtonsForUser(userPokemonMoves) {
   newPara.setAttribute("id", "fade-in-three")
   gamePlay.appendChild(newPara)
   newPara.innerText = "Choose your next move!"
-  // newPara.scrollIntoView();
-  // newPara.scrollIntoView({behavior: "smooth"});
+
+  newPara.scrollIntoView({behavior: "smooth"});
   newForm = gamePlay.appendChild(document.createElement("form"))
   newForm.setAttribute("id", "moveForm")
   newForm.setAttribute("class", "fade-in four")
   newButtonOne = document.createElement("button")
-  newButtonOne.scrollIntoView();
-  newButtonOne.scrollIntoView({behavior: "smooth"});
   newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
   newButtonOne.setAttribute("class", "fade-in four")
   newButtonOne.textContent = `${[userPokemonMoves[0]]}`
   newForm.append(newButtonOne)
   newButtonTwo = document.createElement("button")
-  newButtonTwo.scrollIntoView();
-  newButtonTwo.scrollIntoView({behavior: "smooth"});
+  
   newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
   newButtonTwo.setAttribute("class", "fade-in four")
   newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
   newForm.append(newButtonTwo)
 
+  
+  gamePlay.scrollIntoView({behavior: "smooth", block: "end"});
 
   newPara.setAttribute("class", "oldPara")
-
 }
 
 function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName) {
@@ -189,7 +187,6 @@ gamePlay.addEventListener('click', (event) => {
     newPara.setAttribute("class", "newPara")
     newPara.setAttribute("class", "fade-in one")
     newPara.innerText +=userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName)
-    newPara.scrollIntoView();
     newPara.scrollIntoView({behavior: "smooth"});
     const oldButtons = gamePlay.querySelectorAll('button')
     const oldPara = document.querySelectorAll('.oldPara')
