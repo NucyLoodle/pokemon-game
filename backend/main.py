@@ -24,10 +24,12 @@ def login_page():
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        msg = (lgn.check_login_details()) 
-        if msg == "account found":
-            session['loggedin'] = True
-            session['username'] = 'username'  
+        # username = request.form['username']
+        # msg = (lgn.check_login_details()) 
+        # if msg == "account found":
+        #     session['loggedin'] = True
+        #     session['username'] = username
+        lgn.check_login()
     return render_template('profile.html')
 
 
