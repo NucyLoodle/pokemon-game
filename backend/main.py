@@ -7,6 +7,7 @@ import MySQLdb.cursors, re, hashlib
 import db_utils as db
 import login as lgn
 import config as c
+import add_pokemon as add
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -73,7 +74,18 @@ def battle_page():
 
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
-    return battle.get_pokemon_data()
+    user_pokemon_name = request.form['userPokemonChoice']
+    user_id = session['id']
+    data = battle.get_response_from_api(user_pokemon_name)
+    pokemon_id = data['id']
+    pokemon_type = data['types'][0]['type']['name']
+    print(pokemon_type)
+    return battle.get_pokemon_data(), add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name, pokemon_type)
+
+# @app.route("/battle", methods=['POST', 'GET'])
+# def save_pokemon_to_db():
+#     return add.add_new_pokemon()
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
