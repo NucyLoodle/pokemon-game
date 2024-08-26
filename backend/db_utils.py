@@ -53,15 +53,7 @@ def connect_db(query, params):
 
 # Save user pokemon name to db
 
-def add_new_pokemon(user_id, pokemon_id, pokemon_name, pokemon_type):
-    update = request.get_json()
-    query = f"""
-            INSERT INTO pokemon (user_id, pokemon_id, pokemon_name, pokemon_type)
-            VALUES ('{update[user_id]}', '{update[pokemon_id]}', '{update[pokemon_name]}', '{update[pokemon_type]}');
-            """
-    connect_db(query)
-    return jsonify(
-        {"success": f"{pokemon_name} added to your party"})
+
 
 
 if __name__ == '__main__':
