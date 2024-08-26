@@ -30,7 +30,7 @@ def _connect_to_db(db_name):
         print(f'failed to connect + {str(e)}')
 
 
-def connect_db(query):
+def connect_db(query, params):
     """
     Connects to database and passes in query
     """
@@ -39,8 +39,8 @@ def connect_db(query):
         db_connection = _connect_to_db(db_name)
         cur = db_connection.cursor(dictionary=True)
         print("Connected to DB: %s" % db_name)
-        cur.execute(query)
-        result = cur.fetchall()
+        cur.execute(query, params)
+        result = cur.fetchone()
         db_connection.commit()
         cur.close()
     except Exception:
@@ -53,15 +53,7 @@ def connect_db(query):
 
 # Save user pokemon name to db
 
-def add_new_pokemon(user_id, pokemon_id, pokemon_name, pokemon_type):
-    update = request.get_json()
-    query = f"""
-            INSERT INTO pokemon (user_id, pokemon_id, pokemon_name, pokemon_type)
-            VALUES ('{update[user_id]}', '{update[pokemon_id]}', '{update[pokemon_name]}', '{update[pokemon_type]}');
-            """
-    connect_db(query)
-    return jsonify(
-        {"success": f"{pokemon_name} added to your party"})
+
 
 
 if __name__ == '__main__':

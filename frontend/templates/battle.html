@@ -10,31 +10,30 @@
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="../css/normalize.css">
 		<link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/css-pokemon-gameboy.css">
 	</head>
 	<body>
-		<section id= "userPokemonChoice">
-            <p>Now, which Pokemon do you want? The three available Pokemon are Bulbasaur, Charmander, and Squirtle.</p>
-            <form class = "userinput" method ="POST" action="/battle" id = "form"> 
-                <button type = "submit" name = "userPokemonChoice" value="bulbasaur" id="choosePokemon">Bulbasaur</button>
-                <button type = "submit" name = "userPokemonChoice" value="charmander" id="choosePokemon">Charmander</button>
-                <button type = "submit" name = "userPokemonChoice" value="squirtle" id="choosePokemon">Squirtle</button>    
+		<section id= "userPokemonChoice" class= "framed contains-code">
+            <p>Now, which Pokemon do you want? 
+            The three available Pokemon are BULBASAUR, CHARMANDER, and SQUIRTLE.</p>
+            <form class= "userinput" method="POST" action="/battle" id= "form" class= "framed buttons compact"> 
+                <button name = "userPokemonChoice" value="bulbasaur" class = "fade-in choice">Bulbasaur</button>
+                <button name = "userPokemonChoice" value="charmander" class = "fade-in choice">Charmander</button>
+                <button name = "userPokemonChoice" value="squirtle" class = "fade-in choice">Squirtle</button>    
             </form>
         </section>
 
-        <section id="stats">
-            
-            <!-- <p>{{ userChoice }}</p>
-            <p>{{ pokemonHp }}</p>
-            <p>{{ pokemonMoves }}</p> -->
+        <section id="stats" class="framed contains-code">
         </section>
 
         <section id = "launchGameSection">
-            <form class = "userinput" method ="POST" action="/battle/launch" id ="launchGameForm"> 
-                <button type ="submit"  name = "launchBattle" value ="letsBattle" id ="launchGame">Let's Battle!</button>
+            <form class = "userinput" id ="launchGameForm" class= "framed buttons compact"> 
+                <button type ="submit"  name = "launchBattle" value ="letsBattle" id ="launchGame" class = "fade-in choice">Let's Battle!</button>
+                
             </form>
-
         </section>
-        <section id = "gamePlay">
+
+        <section id = "gamePlay" class="framed contains-code">
 
         </section>
 
