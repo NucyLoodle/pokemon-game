@@ -48,7 +48,7 @@ def login():
             msg = "wrong username/password"
     return render_template('login.html', msg=msg)
 
-@app.route("/login/profile")
+@app.route("/profile")
 def profile():
     # Check if the user is logged in
     
@@ -66,11 +66,14 @@ def main():
     
 @app.route("/battle")
 def battle_page():
-    return render_template('battle.html') 
+    print(session)
+    if 'loggedin' in session:
+        return render_template('battle.html') 
+    return redirect(url_for('login'))
 
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
-    return battle.get_pokemon()
+    return battle.get_pokemon_data()
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
