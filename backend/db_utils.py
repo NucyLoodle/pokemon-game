@@ -30,7 +30,7 @@ def _connect_to_db(db_name):
         print(f'failed to connect + {str(e)}')
 
 
-def connect_db(query):
+def connect_db(query, params):
     """
     Connects to database and passes in query
     """
@@ -39,7 +39,7 @@ def connect_db(query):
         db_connection = _connect_to_db(db_name)
         cur = db_connection.cursor(dictionary=True)
         print("Connected to DB: %s" % db_name)
-        cur.execute(query)
+        cur.execute(query, params)
         result = cur.fetchall()
         db_connection.commit()
         cur.close()
