@@ -40,7 +40,7 @@ def connect_db(query, params):
         cur = db_connection.cursor(dictionary=True)
         print("Connected to DB: %s" % db_name)
         cur.execute(query, params)
-        result = cur.fetchall()
+        result = cur.fetchone()
         db_connection.commit()
         cur.close()
     except Exception:
