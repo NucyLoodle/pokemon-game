@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_session import Session
 import battle
 from flask_mysqldb import MySQL
@@ -16,16 +16,48 @@ app = Flask(__name__ ,
 
 app.secret_key = 'BAD_SECRET_KEY'
 
-@app.route("/login")
+@app.route("/login/")
 def login_page():
     return render_template('login.html')
 
-@app.route("/login/profile", methods=['GET', 'POST'])
+@app.route("/login/", methods=['GET', 'POST'])
 def login():
-    msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        msg = lgn.check_login()
-    return render_template('profile.html', msg=msg)
+        username = request.form['username']
+        password = request.form['password']
+
+        hash = password + app.secret_key
+        hash = hashlib.sha1(hash.encode())
+        password = hash.hexdigest()
+
+        query = """
+                    SELECT * FROM user_profile u 
+                    INNER JOIN passwords p 
+                    ON u.user_id = p.user_id
+                    WHERE u.user_name = %s 
+                    AND p.password = %s;
+                """    
+        account = db.connect_db(query, (username, password,))
+        if account:
+            session['loggedin'] = True
+            session['id'] = account['user_id']
+            session['username'] = account['user_name']
+            print("hi")
+            return redirect(url_for('profile'))
+        else:
+            msg = "wrong username/password"
+    return render_template('login.html', msg=msg)
+
+@app.route("/login/profile")
+def profile():
+    # Check if the user is logged in
+    
+    if 'loggedin' in session:
+        # User is loggedin show them the profile page
+        return render_template('profile.html', username=session['username'])
+    # User is not loggedin redirect to login page
+    return redirect(url_for('login'))
+    
 
 
 @app.route("/")

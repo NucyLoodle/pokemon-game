@@ -1,7 +1,7 @@
 import db_utils as db
 import hashlib
 import main as m
-from flask import request, session
+from flask import request, session, redirect, url_for
 
 """
 Functions for logging in and registering new users
@@ -68,28 +68,27 @@ Functions for logging in and registering new users
 
 
 def check_login():
-    username = request.form['username']
-    password = request.form['password']
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
 
-    hash = password + m.app.secret_key
-    hash = hashlib.sha1(hash.encode())
-    password = hash.hexdigest()
+        hash = password + m.app.secret_key
+        hash = hashlib.sha1(hash.encode())
+        password = hash.hexdigest()
 
-    query = """
-                SELECT * FROM user_profile u 
-                INNER JOIN passwords p 
-                ON u.user_id = p.user_id
-                WHERE u.user_name = %s 
-                AND p.password = %s;
-            """    
-    account = db.connect_db(query, (username, password,))
-    #print(account)
-    #print(account[0]['user_id'])
-    
-    if account:
-        session['loggedin'] = True
-        session['id'] = account['user_id']
-        session['username'] = account['user_name']
-        return "Logged in"
-    else:
-        return "wrong username/password"
+        query = """
+                    SELECT * FROM user_profile u 
+                    INNER JOIN passwords p 
+                    ON u.user_id = p.user_id
+                    WHERE u.user_name = %s 
+                    AND p.password = %s;
+                """    
+        account = db.connect_db(query, (username, password,))
+        if account:
+            session['loggedin'] = True
+            session['id'] = account['user_id']
+            session['username'] = account['user_name']
+            print("hi")
+            return redirect(url_for('profile'))
+        else:
+            msg = "wrong username/password"
