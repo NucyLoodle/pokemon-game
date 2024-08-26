@@ -14,9 +14,9 @@ def check_account_exists(username):
                 SELECT * FROM user_profile u 
                 INNER JOIN passwords p 
                 ON u.user_id = p.user_id
-                WHERE u.user_name = '{username}';
+                WHERE u.user_name = %s;
             """
-    result = db.connect_db(query)
+    result = db.connect_db(query, (username,))
     return result
 
 
@@ -25,14 +25,15 @@ def login_valid(username, password):
     Checks the entered email and password against the details in the db
     - returns a boolean
     """
-    query = f"""
+    query = """
                 SELECT * FROM user_profile u 
                 INNER JOIN passwords p 
                 ON u.user_id = p.user_id
-                WHERE u.user_name = '{username}' 
-                AND p.password = '{password}';
+                WHERE u.user_name = %s 
+                AND p.password = %s;
             """
-    result = db.connect_db(query)
+    
+    result = db.connect_db(query, (username, password,))
 
     if result:
         return True
