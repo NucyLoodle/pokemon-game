@@ -12,6 +12,14 @@
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
+
+        {% block title %}Home{% endblock %}
+
+        {% block content %}
+        <h2>Profile Page</h2>
+        <p>Welcome back, {{ username }}!</p>
+        {% endblock %}
+
         <div class="msg">{{ msg }}</div>
 		<script type="text/javascript" src="../js/main.js"></script>
 	</body>
