@@ -20,6 +20,11 @@
         <p>Welcome back, {{ username }}!</p>
         {% endblock %}
 
+        <div class="links">
+            <a href="{{ url_for('battle_page') }}">Battle</a>
+        </div>
+
+
         <div class="msg">{{ msg }}</div>
 		<script type="text/javascript" src="../js/main.js"></script>
 	</body>
