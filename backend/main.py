@@ -16,12 +16,19 @@ app = Flask(__name__ ,
 
 app.secret_key = 'BAD_SECRET_KEY'
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login")
+def login_page():
+    return render_template('login.html')
+
+@app.route("/login/profile", methods=['GET', 'POST'])
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        msg = (lgn.check_login_details())     
-    return render_template('login.html', msg=msg)
+        msg = (lgn.check_login_details()) 
+        if msg == "account found":
+            session['loggedin'] = True
+            session['username'] = 'username'  
+    return render_template('profile.html')
 
 
 @app.route("/")
