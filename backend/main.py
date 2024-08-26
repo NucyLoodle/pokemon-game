@@ -20,8 +20,6 @@ app.secret_key = 'BAD_SECRET_KEY'
 def login():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        
-        lgn.check_login_details()  
         msg = (lgn.check_login_details())     
     return render_template('login.html', msg=msg)
 
