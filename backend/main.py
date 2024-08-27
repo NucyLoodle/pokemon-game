@@ -75,12 +75,17 @@ def battle_page():
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
     user_pokemon_name = request.form['userPokemonChoice']
+    user_pokemon_name = "ditto"
     user_id = session['id']
     data = battle.get_response_from_api(user_pokemon_name)
     pokemon_id = data['id']
     pokemon_type = data['types'][0]['type']['name']
-    print(pokemon_type)
-    return battle.get_pokemon_data(), add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name, pokemon_type)
+    hp = data['stats'][0]['base_stat']
+    level = 1
+    exp = data['base_experience']
+    weight = data['weight']
+
+    return battle.get_pokemon_data(), add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name), add.add_pokemon_stats(user_id, pokemon_type, hp, level, exp, weight)
 
 # @app.route("/battle", methods=['POST', 'GET'])
 # def save_pokemon_to_db():
