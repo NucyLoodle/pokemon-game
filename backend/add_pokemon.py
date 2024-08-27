@@ -24,14 +24,14 @@ def add_new_pokemon(user_id, pokemon_id, user_pokemon_name):
    
 
 
-def add_pokemon_stats(user_id, pokemon_type, hp, level, exp, weight):
+def add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight):
     #user_id = session['id']
     query = """
     INSERT INTO pokemon_stats(pokemon_db_id, pokemon_type, hp, level, exp, weight)
-    VALUES ((SELECT pokemon_db_id FROM pokemon p WHERE p.user_id = %s), %s, %s, %s, %s, %s); 
+    VALUES ((SELECT pokemon_db_id FROM pokemon p WHERE p.user_id = %s AND p.pokemon_name = %s), %s, %s, %s, %s, %s); 
 
     """ # problem with multiple pokemon
-    db.connect_db(query, (user_id, pokemon_type, hp, level, exp, weight,)) # edit type is now in new table
+    db.connect_db(query, (user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight,)) # edit type is now in new table
     print("yay")
     return f"success"
 

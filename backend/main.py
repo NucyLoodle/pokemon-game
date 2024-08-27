@@ -86,7 +86,7 @@ def get_user_cpu_pokemon():
 
     if not add.pokemon_already_caught(user_id, pokemon_id):
         add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
-        add.add_pokemon_stats(user_id, pokemon_type, hp, level, exp, weight)
+        add.add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight)
     else:
         print("You have already caught this pokemon")
         return jsonify ({"failure" :"You have already caught this pokemon"})
