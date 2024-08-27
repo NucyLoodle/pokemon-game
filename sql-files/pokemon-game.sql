@@ -21,15 +21,29 @@ FOREIGN KEY (user_id)
 CREATE TABLE pokemon (
 user_id INT NOT NULL,
 pokemon_db_id INT AUTO_INCREMENT PRIMARY KEY,
-pokemon_id INT, 
+pokemon_id INT NOT NULL UNIQUE, 
 pokemon_name VARCHAR(20) NOT NULL,
-pokemon_type VARCHAR(20) NOT NULL,
+
 CONSTRAINT fk_user_id_pokemon
 FOREIGN KEY (user_id)
   REFERENCES user_profile(user_id)
   ON DELETE CASCADE
 );
--- add HP
+
+
+CREATE TABLE pokemon_stats (
+pokemon_db_id INT NOT NULL UNIQUE,
+pokemon_type VARCHAR(20) NOT NULL,
+hp INT NOT NULL,
+level INT NOT NULL,
+exp INT NOT NULL,
+weight INT NOT NULL,
+CONSTRAINT fk_pokemon_id_pokemon_stats
+FOREIGN KEY (pokemon_db_id)
+  REFERENCES pokemon(pokemon_db_id)
+  ON DELETE CASCADE
+);
+
 CREATE TABLE pokemon_moves (
 pokemon_db_id INT NOT NULL UNIQUE,
 move_1 VARCHAR(15),
