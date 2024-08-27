@@ -12,13 +12,22 @@
 		<link rel="stylesheet" href="../css/style.css">
 	</head>
 	<body>
+		<section id = "welcome">
+			{% block title %}Home{% endblock %}
 
-        {% block title %}Home{% endblock %}
+			{% block content %}
+			<h1>Profile Page</h1>
+			<p>Welcome back, {{ username }}!</p>
+			{% endblock %}
+		</section>
 
-        {% block content %}
-        <h2>Profile Page</h2>
-        <p>Welcome back, {{ username }}!</p>
-        {% endblock %}
+		<section id = "party">
+			<h2>Your Party</h2>
+			<div class = "pokemon">
+				
+			</div>
+
+		</section>
 
         <div class="links">
             <a href="{{ url_for('battle_page') }}">Battle</a>
