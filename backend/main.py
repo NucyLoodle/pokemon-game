@@ -7,6 +7,7 @@ import MySQLdb.cursors, re, hashlib
 import db_utils as db
 import login as lgn
 import config as c
+import display_profile as dp 
 import add_pokemon as add
 
 app = Flask(__name__ ,
@@ -52,14 +53,17 @@ def login():
 @app.route("/profile")
 def profile():
     # Check if the user is logged in
-    
     if 'loggedin' in session:
         # User is loggedin show them the profile page
         return render_template('profile.html', username=session['username'])
     # User is not loggedin redirect to login page
     return redirect(url_for('login'))
     
-
+@app.route("/profile", methods=['GET', 'POST'])
+def display_pokemon():
+    if request.form['viewParty'] == 'viewParty':
+        user_id = session['id']
+        return dp.get_pokemon_names(user_id)
 
 @app.route("/")
 def main():
