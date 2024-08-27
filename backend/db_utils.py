@@ -32,7 +32,7 @@ def _connect_to_db(db_name):
 
 def connect_db(query, params):
     """
-    Connects to database and passes in query
+    Connects to database and passes in query - used for single result
     """
     try:
         db_name = 'pokemon_game'
@@ -51,7 +51,28 @@ def connect_db(query, params):
             print('DB connection is closed')
         return result
 
-# Save user pokemon name to db
+
+
+def connect_db_multiple_results(query, params):
+    """
+    Connects to database and passes in query - used for multiple results
+    """
+    try:
+        db_name = 'pokemon_game'
+        db_connection = _connect_to_db(db_name)
+        cur = db_connection.cursor(dictionary=True)
+        print("Connected to DB: %s" % db_name)
+        cur.execute(query, params)
+        result = cur.fetchall()
+        db_connection.commit()
+        cur.close()
+    except Exception:
+        raise DbConnectionError("Failed to read data from the DB")
+    finally:
+        if db_connection:
+            db_connection.close()
+            print('DB connection is closed')
+        return result
 
 
 
