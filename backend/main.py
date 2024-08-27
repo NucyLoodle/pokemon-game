@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from flask_session import Session
 import battle
 from flask_mysqldb import MySQL
@@ -83,9 +83,13 @@ def get_user_cpu_pokemon():
     level = 1
     exp = data['base_experience']
     weight = data['weight']
-    add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name), add.add_pokemon_stats(user_id, pokemon_type, hp, level, exp, weight)
 
-
+    if not add.pokemon_already_caught(user_id, pokemon_id):
+        add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
+        add.add_pokemon_stats(user_id, pokemon_type, hp, level, exp, weight)
+    else:
+        print("You have already caught this pokemon")
+        return jsonify ({"failure" :"You have already caught this pokemon"})
     return battle.get_pokemon_data()
     
     #

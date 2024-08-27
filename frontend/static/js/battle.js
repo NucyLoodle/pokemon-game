@@ -38,35 +38,40 @@ function getUserPokemonName() { // ask user to choose between three pokemon
       })
           .then(response => response.json()) 
           .then(data => {
-            console.log(data);
-            sessionStorage.setItem("userPokemonName", data[0]['name'])
-            sessionStorage.setItem("cpuPokemonName", data[1]['name'])
-            sessionStorage.setItem("userPokemonHp", data[0]['hp'])
-            sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
-            sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
-            sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
-            
-            userPokemonName = sessionStorage.getItem("userPokemonName")
-            userPokemonHp = sessionStorage.getItem("userPokemonHp")
-            userPokemonMoves = (sessionStorage.getItem("userPokemonMoves")).split(",")
-            cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
-            cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
-            cpuPokemonMoves = (sessionStorage.getItem("cpuPokemonMoves")).split(",")
-            
-            
+            if (data['failure'] == 'You have already caught this pokemon') {
+              console.log("oh no")
+              return
+              //display this message to user
+              //remove the pokemon choice
+            } else {
+              sessionStorage.setItem("userPokemonName", data[0]['name'])
+              sessionStorage.setItem("cpuPokemonName", data[1]['name'])
+              sessionStorage.setItem("userPokemonHp", data[0]['hp'])
+              sessionStorage.setItem("cpuPokemonHp", data[1]['hp'])
+              sessionStorage.setItem("userPokemonMoves", data[0]['moves'])
+              sessionStorage.setItem("cpuPokemonMoves", data[1]['moves'])
+              
+              userPokemonName = sessionStorage.getItem("userPokemonName")
+              userPokemonHp = sessionStorage.getItem("userPokemonHp")
+              userPokemonMoves = (sessionStorage.getItem("userPokemonMoves")).split(",")
+              cpuPokemonName = sessionStorage.getItem("cpuPokemonName")
+              cpuPokemonHp = sessionStorage.getItem("cpuPokemonHp")
+              cpuPokemonMoves = (sessionStorage.getItem("cpuPokemonMoves")).split(",")
+              pokemonStats.style.display = "block"
+              newPara = pokemonStats.appendChild(document.createElement("p"))
+              newParaTwo = pokemonStats.appendChild(document.createElement("p"))
+              newPara.innerText =            
+              `You have chosen ${(data[0]['name'].toUpperCase())}. 
+              ${(data[0]['name']).toUpperCase()}'s hp is ${data[0]['hp']}. 
+              ${data[0]['name'].toUpperCase()}'s moves are ${handleMovesArray(data[0]['moves'])}.`
+  
+              newParaTwo.innerText = `The cpu has chosen ${data[1]['name'].toUpperCase()}.`
+              choiceSection.style.display = "none";
+              launchGame.style.display = "block";
 
+            }
 
-            pokemonStats.style.display = "block"
-            newPara = pokemonStats.appendChild(document.createElement("p"))
-            newParaTwo = pokemonStats.appendChild(document.createElement("p"))
-            newPara.innerText =            
-            `You have chosen ${(data[0]['name'].toUpperCase())}. 
-            ${(data[0]['name']).toUpperCase()}'s hp is ${data[0]['hp']}. 
-            ${data[0]['name'].toUpperCase()}'s moves are ${handleMovesArray(data[0]['moves'])}.`
-
-            newParaTwo.innerText = `The cpu has chosen ${data[1]['name'].toUpperCase()}.`
-            choiceSection.style.display = "none";
-            launchGame.style.display = "block";
+  
           })
   })
 }
