@@ -2,7 +2,7 @@ sessionStorage.clear() // clear all storage if accessing after battles
 
 const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
-
+const viewPartyButton = document.getElementById("viewPartyButton");
 
 
 viewParty.addEventListener('submit', function(e) {
@@ -29,7 +29,7 @@ viewParty.addEventListener('submit', function(e) {
                 div.append(namePara)
                 namePara.innerText = data[i]['pokemon_name'].toUpperCase()
                 }
-        
+            viewPartyButton.style.display = "none"
             
 
 
