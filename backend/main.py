@@ -63,7 +63,7 @@ def profile():
 def display_pokemon():
     if request.form['viewParty'] == 'viewParty':
         user_id = session['id']
-        return dp.get_pokemon_names(user_id)
+        return dp.get_pokemon_info(user_id)
 
 @app.route("/")
 def main():
