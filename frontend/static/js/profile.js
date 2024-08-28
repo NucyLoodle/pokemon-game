@@ -30,6 +30,11 @@ viewParty.addEventListener('submit', function(e) {
                 namePara = document.createElement("p")
                 div.append(namePara)
                 namePara.innerText = data[i]['pokemon_name'].toUpperCase()
+
+                spriteImg = document.createElement("img")
+                spriteImg.setAttribute("src", `${data[i]["pokemon_sprite"]}`)
+                div.append(spriteImg)
+
                 
                 typePara = document.createElement("p")
                 div.append(typePara)
