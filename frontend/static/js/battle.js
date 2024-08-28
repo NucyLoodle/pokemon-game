@@ -10,6 +10,7 @@ const launchGame = document.getElementById("launchGameSection")
 const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 const pokemonStats = document.getElementById('stats')
+const endBattleForm = document.getElementById('endBattle')
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 pokemonStats.style.display = "none"
@@ -159,13 +160,40 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
 } 
 
 function endBattle() {
-  battleDoneForm = gamePlay.appendChild(document.createElement("form"))
+  battleDoneForm = endBattleForm.appendChild(document.createElement("form"))
   // create button to return to profile
   returnToProfileButton = document.createElement("button")
+  returnToProfileButton.setAttribute("name", "returnToProfile")
+  returnToProfileButton.setAttribute("value", "battleDone")
   returnToProfileButton.textContent = 'Return to Profile'
-  newForm.append(returnToProfileButton)
+  battleDoneForm.append(returnToProfileButton)
+  // could have these elements in html, but hidden
+  // if flag true, display these elements
+
+
+
   // store firstBattleCompleted flag in session storage and db
+  sessionStorage.setItem('firstBattleCompleted', 'true')
+
+  battleDoneForm.addEventListener("submit", function(e) {
+    e.preventDefault()
+    console.log("button clicked")
+    // const formData = new FormData(this); 
+    // formData.append(e.submitter.name, e.submitter.value);
+    // const url = '/profile';
+    //   fetch(url, { 
+    //       method: 'post', 
+    //       body: formData // send user choice through to python backend
+    //   })
+    //       .then(response => response.json()) 
+    //       .then(data => {
+    //         console.log(data)
+    //       })
+
+  })
+
   //in profle, check this and display option to first battle or not
+  //load this as a sessionstorage when user logs in
 
 }
 
