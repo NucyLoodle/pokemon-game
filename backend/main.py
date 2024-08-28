@@ -1,12 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-from flask_session import Session
 import battle
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
-import MySQLdb.cursors, re, hashlib
+import hashlib
 import db_utils as db
-import login as lgn
-import config as c
 import display_profile as dp 
 import add_pokemon as add
 
@@ -44,7 +39,6 @@ def login():
             session['loggedin'] = True
             session['id'] = account['user_id']
             session['username'] = account['user_name']
-            print("hi")
             return redirect(url_for('profile'))
         else:
             msg = "wrong username/password"
@@ -52,11 +46,8 @@ def login():
 
 @app.route("/profile")
 def profile():
-    # Check if the user is logged in
     if 'loggedin' in session:
-        # User is loggedin show them the profile page
         return render_template('profile.html', username=session['username'])
-    # User is not loggedin redirect to login page
     return redirect(url_for('login'))
     
 @app.route("/profile", methods=['GET', 'POST'])
@@ -71,7 +62,6 @@ def main():
     
 @app.route("/battle")
 def battle_page():
-    print(session)
     if 'loggedin' in session:
         return render_template('battle.html') 
     return redirect(url_for('login'))
@@ -88,23 +78,14 @@ def get_user_cpu_pokemon():
     exp = data['base_experience']
     weight = data['weight']
     pokemon_sprite = data['sprites']['versions']['generation-i']['yellow']['front_default']
-    print(pokemon_sprite)
 
     if not add.pokemon_already_caught(user_id, pokemon_id):
         add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
         add.add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight)
         add.add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite)
-        print(pokemon_sprite)
     else:
-        print("You have already caught this pokemon")
         return jsonify ({"failure" :"You have already caught this pokemon"})
     return battle.get_pokemon_data()
-    
-    #
-# @app.route("/battle", methods=['POST', 'GET'])
-# def save_pokemon_to_db():
-#     return add.add_new_pokemon()
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
