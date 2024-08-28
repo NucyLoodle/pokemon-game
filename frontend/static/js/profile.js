@@ -4,6 +4,7 @@ const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 const viewPartyButton = document.getElementById("viewPartyButton");
 
+usersPartyPokemon.style.display = "none"
 
 viewParty.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -54,6 +55,7 @@ viewParty.addEventListener('submit', function(e) {
 
 
             }
+            usersPartyPokemon.style.display = "flex"
             viewPartyButton.style.display = "none"
         })
     })   
