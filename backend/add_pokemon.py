@@ -35,6 +35,14 @@ def add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, 
     print("yay")
     return f"success"
 
+def add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite):
+    query = """
+            INSERT INTO pokemon_sprites(pokemon_db_id, pokemon_sprite)
+            VALUES ((SELECT pokemon_db_id FROM pokemon p WHERE p.user_id = %s AND p.pokemon_name = %s), %s);
+            """
+    db.connect_db(query, (user_id, user_pokemon_name, pokemon_sprite,))
+
+
 
 
 
