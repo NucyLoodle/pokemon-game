@@ -19,15 +19,3 @@ def get_pokemon_info(user_id):
             """
     result = db.connect_db_multiple_results(query, (user_id,))
     return result
-
-
-
-
-# def get_pokemon_stats(user_id):
-
-#     #access the db to get user pokemon's stats
-#     query = """
-#             SELECT * FROM pokemon_stats ps WHERE pokemon_db_id IN (SELECT pokemon_db_id FROM pokemon p WHERE p.user_id = %s);
-#             """
-#     result = db.connect_db_multiple_results(query, (user_id,))
-#     return result
