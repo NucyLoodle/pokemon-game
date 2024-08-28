@@ -1,3 +1,5 @@
+sessionStorage.clear() // clear all storage if accessing after battles
+
 const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 
@@ -16,13 +18,19 @@ viewParty.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data)
             console.log(data.length)
+            console.log(data[0])
 
-            let numOfDivs = data.length;
-            for (let i = 0; i < numOfDivs; i++) {  
+            let numOfPokemon = data.length;
+            for (let i = 0; i < numOfPokemon; i++) { 
                 div = document.createElement("div")
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
-              } 
+                namePara = document.createElement("p")
+                div.append(namePara)
+                namePara.innerText = data[i]['pokemon_name'].toUpperCase()
+                }
+        
+            
 
 
         })
