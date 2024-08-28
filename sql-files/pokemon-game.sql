@@ -44,6 +44,15 @@ FOREIGN KEY (pokemon_db_id)
   ON DELETE CASCADE
 );
 
+CREATE TABLE pokemon_sprites(
+pokemon_db_id INT NOT NULL UNIQUE,
+pokemon_sprite VARCHAR(150),
+CONSTRAINT fk_pokemon_id_pokemon_sprites
+FOREIGN KEY (pokemon_db_id)
+  REFERENCES pokemon(pokemon_db_id)
+  ON DELETE CASCADE
+);
+
 CREATE TABLE pokemon_moves (
 pokemon_db_id INT NOT NULL UNIQUE,
 move_1 VARCHAR(15),
