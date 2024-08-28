@@ -14,33 +14,21 @@
 	</head>
 	<body>
 		<section id = "welcome">
-			{% block title %}Home{% endblock %}
-
 			{% block content %}
-			<h1>Profile Page</h1>
 			<p>Welcome back, {{ username }}!</p>
 			{% endblock %}
 		</section>
 
 		<section id = "party">
-			<h2>Your Party</h2>
 			<form id= "viewParty" method="POST" action="/profile"> 
                 <button name = "viewParty" value="viewParty" id = "viewPartyButton">View Your Party</button>
-			</form>
-			
-			
-			<div class ="framed contains-code" id = "usersPartyPokemon">
-				
+			</form>			
+			<div class ="framed contains-code" id = "usersPartyPokemon">	
 			</div>
-
 		</section>
-
-        <div class="links">
-            <a href="{{ url_for('battle_page') }}">Battle</a>
-        </div>
-
-
-        <div class="msg">{{ msg }}</div>
+		<section id = "links">
+			<a href="{{ url_for('battle_page') }}">Battle</a>
+		</section>
 		<script type="text/javascript" src="../js/profile.js"></script>
 	</body>
 </html>
