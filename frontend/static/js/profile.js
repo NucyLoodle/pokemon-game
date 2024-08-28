@@ -1,4 +1,5 @@
-const viewParty = document.getElementById("viewParty")
+const viewParty = document.getElementById("viewParty");
+const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 
 
 
@@ -14,6 +15,16 @@ viewParty.addEventListener('submit', function(e) {
         .then(response => response.json()) 
         .then(data => {
             console.log(data)
+            console.log(data.length)
+
+            let numOfDivs = data.length;
+            for (let i = 0; i < numOfDivs; i++) {  
+                div = document.createElement("div")
+                div.setAttribute("class","partyPokemonStats")
+                usersPartyPokemon.append(div)
+              } 
+
+
         })
     })   
 
