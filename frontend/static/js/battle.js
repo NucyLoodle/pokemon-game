@@ -20,6 +20,7 @@ let userPokemonMoves;
 let cpuPokemonName;
 let cpuPokemonHp;
 let cpuPokemonMoves;
+let firstBattleCompleted = false;
 
 function handleMovesArray(a) {
   a = a.map(function(x){ return x.toUpperCase(); })
@@ -127,9 +128,12 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
       // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
+      firstBattleCompleted = true;
+      endBattle()
       return `${cpuPokemonName.toUpperCase()} used ${cpuMove} causing ${cpuDamage} damage! 
       ${userPokemonName.toUpperCase()} fainted!
       ${cpuPokemonName.toUpperCase()} is the winner!`
+      
     }
   }  
 }
@@ -145,12 +149,25 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
     } else {
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
       document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
+      firstBattleCompleted = true;
+      endBattle()
       return `${userPokemonName.toUpperCase()} used ${userMove} causing ${userDamage} damage! 
       ${cpuPokemonName.toUpperCase()} fainted!
-      ${userPokemonName.toUpperCase()} is the winner!`
+      ${userPokemonName.toUpperCase()} is the winner!` 
     }
   } 
-}         
+} 
+
+function endBattle() {
+  battleDoneForm = gamePlay.appendChild(document.createElement("form"))
+  // create button to return to profile
+  returnToProfileButton = document.createElement("button")
+  returnToProfileButton.textContent = 'Return to Profile'
+  newForm.append(returnToProfileButton)
+  // store firstBattleCompleted flag in session storage and db
+  //in profle, check this and display option to first battle or not
+
+}
 
 /* Run the Game */          
 
@@ -164,19 +181,9 @@ launchGameForm.addEventListener("submit", function(e) {
     newPara.innerText += cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
     gamePlay.style.display = "block"
     //createButtonsForUser(userPokemonMoves)
-    
-  } else {
+    } else {
     console.log("end")
-  }
-  
-  
-
-    
-  // } else {
-  //   console.log("stop the loop")
-  // }
-
-         
+    }   
   })
 
 
@@ -207,7 +214,6 @@ if (sessionStorage.getItem("cpuPokemonHp")> 0) {
   }
 })    
       
-
 
 
 
