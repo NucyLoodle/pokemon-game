@@ -166,7 +166,7 @@ function endBattle() {
   const returnButton = document.getElementById("returnButton")
   returnButton.style.display = "flex"
   // store firstBattleCompleted flag in session storage and db
-  sessionStorage.setItem('firstBattleCompleted', 'true')
+  
   endBattleForm.addEventListener("submit", function(e) {
     e.preventDefault()
 
@@ -180,7 +180,9 @@ function endBattle() {
       })
           .then(response => response.text()) 
           .then(data => {
-            console.log(data)
+            if (data == "battleDone") {
+              sessionStorage.setItem('firstBattleCompleted', 'true')
+            }
           })
     location.href = '/profile'
   })
