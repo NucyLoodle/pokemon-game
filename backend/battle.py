@@ -50,5 +50,7 @@ def first_battle_completed(user_id):
         query = """
                 UPDATE user_profile SET first_battle = true WHERE user_id = %s
                 """
-        db.connect_db(query, (user_id,))
+    db.connect_db(query, (user_id,))
+    return "flag updated"
+    
 
