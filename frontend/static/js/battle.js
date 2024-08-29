@@ -169,6 +169,7 @@ function endBattle() {
   sessionStorage.setItem('firstBattleCompleted', 'true')
   endBattleForm.addEventListener("submit", function(e) {
     e.preventDefault()
+
     console.log("button clicked")
     const formData = new FormData(this); 
     formData.append(e.submitter.name, e.submitter.value);
@@ -181,7 +182,7 @@ function endBattle() {
           .then(data => {
             console.log(data)
           })
-
+    location.href = '/profile'
   })
 
   //in profle, check this and display option to first battle or not

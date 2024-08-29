@@ -91,9 +91,10 @@ def get_user_cpu_pokemon():
 @app.route("/battle/end", methods=['POST', 'GET'])
 def finish_battle():
     if request.method == 'POST' and "returnToProfile" in request.form:
+        redirect(url_for('profile'))
         return battle.first_battle_completed()
-    if request.form == 'battleDone' :
-        return redirect(url_for('profile'))
+    # if request.form == 'battleDone' :
+    #     return redirect(url_for('profile'))
 
 
 if __name__ == '__main__':
