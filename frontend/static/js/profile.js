@@ -1,4 +1,11 @@
-sessionStorage.clear() // clear all storage if accessing after battles
+// clear battle items
+
+sessionStorage.removeItem("userPokemonName")
+sessionStorage.removeItem("cpuPokemonName")
+sessionStorage.removeItem("userPokemonHp")
+sessionStorage.removeItem("cpuPokemonHp")
+sessionStorage.removeItem("userPokemonMoves")
+sessionStorage.removeItem("cpuPokemonMoves")
 
 const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
