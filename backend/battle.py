@@ -41,3 +41,9 @@ def get_pokemon_data():
     poke_list.append(user_pokemon)
     poke_list.append(cpu_pokemon)
     return poke_list
+
+
+def first_battle_completed():
+    flag = request.form['returnToProfile']
+    print(flag)
+    return flag

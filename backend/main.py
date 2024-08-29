@@ -68,24 +68,33 @@ def battle_page():
 
 @app.route("/battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
-    user_pokemon_name = request.form['userPokemonChoice']
-    user_id = session['id']
-    data = battle.get_response_from_api(user_pokemon_name)
-    pokemon_id = data['id']
-    pokemon_type = data['types'][0]['type']['name']
-    hp = data['stats'][0]['base_stat']
-    level = 1
-    exp = data['base_experience']
-    weight = data['weight']
-    pokemon_sprite = data['sprites']['versions']['generation-i']['yellow']['front_default']
+    if request.method == 'POST' and "userPokemonChoice" in request.form:
+        user_pokemon_name = request.form['userPokemonChoice']
+        user_id = session['id']
+        data = battle.get_response_from_api(user_pokemon_name)
+        pokemon_id = data['id']
+        pokemon_type = data['types'][0]['type']['name']
+        hp = data['stats'][0]['base_stat']
+        level = 1
+        exp = data['base_experience']
+        weight = data['weight']
+        pokemon_sprite = data['sprites']['versions']['generation-i']['yellow']['front_default']
 
-    if not add.pokemon_already_caught(user_id, pokemon_id):
-        add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
-        add.add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight)
-        add.add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite)
-    else:
-        return jsonify ({"failure" :"You have already caught this pokemon"})
-    return battle.get_pokemon_data()
+        if not add.pokemon_already_caught(user_id, pokemon_id):
+            add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
+            add.add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight)
+            add.add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite)
+        else:
+            return jsonify ({"failure" :"You have already caught this pokemon"})
+        return battle.get_pokemon_data()
+
+@app.route("/battle/end", methods=['POST', 'GET'])
+def finish_battle():
+    if request.method == 'POST' and "returnToProfile" in request.form:
+        return battle.first_battle_completed()
+    if request.form == 'battleDone' :
+        return redirect(url_for('profile'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

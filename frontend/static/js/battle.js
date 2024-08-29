@@ -11,6 +11,7 @@ const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 const pokemonStats = document.getElementById('stats')
 const endBattleSection = document.getElementById('endBattle')
+const endBattleForm = document.getElementById('endBattleForm')
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 pokemonStats.style.display = "none"
@@ -160,31 +161,26 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
   } 
 } 
 
-function endBattle() {
-  
+function endBattle() {  
   endBattleSection.style.display = "flex"
   const returnButton = document.getElementById("returnButton")
   returnButton.style.display = "flex"
-
-
-
   // store firstBattleCompleted flag in session storage and db
   sessionStorage.setItem('firstBattleCompleted', 'true')
-
-  endBattleSection.addEventListener("submit", function(e) {
+  endBattleForm.addEventListener("submit", function(e) {
     e.preventDefault()
     console.log("button clicked")
-    // const formData = new FormData(this); 
-    // formData.append(e.submitter.name, e.submitter.value);
-    // const url = '/profile';
-    //   fetch(url, { 
-    //       method: 'post', 
-    //       body: formData // send user choice through to python backend
-    //   })
-    //       .then(response => response.json()) 
-    //       .then(data => {
-    //         console.log(data)
-    //       })
+    const formData = new FormData(this); 
+    formData.append(e.submitter.name, e.submitter.value);
+    const url = '/battle/end';
+      fetch(url, { 
+          method: 'post', 
+          body: formData // send user choice through to python backend
+      })
+          .then(response => response.text()) 
+          .then(data => {
+            console.log(data)
+          })
 
   })
 
