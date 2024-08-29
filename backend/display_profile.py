@@ -14,3 +14,9 @@ def get_pokemon_info(user_id):
     result = db.connect_db_multiple_results(query, (user_id,))
     return result
 
+def get_flag(user_id):
+    query = """
+            SELECT first_battle FROM user_profile WHERE user_id = %s
+            """
+    result = db.connect_db(query, (user_id,))
+    return result

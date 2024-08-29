@@ -40,7 +40,6 @@ def login():
             session['loggedin'] = True
             session['id'] = account['user_id']
             session['username'] = account['user_name']
-            session['first_battle_done'] = account['first_battle']
             return redirect(url_for('profile'))
         else:
             msg = "wrong username/password"
@@ -49,7 +48,9 @@ def login():
 @app.route("/profile/flag", methods=['GET', 'POST'])
 def first_battle_flag():
     if 'loggedin' in session:
-        return str(session['first_battle_done'])
+        user_id = session['id']
+        print(dp.get_flag(user_id))
+        return dp.get_flag(user_id)
 
 @app.route("/profile")
 def profile():
