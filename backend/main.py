@@ -35,18 +35,29 @@ def login():
                     AND p.password = %s;
                 """    
         account = db.connect_db(query, (username, password,))
+        print(account)
         if account:
             session['loggedin'] = True
             session['id'] = account['user_id']
             session['username'] = account['user_name']
+            session['first_battle_done'] = account['first_battle']
             return redirect(url_for('profile'))
         else:
             msg = "wrong username/password"
     return render_template('login.html', msg=msg)
 
+@app.route("/profile/flag", methods=['GET', 'POST'])
+def first_battle_flag():
+    if 'loggedin' in session:
+        return str(session['first_battle_done'])
+
 @app.route("/profile")
 def profile():
     if 'loggedin' in session:
+        user_id = session['id']
+        # print(dp.get_flag(user_id))
+        # if dp.get_flag(user_id)['first_battle'] == 1:
+        #     msg = "first battle completed"
         return render_template('profile.html', username=session['username'])
     return redirect(url_for('login'))
     
