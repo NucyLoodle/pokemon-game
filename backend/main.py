@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-import battle
+import first_battle
 import hashlib
 import db_utils as db
 import display_profile as dp 
@@ -72,18 +72,18 @@ def display_pokemon():
 def main():
     return render_template('index.html')
     
-@app.route("/battle")
+@app.route("/first-battle")
 def battle_page():
     if 'loggedin' in session:
-        return render_template('battle.html') 
+        return render_template('first-battle.html') 
     return redirect(url_for('login'))
 
-@app.route("/battle", methods=['POST', 'GET'])
+@app.route("/first-battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
     if request.method == 'POST' and "userPokemonChoice" in request.form:
         user_pokemon_name = request.form['userPokemonChoice']
         user_id = session['id']
-        data = battle.get_response_from_api(user_pokemon_name)
+        data = first_battle.get_response_from_api(user_pokemon_name)
         pokemon_id = data['id']
         pokemon_type = data['types'][0]['type']['name']
         hp = data['stats'][0]['base_stat']
@@ -98,14 +98,14 @@ def get_user_cpu_pokemon():
             add.add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite)
         else:
             return jsonify ({"failure" :"You have already caught this pokemon"})
-        return battle.get_pokemon_data()
+        return first_battle.get_pokemon_data()
 
-@app.route("/battle/end", methods=['POST', 'GET'])
+@app.route("/first-battle/end", methods=['POST', 'GET'])
 def finish_battle():
     #if request.method == 'POST' and "returnToProfile" in request.form:
     user_id = session['id']
     #redirect(url_for('profile'))
-    return battle.first_battle_completed(user_id)
+    return first_battle.first_battle_completed(user_id)
     # if request.form == 'battleDone' :
     #     return redirect(url_for('profile'))
 

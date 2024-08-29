@@ -35,7 +35,7 @@ function getUserPokemonName() { // ask user to choose between three pokemon
     e.preventDefault();
     const formData = new FormData(this); 
     formData.append(e.submitter.name, e.submitter.value);
-    const url = '/battle';
+    const url = '/first-battle';
       fetch(url, { 
           method: 'post', 
           body: formData // send user choice through to python backend
@@ -173,7 +173,7 @@ function endBattle() {
     console.log("button clicked")
     const formData = new FormData(this); 
     formData.append(e.submitter.name, e.submitter.value);
-    const url = '/battle/end';
+    const url = '/first-battle/end';
       fetch(url, { 
           method: 'post', 
           body: formData // send user choice through to python backend
