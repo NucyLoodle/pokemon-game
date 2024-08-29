@@ -1,6 +1,7 @@
 import requests
 import random
 from flask import request, session
+import db_utils as db
 
 """
 Functions to create the initial battle between player and CPU
@@ -43,7 +44,11 @@ def get_pokemon_data():
     return poke_list
 
 
-def first_battle_completed():
+def first_battle_completed(user_id):
     flag = request.form['returnToProfile']
-    print(flag)
-    return flag
+    if (flag == 'battleDone'):
+        query = """
+                UPDATE user_profile SET first_battle = true WHERE user_id = %s
+                """
+        db.connect_db(query, (user_id,))
+
