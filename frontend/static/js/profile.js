@@ -13,6 +13,24 @@ const viewPartyButton = document.getElementById("viewPartyButton");
 
 usersPartyPokemon.style.display = "none"
 
+
+const userFlag = 
+    fetch('/profile/flag')
+        .then(r=>r.text())
+        .then(data => {
+    console.log('in async');
+    console.log(data)
+    return data;
+});
+window.onload = async () => {
+    let someData = await userFlag;
+    console.log("onload")
+    console.log (someData);
+};
+
+
+
+
 viewParty.addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this); 
@@ -66,17 +84,3 @@ viewParty.addEventListener('submit', function(e) {
             viewPartyButton.style.display = "none"
         })
     })   
-
-
-
-
-    // (2) [{…}, {…}]
-    // 0
-    // : 
-    // {exp: 64, hp: 45, level: 1, pokemon_name: 'bulbasaur', pokemon_type: 'grass', …}
-    // 1
-    // : 
-    // {exp: 62, hp: 39, level: 1, pokemon_name: 'charmander', pokemon_type: 'fire', …}
-    // length
-    // : 
-    // 2
