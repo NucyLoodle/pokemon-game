@@ -10,22 +10,21 @@ sessionStorage.removeItem("cpuPokemonMoves")
 const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 const viewPartyButton = document.getElementById("viewPartyButton");
-
+const firstBattleButton = document.getElementById("firstBattleLink");
 usersPartyPokemon.style.display = "none"
 
 
 const userFlag = 
     fetch('/profile/flag')
-        .then(r=>r.text())
+        .then(r=>r.json())
         .then(data => {
-    console.log('in async');
-    console.log(data)
     return data;
 });
 window.onload = async () => {
     let someData = await userFlag;
-    console.log("onload")
-    console.log (someData);
+    if (someData['first_battle'] == 1) {
+        firstBattleButton.style.display = "none"
+    }
 };
 
 
