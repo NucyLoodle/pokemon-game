@@ -10,10 +10,11 @@ const launchGame = document.getElementById("launchGameSection")
 const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 const pokemonStats = document.getElementById('stats')
-const endBattleForm = document.getElementById('endBattle')
+const endBattleSection = document.getElementById('endBattle')
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 pokemonStats.style.display = "none"
+endBattleSection.style.display = "none"
 
 let userPokemonName;
 let userPokemonHp;
@@ -160,22 +161,17 @@ function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
 } 
 
 function endBattle() {
-  battleDoneForm = endBattleForm.appendChild(document.createElement("form"))
-  // create button to return to profile
-  returnToProfileButton = document.createElement("button")
-  returnToProfileButton.setAttribute("name", "returnToProfile")
-  returnToProfileButton.setAttribute("value", "battleDone")
-  returnToProfileButton.textContent = 'Return to Profile'
-  battleDoneForm.append(returnToProfileButton)
-  // could have these elements in html, but hidden
-  // if flag true, display these elements
+  
+  endBattleSection.style.display = "flex"
+  const returnButton = document.getElementById("returnButton")
+  returnButton.style.display = "flex"
 
 
 
   // store firstBattleCompleted flag in session storage and db
   sessionStorage.setItem('firstBattleCompleted', 'true')
 
-  battleDoneForm.addEventListener("submit", function(e) {
+  endBattleSection.addEventListener("submit", function(e) {
     e.preventDefault()
     console.log("button clicked")
     // const formData = new FormData(this); 
