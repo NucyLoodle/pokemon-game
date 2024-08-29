@@ -4,6 +4,7 @@ import hashlib
 import db_utils as db
 import display_profile as dp 
 import add_pokemon as add
+import main_battle as mb
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -119,8 +120,8 @@ def main_battle_page():
 def show_party():
     user_id = session['id']
 
-    print(dp.get_pokemon_info(user_id))
-    return dp.get_pokemon_info(user_id)
+    print(mb.get_pokemon_info_for_battle(user_id))
+    return mb.get_pokemon_info_for_battle(user_id)
     
 
 
