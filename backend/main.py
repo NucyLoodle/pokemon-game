@@ -109,6 +109,20 @@ def finish_battle():
     # if request.form == 'battleDone' :
     #     return redirect(url_for('profile'))
 
+@app.route("/battle")
+def main_battle_page():
+    if 'loggedin' in session:
+        return render_template('battle.html') 
+    return redirect(url_for('login'))
+
+@app.route("/battle/party" , methods=['POST', 'GET'])
+def show_party():
+    user_id = session['id']
+
+    print(dp.get_pokemon_info(user_id))
+    return dp.get_pokemon_info(user_id)
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
