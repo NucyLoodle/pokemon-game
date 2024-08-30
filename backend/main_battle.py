@@ -32,10 +32,11 @@ def get_maximum_user_hp(user_id):
 # get a list of names of pokemon that have similar hp to the user_pokemon
 
 def get_pokemon_with_similar_hp(max_hp):
+    print(f"the formula thigns the max hp is {max_hp}")
     graphql_url = "https://beta.pokeapi.co/graphql/v1beta"
     payload = {
         "operationName": "samplePokeAPIquery",
-        "query": r"query samplePokeAPIquery($maxhp: Int) {pokemon_v2_pokemon (where: {pokemon_v2_pokemonstats: {base_stat: {_lt: $maxhp}}, id: {_lte: 151}}) {name}}",
+        "query": r"query samplePokeAPIquery($maxhp: Int) {pokemon_v2_pokemon (where: {pokemon_v2_pokemonstats: {stat_id: {_eq: 1}, _and: {base_stat: {_lte: $maxhp}}}, id: {_lte: 151}}) {name}}",
         "variables": {"maxhp": max_hp},
     }
     data = requests.post(graphql_url, json=payload)
