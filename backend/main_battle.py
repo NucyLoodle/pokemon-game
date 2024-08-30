@@ -1,6 +1,7 @@
 import requests
 import db_utils as db
 import random
+import first_battle as fb
 
 
 
@@ -50,3 +51,14 @@ def get_pokemon_with_similar_hp(max_hp):
 
 def cpu_pokemon_choice(pokemon_names):
     return random.choice(pokemon_names)
+
+# get moves - keeping cpu pokemon at level 1
+"""later: match cpu pokemon level to user pokemon level"""
+
+# get info about cpu pokemon
+
+def get_pokemon_data(cpu_pokemon_name):
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = fb.get_initial_moves(cpu_pokemon_name) )
+    #poke_list = []
+    #poke_list.append(cpu_pokemon)
+    return cpu_pokemon
