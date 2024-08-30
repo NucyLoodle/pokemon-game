@@ -119,15 +119,14 @@ def main_battle_page():
 @app.route("/battle/party" , methods=['POST', 'GET'])
 def show_party():
     user_id = session['id']
-    
-    #print(mb.get_pokemon_info_for_battle(user_id))
     return mb.get_pokemon_info_for_battle(user_id)
 
 @app.route("/battle/cpu", methods=['POST', 'GET'])
 def get_cpu_pokemon():
     user_id = session['id']
-    #return (mb.get_maximum_user_hp(user_id))
-    return(mb.get_pokemon_with_similar_hp(user_id))
+    max_hp = mb.get_maximum_user_hp(user_id)['MAX(hp)']
+    pokemon_names = mb.get_pokemon_with_similar_hp(max_hp) 
+    return(mb.cpu_pokemon_choice(pokemon_names))
 
 
 if __name__ == '__main__':
