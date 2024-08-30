@@ -1,7 +1,7 @@
 import requests
-from flask import session
 import db_utils as db
-import first_battle
+import random
+
 
 
 def get_pokemon_info_for_battle(user_id):
@@ -28,22 +28,25 @@ def get_maximum_user_hp(user_id):
     result = db.connect_db(query, (user_id,))
     return result
 
-
-
-
 # get a list of names of pokemon that have similar hp to the user_pokemon
 
-def get_pokemon_with_similar_hp(user_id):
+def get_pokemon_with_similar_hp(max_hp):
+    graphql_url = "https://beta.pokeapi.co/graphql/v1beta"
+    payload = {
+        "operationName": "samplePokeAPIquery",
+        "query": r"query samplePokeAPIquery($maxhp: Int) {pokemon_v2_pokemon (where: {pokemon_v2_pokemonstats: {base_stat: {_lt: $maxhp}}, id: {_lte: 151}}) {name}}",
+        "variables": {"maxhp": max_hp},
+    }
+    data = requests.post(graphql_url, json=payload)
+    data = data.json()
     pokemon_names = []
-    poke_data = []
-    for i in range(1, 151):
-        api_url = f"https://pokeapi.co/api/v2/pokemon/{i}"
-        pokemon_response = requests.get(api_url)
-        pokemon_data = pokemon_response.json()
-        poke_data.append(pokemon_data)
-    
-    for j in range(0, 150):
-        if poke_data[j]['stats'][0]['base_stat'] < get_maximum_user_hp(user_id)['MAX(hp)']:
-                pokemon_names.append(poke_data[j]['name'])
-    print(pokemon_names) 
-    return pokemon_names   
+    for i in range(0, len(data['data']['pokemon_v2_pokemon'])):
+        pokemon_names.append(data['data']['pokemon_v2_pokemon'][i]['name'])
+    return pokemon_names
+
+
+
+# cpu will choose random pokemon from list
+
+def cpu_pokemon_choice(pokemon_names):
+    return random.choice(pokemon_names)
