@@ -54,12 +54,22 @@ def cpu_pokemon_choice(pokemon_names):
     return random.choice(pokemon_names)
 
 # get moves - keeping cpu pokemon at level 1
+def get_moves(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    move_names = []
+    for i in range(len(data)):
+        if data['moves'][i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data['moves'][i]['version_group_details'][0]['level_learned_at'] == 1:
+            move_names.append(data['moves'][i]['move']['name'])
+    if len(move_names) > 4:
+        while len(move_names) > 4:
+            rand_num = random.randint(0,len(move_names) - 1)
+            del move_names[rand_num]
+    return move_names
+
 """later: match cpu pokemon level to user pokemon level"""
 
 # get info about cpu pokemon
 
 def get_pokemon_data(cpu_pokemon_name):
-    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = fb.get_initial_moves(cpu_pokemon_name) )
-    #poke_list = []
-    #poke_list.append(cpu_pokemon)
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name) )
     return cpu_pokemon
