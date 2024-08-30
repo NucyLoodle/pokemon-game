@@ -69,4 +69,14 @@ const userFlag =
 });
 window.onload = async () => {
     let someData = await userFlag;
+    let cpuHp = await cpuDetails
 };
+
+
+const cpuDetails = 
+    fetch('/battle/cpu')
+        .then(r=>r.json())
+        .then(data => {
+    // return data;
+    console.log(data)
+        })

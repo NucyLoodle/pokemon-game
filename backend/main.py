@@ -119,9 +119,14 @@ def main_battle_page():
 @app.route("/battle/party" , methods=['POST', 'GET'])
 def show_party():
     user_id = session['id']
-
-    print(mb.get_pokemon_info_for_battle(user_id))
+    
+    #print(mb.get_pokemon_info_for_battle(user_id))
     return mb.get_pokemon_info_for_battle(user_id)
+
+@app.route("/battle/cpu", methods=['POST', 'GET'])
+def get_cpu_pokemon():
+    user_id = session['id']
+    return (mb.get_maximum_user_hp(user_id))
     
 
 

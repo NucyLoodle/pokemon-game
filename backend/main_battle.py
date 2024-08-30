@@ -1,7 +1,9 @@
+from flask import session
 import db_utils as db
+import first_battle
+
 
 def get_pokemon_info_for_battle(user_id):
-    
     # access the db to get a list of user's pokemon and their stats
 
     query = """
@@ -14,3 +16,17 @@ def get_pokemon_info_for_battle(user_id):
             """
     result = db.connect_db_multiple_results(query, (user_id,))
     return result
+
+def get_maximum_user_hp(user_id):
+    query =  """
+                SELECT MAX(hp) 
+                FROM pokemon_stats 
+                WHERE pokemon_stats.pokemon_db_id IN (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s);
+                """
+    result = db.connect_db(query, (user_id,))
+    return result
+
+
+
+# get hp of user_pokemon
+# get a list of names of pokemon that have similar hp to the user_pokemon    
