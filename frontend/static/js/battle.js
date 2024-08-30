@@ -1,3 +1,6 @@
+userPartySection = document.getElementById("userPokemonChoice")
+userPartySection.style.display = "none"
+
 function handleMovesArray(a) {
     a = a.map(function(x){ return x.toUpperCase(); })
     return a.length == 1 ? a[0] : [ a.slice(0, a.length - 1).join(", "), a[a.length - 1] ].join(" and ")
@@ -26,12 +29,23 @@ const cpuDetails =
                 reloadButton.textContent = "Reload battle"
                 cpuSection.append(reloadButton)
 
-                
-
             } else {
                 sessionStorage.setItem("cpuPokemonName", data['name'])
                 sessionStorage.setItem("cpuPokemonHp", data['hp'])
                 sessionStorage.setItem("cpuPokemonMoves", data['moves'])
+
+                viewPartyForm = cpuSection.appendChild(document.createElement("form"))
+                viewPartyForm.setAttribute("id", "viewParty")
+                
+                button = document.createElement("button")
+                // newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
+                // newButtonOne.setAttribute("class", "fade-in four")
+                button.textContent = `View Party`
+                viewPartyForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    userPartySection.style.display = "flex"
+                })    
+                viewPartyForm.append(button)   
             }
     })
 
