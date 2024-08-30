@@ -103,12 +103,8 @@ def get_user_cpu_pokemon():
 
 @app.route("/first-battle/end", methods=['POST', 'GET'])
 def finish_battle():
-    #if request.method == 'POST' and "returnToProfile" in request.form:
     user_id = session['id']
-    #redirect(url_for('profile'))
     return first_battle.first_battle_completed(user_id)
-    # if request.form == 'battleDone' :
-    #     return redirect(url_for('profile'))
 
 @app.route("/battle")
 def main_battle_page():
@@ -128,8 +124,6 @@ def get_cpu_pokemon():
     pokemon_names = mb.get_pokemon_with_similar_hp(max_hp)
     cpu_pokemon_name = mb.cpu_pokemon_choice(pokemon_names)
     session['cpu_pokemon_name'] = cpu_pokemon_name
-    print(cpu_pokemon_name)
-
     return mb.get_pokemon_data(cpu_pokemon_name)
 
 
