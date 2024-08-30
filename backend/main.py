@@ -126,8 +126,8 @@ def show_party():
 @app.route("/battle/cpu", methods=['POST', 'GET'])
 def get_cpu_pokemon():
     user_id = session['id']
-    return (mb.get_maximum_user_hp(user_id))
-    
+    #return (mb.get_maximum_user_hp(user_id))
+    return(mb.get_pokemon_with_similar_hp(user_id))
 
 
 if __name__ == '__main__':
