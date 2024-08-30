@@ -8,10 +8,14 @@ const cpuDetails =
     fetch('/battle/cpu')
         .then(r=>r.json())
         .then(data => {
+            console.log(data)
             const cpuSection = document.getElementById("wildPokemon")
             cpuPara = document.createElement("p")
             cpuPara.innerText = `A wild ${data['name']} appeared!`
             cpuSection.append(cpuPara)
+            spriteImg = document.createElement("img")
+            spriteImg.setAttribute("src", `${data["sprite"]}`)
+            cpuSection.append(spriteImg)
 
             if (data['moves'].length == 0) {
                 fleePara = document.createElement("p")

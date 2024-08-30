@@ -66,10 +66,14 @@ def get_moves(pokemon_name):
             del move_names[rand_num]
     return move_names
 
+def get_pokemon_sprite(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    return data['sprites']['versions']['generation-i']['yellow']['front_default']
+
 """later: match cpu pokemon level to user pokemon level"""
 
 # get info about cpu pokemon
 
 def get_pokemon_data(cpu_pokemon_name):
-    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name) )
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name), sprite = get_pokemon_sprite(cpu_pokemon_name) )
     return cpu_pokemon
