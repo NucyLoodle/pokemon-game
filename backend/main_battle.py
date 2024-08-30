@@ -1,3 +1,4 @@
+import requests
 from flask import session
 import db_utils as db
 import first_battle
@@ -18,6 +19,7 @@ def get_pokemon_info_for_battle(user_id):
     return result
 
 def get_maximum_user_hp(user_id):
+    # get hp of user_pokemon
     query =  """
                 SELECT MAX(hp) 
                 FROM pokemon_stats 
@@ -28,5 +30,20 @@ def get_maximum_user_hp(user_id):
 
 
 
-# get hp of user_pokemon
-# get a list of names of pokemon that have similar hp to the user_pokemon    
+
+# get a list of names of pokemon that have similar hp to the user_pokemon
+
+def get_pokemon_with_similar_hp(user_id):
+    pokemon_names = []
+    poke_data = []
+    for i in range(1, 151):
+        api_url = f"https://pokeapi.co/api/v2/pokemon/{i}"
+        pokemon_response = requests.get(api_url)
+        pokemon_data = pokemon_response.json()
+        poke_data.append(pokemon_data)
+    
+    for j in range(0, 150):
+        if poke_data[j]['stats'][0]['base_stat'] < get_maximum_user_hp(user_id)['MAX(hp)']:
+                pokemon_names.append(poke_data[j]['name'])
+    print(pokemon_names) 
+    return pokemon_names   
