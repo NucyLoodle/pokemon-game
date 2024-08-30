@@ -3,12 +3,29 @@ function handleMovesArray(a) {
     return a.length == 1 ? a[0] : [ a.slice(0, a.length - 1).join(", "), a[a.length - 1] ].join(" and ")
   }
 
+
+const cpuDetails = 
+    fetch('/battle/cpu')
+        .then(r=>r.json())
+        .then(data => {
+            const cpuSection = document.getElementById("wildPokemon")
+            cpuPara = document.createElement("p")
+            cpuPara.innerText = `A wild ${data['name']} appeared!`
+            cpuSection.append(cpuPara)
+
+            sessionStorage.setItem("cpuPokemonName", data['name'])
+            sessionStorage.setItem("cpuPokemonHp", data['hp'])
+            sessionStorage.setItem("cpuPokemonMoves", data['moves'])
+    // return data;
+    console.log(data)
+    })
+
 const userFlag = 
     fetch('/battle/party')
         .then(r=>r.json())
         .then(data => {
     // return data;
-    console.log(data)
+    // console.log(data)
     
     let numOfPokemon = data.length;
         for (let i = 0; i < numOfPokemon; i++) {
@@ -68,15 +85,9 @@ const userFlag =
 
 });
 window.onload = async () => {
+    let cpuStats = await cpuDetails;
     let someData = await userFlag;
-    let cpuHp = await cpuDetails
+
 };
 
 
-const cpuDetails = 
-    fetch('/battle/cpu')
-        .then(r=>r.json())
-        .then(data => {
-    // return data;
-    console.log(data)
-        })
