@@ -13,11 +13,22 @@ const cpuDetails =
             cpuPara.innerText = `A wild ${data['name']} appeared!`
             cpuSection.append(cpuPara)
 
-            sessionStorage.setItem("cpuPokemonName", data['name'])
-            sessionStorage.setItem("cpuPokemonHp", data['hp'])
-            sessionStorage.setItem("cpuPokemonMoves", data['moves'])
-    // return data;
-    console.log(data)
+            if (data['moves'].length == 0) {
+                fleePara = document.createElement("p")
+                fleePara.innerText = `Oh no! The wild ${data['name']} fled!`
+                cpuSection.append(fleePara)
+                reloadButton = document.createElement("button")
+                reloadButton.setAttribute("onClick", "window.location.reload()")
+                reloadButton.textContent = "Reload battle"
+                cpuSection.append(reloadButton)
+
+                
+
+            } else {
+                sessionStorage.setItem("cpuPokemonName", data['name'])
+                sessionStorage.setItem("cpuPokemonHp", data['hp'])
+                sessionStorage.setItem("cpuPokemonMoves", data['moves'])
+            }
     })
 
 const userFlag = 
