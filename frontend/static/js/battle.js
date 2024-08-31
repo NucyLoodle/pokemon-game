@@ -6,11 +6,13 @@ const gamePlay = document.getElementById("gamePlay")
 const endBattleSection = document.getElementById('endBattle')
 const endBattleForm = document.getElementById('endBattleForm')
 const endBattleButton = document.getElementById('returnButton')
+const catchPokemonButton = document.getElementById('catchPokemon')
 
 userPartySection.style.display = "none"
 launchGame.style.display = "none"
 gamePlay.style.display = "none"
 endBattleSection.style.display = "none"
+catchPokemonButton.style.display = "none"
 
 let userPokemonName;
 let userPokemonHp;
@@ -239,20 +241,41 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
     console.log("battle over")
 
     // if user loses battle, show return to profile button
-    if (userPokemonHp <= 0){
+    if (sessionStorage.getItem("userPokemonHp") <= 0){
         console.log("cpu has won")
-        endBattleButton.addEventListener("click", function(e) {
-            console.log("click")
-            //e.preventDefault()
-            //location.href = "/profile";
+        endBattleButton.addEventListener("click", function() {
+            location.href = '/profile'
         })
-    } else {
+    } 
+
+    if (sessionStorage.getItem("cpuPokemonHp") <= 0) {
         // if user wins battle, show option to catch opponent pokemon
         console.log("user has won")
-        endBattleButton.addEventListener("click", function(e) {
-            console.log("click")
-            //e.preventDefault()
-            //location.href = "/profile";
+
+        endBattleButton.addEventListener("click", function() {
+            location.href = '/profile'
+        })
+        
+        catchPokemonButton.style.display = "flex"
+        catchPokemonButton.setAttribute("name", "pokemonCaught")
+        catchPokemonButton.setAttribute("value", `${cpuPokemonName}`)
+        catchPokemonButton.textContent = `Catch ${cpuPokemonName}?`
+        
+        catchPokemonButton.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this); 
+            formData.append(e.submitter.name, e.submitter.value);
+            const url = '/battle/end';
+            fetch(url, { 
+                method: 'post', 
+                body: formData // send user choice through to python backend
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                console.log(data)
+            })
+
+            
         })
 
     }
