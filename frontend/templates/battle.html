@@ -38,12 +38,12 @@
         <section id = "gamePlay" class="framed contains-code">
         </section>
         <section id = "endBattle">
-            <button name="returnToProfile" value="battleDone" id="returnButton">Return To Profile</button>
-            
-            <form class = "framed buttons compact" id="endBattleForm" method="POST" action="/battle/end"> 
-                <button id="catchPokemon" type = "submit"></button>
-                
-            </form> 
+            <!-- <form> -->
+                <button name="returnToProfile" value="battleDone" id="returnButton">Return To Profile</button>
+            <!-- </form> -->
+            <form class = "userinput" id="catchPokemonForm" class= "framed buttons compact"> 
+                <button type = "submit" id="catchPokemon" name="catch" value = "catchThePoke" action="/battle/end"></button>
+            </form>
             
         </section> 
 

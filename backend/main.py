@@ -130,19 +130,18 @@ def get_cpu_pokemon():
 
 
 
+# @app.route("/battle/end" , methods=['POST', 'GET'])
+# def end_of_battle():
+#     return render_template('battle-end.html')
+
 @app.route("/battle/end", methods=['POST', 'GET'])
-def end_of_battle():
-    return render_template('battle-end.html')
-
-
 def catch_pokemon():
-    if request.method == 'POST' and "pokemonCaught" in request.form:
-        print("hi")
-        cpu_pokemon_name = session['cpu_pokemon_name']
-        print(cpu_pokemon_name)
+    cpu_pokemon_name = session['cpu_pokemon_name']
+
     # call mb.get_pokemon_data(cpu_pokemon_name) ?
-        print(mb.get_pokemon_data(cpu_pokemon_name))
-        return mb.get_pokemon_data(cpu_pokemon_name)
+    print(mb.get_pokemon_data(cpu_pokemon_name))
+    return mb.get_pokemon_data(cpu_pokemon_name)
+    
 
 
 if __name__ == '__main__':

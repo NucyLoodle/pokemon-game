@@ -7,6 +7,7 @@ const endBattleSection = document.getElementById('endBattle')
 const endBattleForm = document.getElementById('endBattleForm')
 const endBattleButton = document.getElementById('returnButton')
 const catchPokemonButton = document.getElementById('catchPokemon')
+const catchPokemonForm = document.getElementById('catchPokemonForm')
 
 userPartySection.style.display = "none"
 launchGame.style.display = "none"
@@ -261,22 +262,24 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
         catchPokemonButton.setAttribute("value", `${cpuPokemonName}`)
         catchPokemonButton.textContent = `Catch ${cpuPokemonName}?`
         
-        catchPokemonButton.addEventListener("submit", function(e) {
-            e.preventDefault();
+        catchPokemonForm.addEventListener("submit", function(e) { 
+            e.preventDefault()           
+            //location.href = '/battle/end';
             const formData = new FormData(this); 
             formData.append(e.submitter.name, e.submitter.value);
             const url = '/battle/end';
-            fetch(url, { 
-                method: 'post', 
-                body: formData // send user choice through to python backend
-            })
-            .then(response => response.json()) 
-            .then(data => {
-                console.log(data)
-            })
+                fetch(url, { 
+                    method: 'post', 
+                    body: formData // send user choice through to python backend
+                })
+                    .then(response => response.text()) 
+                    .then(data => {
+                    console.log(data)
 
-            
-        })
+                    })
+
+            })   
+        }
 
     }
 
@@ -301,7 +304,7 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
     //         })
       
     // })
-}
+
 
 /* Run the Game */
 
