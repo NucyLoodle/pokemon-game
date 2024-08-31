@@ -230,12 +230,30 @@ if (userPokemonHp > 0 && cpuPokemonHp > 0) {
 }  
 
 
-function endBattle() {  
+function endBattle(cpuPokemonHp, userPokemonHp) {  
     endBattleSection.style.display = "flex"
     const returnButton = document.getElementById("returnButton")
     returnButton.style.display = "flex"
     // store firstBattleCompleted flag in session storage and db
     console.log("battle over")
+
+    // if user loses battle, show return to profile button
+    if (userPokemonHp <= 0){
+        console.log("cpu has won")
+        endBattleForm.addEventListener("submit", function(e) {
+            e.preventDefault()
+            location.href = "/profile";
+        })
+    } else {
+        // if user wins battle, show option to catch opponent pokemon
+        console.log("user has won")
+
+    }
+
+    
+    
+
+
     // endBattleForm.addEventListener("submit", function(e) {
     //   e.preventDefault()
   
