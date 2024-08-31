@@ -14,7 +14,7 @@ const cpuDetails =
             console.log(data)
             const cpuSection = document.getElementById("wildPokemon")
             cpuPara = document.createElement("p")
-            cpuPara.innerText = `A wild ${data['name']} appeared!`
+            cpuPara.innerText = `A wild ${data['name'].toUpperCase()} appeared!`
             cpuSection.append(cpuPara)
             spriteImg = document.createElement("img")
             spriteImg.setAttribute("src", `${data["sprite"]}`)
@@ -22,7 +22,7 @@ const cpuDetails =
 
             if (data['moves'].length == 0) {
                 fleePara = document.createElement("p")
-                fleePara.innerText = `Oh no! The wild ${data['name']} fled!`
+                fleePara.innerText = `Oh no! The wild ${data['name'].toUpperCase()} fled!`
                 cpuSection.append(fleePara)
                 reloadButton = document.createElement("button")
                 reloadButton.setAttribute("onClick", "window.location.reload()")
