@@ -58,7 +58,7 @@ def get_pokemon_with_similar_hp(max_hp, user_id):
     for i in range(0, len(party_pokemon)):
         party_names.append(party_pokemon[i]['pokemon_name'])
         pokemon_names.remove(party_names[i])
-    
+        
     return pokemon_names
 
 

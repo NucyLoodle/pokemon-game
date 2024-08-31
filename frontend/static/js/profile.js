@@ -34,7 +34,7 @@ viewParty.addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(this); 
     formData.append(e.submitter.name, e.submitter.value);
-    const url = '/profile';
+    const url = '/profile/party';
       fetch(url, { 
           method: 'post', 
           body: formData // send user choice through to python backend

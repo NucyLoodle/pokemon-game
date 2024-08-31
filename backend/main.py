@@ -53,7 +53,7 @@ def first_battle_flag():
         print(dp.get_flag(user_id))
         return dp.get_flag(user_id)
 
-@app.route("/profile")
+@app.route("/profile", methods=["GET", "POST"])
 def profile():
     if 'loggedin' in session:
         user_id = session['id']
@@ -63,11 +63,12 @@ def profile():
         return render_template('profile.html', username=session['username'])
     return redirect(url_for('login'))
     
-@app.route("/profile", methods=['GET', 'POST'])
+@app.route("/profile/party", methods=['GET', 'POST'])
 def display_pokemon():
     if request.form['viewParty'] == 'viewParty':
         user_id = session['id']
         return dp.get_pokemon_info(user_id)
+    
 
 @app.route("/")
 def main():

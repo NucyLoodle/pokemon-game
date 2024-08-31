@@ -5,6 +5,7 @@ const launchGameForm = document.getElementById("launchGameForm")
 const gamePlay = document.getElementById("gamePlay")
 const endBattleSection = document.getElementById('endBattle')
 const endBattleForm = document.getElementById('endBattleForm')
+const endBattleButton = document.getElementById('returnButton')
 
 userPartySection.style.display = "none"
 launchGame.style.display = "none"
@@ -240,13 +241,19 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
     // if user loses battle, show return to profile button
     if (userPokemonHp <= 0){
         console.log("cpu has won")
-        endBattleForm.addEventListener("submit", function(e) {
-            e.preventDefault()
-            location.href = "/profile";
+        endBattleButton.addEventListener("click", function(e) {
+            console.log("click")
+            //e.preventDefault()
+            //location.href = "/profile";
         })
     } else {
         // if user wins battle, show option to catch opponent pokemon
         console.log("user has won")
+        endBattleButton.addEventListener("click", function(e) {
+            console.log("click")
+            //e.preventDefault()
+            //location.href = "/profile";
+        })
 
     }
 
