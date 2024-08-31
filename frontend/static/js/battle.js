@@ -186,28 +186,27 @@ function moveDamage() {
 }
 
 function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName) {
-if (cpuPokemonHp > 0 && userPokemonHp > 0) {
-    let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
-    let cpuDamage = moveDamage()
-    userPokemonHp = sessionStorage.getItem("userPokemonHp") - cpuDamage
-    sessionStorage.setItem("userPokemonHp", userPokemonHp)
-    if (userPokemonHp > 0) {
-        createButtonsForUser(userPokemonMoves)
-        return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
-        ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!` 
-    } else {
-        console.log(`${userPokemonName.toUpperCase()} fainted`)
-        // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
-        document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
-        document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
-        firstBattleCompleted = true;
-        endBattle()
-        return `${cpuPokemonName.toUpperCase()} used ${cpuMove} causing ${cpuDamage} damage! 
-        ${userPokemonName.toUpperCase()} fainted!
-        ${cpuPokemonName.toUpperCase()} is the winner!`
-    
-    }
-}  
+    if (cpuPokemonHp > 0 && userPokemonHp > 0) {
+        let cpuMove = cpuPokemonMoves[Math.floor(Math.random() * cpuPokemonMoves.length)]
+        let cpuDamage = moveDamage()
+        userPokemonHp = sessionStorage.getItem("userPokemonHp") - cpuDamage
+        sessionStorage.setItem("userPokemonHp", userPokemonHp)
+        if (userPokemonHp > 0) {
+            createButtonsForUser(userPokemonMoves)
+            return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
+            ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!` 
+        } else {
+            console.log(`${userPokemonName.toUpperCase()} fainted`)
+            // document.getElementsByClassName('.fade-in four').forEach(form => form.style.display = "none")
+            document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
+            document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
+            firstBattleCompleted = true;
+            endBattle()
+            return `${cpuPokemonName.toUpperCase()} used ${cpuMove} causing ${cpuDamage} damage! 
+            ${userPokemonName.toUpperCase()} fainted!
+            ${cpuPokemonName.toUpperCase()} is the winner!`
+        }
+    }  
 }
   
 function userTurn(userPokemonName, cpuPokemonHp, userMove, cpuPokemonName) {
@@ -267,9 +266,9 @@ launchGameForm.addEventListener("submit", function(e) {
       gamePlay.style.display = "block"
       //createButtonsForUser(userPokemonMoves)
     } else {
-    console.log("end")
+        console.log("end")
     }   
-    })
+})
 
 gamePlay.addEventListener('click', (event) => {
     event.preventDefault()
@@ -296,4 +295,4 @@ gamePlay.addEventListener('click', (event) => {
     para.setAttribute("class", "fade-in two")
     para.innerText = cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName)
     }
-    })    
+})    
