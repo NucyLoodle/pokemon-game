@@ -1,5 +1,7 @@
 const userPartySection = document.getElementById("userPokemonChoice")
+const cpuSection = document.getElementById("wildPokemon")
 userPartySection.style.display = "none"
+
 
 function handleMovesArray(a) {
     a = a.map(function(x){ return x.toUpperCase(); })
@@ -11,7 +13,7 @@ const cpuDetails =
         .then(r=>r.json())
         .then(data => {
             console.log(data)
-            const cpuSection = document.getElementById("wildPokemon")
+            
             cpuPara = document.createElement("p")
             cpuPara.innerText = `A wild ${data['name'].toUpperCase()} appeared!`
             cpuSection.append(cpuPara)
@@ -69,6 +71,15 @@ const userParty =
                     sessionStorage.setItem("userPokemonHp", data[i]['hp'])
                     sessionStorage.setItem("userPokemonMoves", moves_list)
                 }
+                userPartySection.style.display = "none"
+                viewPartyForm.style.display = "none"
+                userPara = document.createElement("p")
+                userPara.innerText= `You have chosen ${user_choice.toUpperCase()}`
+                cpuSection.append(userPara)
+                spriteImg = document.createElement("img")
+                spriteImg.setAttribute("src", `${data[i]["pokemon_sprite"]}`)
+                cpuSection.append(spriteImg)
+
             });
 
             div.append(nameButton)
