@@ -57,11 +57,20 @@ const userParty =
             div = document.createElement("div")
             div.setAttribute("class","partyPokemonStats")
             usersPartyPokemon.append(div)
-            
-            // change name to be a button
 
             nameButton = document.createElement("button")
-            nameButton.addEventListener("click", userPokemonChoice);
+            nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
+            
+            nameButton.addEventListener("click", function(){
+                //console.log(data)
+                user_choice = this.value
+                if (data[i]['pokemon_name'] == user_choice) {
+                    sessionStorage.setItem("userPokemonName", data[i]['pokemon_name'])
+                    sessionStorage.setItem("userPokemonHp", data[i]['hp'])
+                    sessionStorage.setItem("userPokemonMoves", moves_list)
+                }
+            });
+
             div.append(nameButton)
             nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
 
@@ -110,7 +119,3 @@ window.onload = async () => {
     let someData = await userParty;
 };
 
-
-function userPokemonChoice() {
-    console.log("click")
-}
