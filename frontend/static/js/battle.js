@@ -1,11 +1,10 @@
-userPartySection = document.getElementById("userPokemonChoice")
+const userPartySection = document.getElementById("userPokemonChoice")
 userPartySection.style.display = "none"
 
 function handleMovesArray(a) {
     a = a.map(function(x){ return x.toUpperCase(); })
     return a.length == 1 ? a[0] : [ a.slice(0, a.length - 1).join(", "), a[a.length - 1] ].join(" and ")
   }
-
 
 const cpuDetails = 
     fetch('/battle/cpu')
@@ -49,13 +48,10 @@ const cpuDetails =
             }
     })
 
-const userFlag = 
+const userParty = 
     fetch('/battle/party')
         .then(r=>r.json())
-        .then(data => {
-    // return data;
-    // console.log(data)
-    
+        .then(data => {    
     let numOfPokemon = data.length;
         for (let i = 0; i < numOfPokemon; i++) {
             div = document.createElement("div")
@@ -63,14 +59,15 @@ const userFlag =
             usersPartyPokemon.append(div)
             
             // change name to be a button
-            namePara = document.createElement("p")
-            div.append(namePara)
-            namePara.innerText = data[i]['pokemon_name'].toUpperCase()
+
+            nameButton = document.createElement("button")
+            nameButton.addEventListener("click", userPokemonChoice);
+            div.append(nameButton)
+            nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
 
             spriteImg = document.createElement("img")
             spriteImg.setAttribute("src", `${data[i]["pokemon_sprite"]}`)
             div.append(spriteImg)
-
             
             typePara = document.createElement("p")
             div.append(typePara)
@@ -103,20 +100,17 @@ const userFlag =
                 moves_list.push(data[i]['move_4'])
             }
 
-
-
             movesPara = document.createElement("p")
             div.append(movesPara)
-            movesPara.innerText = "Moves: " + `${handleMovesArray(moves_list)}`
-            
-            
+            movesPara.innerText = "Moves: " + `${handleMovesArray(moves_list)}`  
         }
-
 });
 window.onload = async () => {
     let cpuStats = await cpuDetails;
-    let someData = await userFlag;
-
+    let someData = await userParty;
 };
 
 
+function userPokemonChoice() {
+    console.log("click")
+}
