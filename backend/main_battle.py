@@ -29,9 +29,12 @@ def get_maximum_user_hp(user_id):
     result = db.connect_db(query, (user_id,))
     return result
 
+
+
+
 # get a list of names of pokemon that have similar hp to the user_pokemon
 
-def get_pokemon_with_similar_hp(max_hp):
+def get_pokemon_with_similar_hp(max_hp, user_id):
     graphql_url = "https://beta.pokeapi.co/graphql/v1beta"
     payload = {
         "operationName": "samplePokeAPIquery",
@@ -43,6 +46,19 @@ def get_pokemon_with_similar_hp(max_hp):
     pokemon_names = []
     for i in range(0, len(data['data']['pokemon_v2_pokemon'])):
         pokemon_names.append(data['data']['pokemon_v2_pokemon'][i]['name'])
+
+    # get list of user's pokemon to prevent these from appearing as opponents
+
+    query = """
+            SELECT pokemon_name FROM pokemon WHERE pokemon.user_id = %s;
+            """
+    party_pokemon = db.connect_db_multiple_results(query, (user_id,))    
+    party_names = []
+
+    for i in range(0, len(party_pokemon)):
+        party_names.append(party_pokemon[i]['pokemon_name'])
+        pokemon_names.remove(party_names[i])
+    
     return pokemon_names
 
 
