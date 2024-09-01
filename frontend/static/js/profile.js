@@ -55,10 +55,21 @@ viewParty.addEventListener('submit', function(e) {
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
 
-                namePara = document.createElement("p")
-                div.append(namePara)
-                namePara.innerText = data[i]['pokemon_name'].toUpperCase()
+                // namePara = document.createElement("p")
+                // div.append(namePara)
+                // namePara.innerText = data[i]['pokemon_name'].toUpperCase()
 
+                nameButton = document.createElement("button")
+                nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
+                nameButton.addEventListener("click", function(){
+                    console.log("clicked")
+                    // create popup when clicked
+
+                })
+                div.append(nameButton)
+                nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
+
+                
                 spriteImg = document.createElement("img")
                 spriteImg.setAttribute("src", `${data[i]["pokemon_sprite"]}`)
                 div.append(spriteImg)
