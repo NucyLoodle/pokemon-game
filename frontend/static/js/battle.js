@@ -158,7 +158,9 @@ window.onload = async () => {
 };
 
 function createButtonsForUser(userPokemonMoves) {
-    console.log("buttons created!")
+    console.log(userPokemonMoves)
+    console.log(userPokemonMoves.length)
+
     newPara = document.createElement("p")
     newPara.setAttribute("id", "fade-in-three")
     gamePlay.appendChild(newPara)
@@ -168,16 +170,25 @@ function createButtonsForUser(userPokemonMoves) {
     newForm = gamePlay.appendChild(document.createElement("form"))
     newForm.setAttribute("id", "moveForm")
     newForm.setAttribute("class", "fade-in four")
-    newButtonOne = document.createElement("button")
-    newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
-    newButtonOne.setAttribute("class", "fade-in four")
-    newButtonOne.textContent = `${[userPokemonMoves[0]]}`
-    newForm.append(newButtonOne)
-    newButtonTwo = document.createElement("button")
-    newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
-    newButtonTwo.setAttribute("class", "fade-in four")
-    newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
-    newForm.append(newButtonTwo)
+
+    for (let i = 0; i < userPokemonMoves.length; i++) {
+        newButton = document.createElement("button")
+        newButton.setAttribute("value", `${[userPokemonMoves[i]]}`)
+        newButton.setAttribute("class", "fade-in four")
+        newButton.textContent = `${[userPokemonMoves[i]]}`
+        newForm.append(newButton)
+    }
+
+    // newButtonOne = document.createElement("button")
+    // newButtonOne.setAttribute("value", `${[userPokemonMoves[0]]}`)
+    // newButtonOne.setAttribute("class", "fade-in four")
+    // newButtonOne.textContent = `${[userPokemonMoves[0]]}`
+    // newForm.append(newButtonOne)
+    // newButtonTwo = document.createElement("button")
+    // newButtonTwo.setAttribute("value", `${[userPokemonMoves[1]]}`)
+    // newButtonTwo.setAttribute("class", "fade-in four")
+    // newButtonTwo.textContent = `${[userPokemonMoves[1]]}`
+    // newForm.append(newButtonTwo)
   
     
     gamePlay.scrollIntoView({behavior: "smooth", block: "end"});
