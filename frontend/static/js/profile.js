@@ -11,7 +11,9 @@ const viewParty = document.getElementById("viewParty");
 const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 const viewPartyButton = document.getElementById("viewPartyButton");
 const firstBattleButton = document.getElementById("firstBattleLink");
+const mainBattleButton = document.getElementById("mainBattleLink");
 usersPartyPokemon.style.display = "none"
+mainBattleButton.style.display = "none"
 
 
 const userFlag = 
@@ -24,6 +26,7 @@ window.onload = async () => {
     let someData = await userFlag;
     if (someData['first_battle'] == 1) {
         firstBattleButton.style.display = "none"
+        mainBattleButton.style.display = "flex"
     }
 };
 
