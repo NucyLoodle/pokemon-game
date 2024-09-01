@@ -52,19 +52,19 @@ def first_battle_completed(user_id):
         query = """
                 UPDATE user_profile SET first_battle = true WHERE user_id = %s
                 """
-        moves = get_initial_moves(user_pokemon_name)
-        if (len(moves) < 4):
-            for i in range(1, 5 - len(moves)):
-                moves.append('null')
+        # moves = get_initial_moves(user_pokemon_name)
+        # if (len(moves) < 4):
+        #     for i in range(1, 5 - len(moves)):
+        #         moves.append('null')
         
-        query_two = """
-                INSERT INTO pokemon_moves (pokemon_db_id, move_1, move_2, move_3, move_4)
-                VALUES (
-                    (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s AND pokemon.pokemon_name = %s), 
-                    %s, %s, %s, %s);
-                """
+        # query_two = """
+        #         INSERT INTO pokemon_moves (pokemon_db_id, move_1, move_2, move_3, move_4)
+        #         VALUES (
+        #             (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s AND pokemon.pokemon_name = %s), 
+        #             %s, %s, %s, %s);
+        #         """
     db.connect_db(query, (user_id,))
-    db.connect_db(query_two, (user_id, user_pokemon_name, moves[0], moves[1], moves[2], moves[3], ))
+    #db.connect_db(query_two, (user_id, user_pokemon_name, moves[0], moves[1], moves[2], moves[3], ))
     return "flag updated"
     
 

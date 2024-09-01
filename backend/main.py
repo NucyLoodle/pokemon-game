@@ -98,6 +98,7 @@ def get_user_cpu_pokemon():
             add.add_new_pokemon(user_id, pokemon_id, user_pokemon_name)
             add.add_pokemon_stats(user_id, user_pokemon_name, pokemon_type, hp, level, exp, weight)
             add.add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite)
+            add.add_pokemon_moves(user_id, user_pokemon_name)
         else:
             return jsonify ({"failure" :"You have already caught this pokemon"})
         return first_battle.get_pokemon_data()

@@ -1,4 +1,5 @@
 import db_utils as db
+import first_battle as fb
 
 def pokemon_already_caught(user_id, pokemon_id):
     query = """
@@ -33,7 +34,19 @@ def add_pokemon_sprites(user_id, user_pokemon_name, pokemon_sprite):
             """
     db.connect_db(query, (user_id, user_pokemon_name, pokemon_sprite,))
 
-
-
+def add_pokemon_moves(user_id, user_pokemon_name):
+    moves = fb.get_initial_moves(user_pokemon_name)
+    if (len(moves) < 4):
+        for i in range(1, 5 - len(moves)):
+            moves.append('null')
+    
+    query = """
+            INSERT INTO pokemon_moves (pokemon_db_id, move_1, move_2, move_3, move_4)
+            VALUES (
+                (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s AND pokemon.pokemon_name = %s), 
+                %s, %s, %s, %s);
+            """
+    db.connect_db(query, (user_id, user_pokemon_name, moves[0], moves[1], moves[2], moves[3], ))
+    
 
 
