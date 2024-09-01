@@ -274,7 +274,10 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
                 })
                     .then(response => response.text()) 
                     .then(data => {
-                    console.log(data)
+                    caughtPara = document.createElement("p")
+                    endBattleSection.append(caughtPara)
+                    caughtPara.innerText = `${cpuPokemonName} has been caught!`
+                    catchPokemonForm.style.display = "none"
 
                     })
 
