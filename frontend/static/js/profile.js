@@ -31,11 +31,6 @@ window.onload = async () => {
 };
 
 
-function showPopup() {
-    let popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-}
-
 
 viewParty.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -65,27 +60,38 @@ viewParty.addEventListener('submit', function(e) {
 
                 nameButton = document.createElement("button")
                 nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
-                nameButton.setAttribute("onclick", "showPopup()")
+                //nameButton.setAttribute("onclick", "showPopup()")
                 nameButton.setAttribute("class", "popup")
-                div.append(nameButton)
+
+                
+                
                 nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
 
 
                 releaseSpan = document.createElement("span")
                 releaseSpan.setAttribute("class", "popuptext")
-                releaseSpan.setAttribute("id", "myPopup")
-                nameButton.append(releaseSpan)
+                releaseSpan.setAttribute("id", `${data[i]['pokemon_name']}`)
+                releaseSpan.style.display = "none"
 
                 releaseButton = document.createElement("button")
                 releaseButton.innerText = `Release ${data[i]['pokemon_name'].toUpperCase()}?`
+
+                nameButton.addEventListener("click", function(){
+                    console.log("clicked")
+                    pokemonSpan = document.getElementById(`${data[i]['pokemon_name']}`)
+                    pokemonSpan.style.display = "flex"
+                    // create popup when clicked
+
+                })
+                
+
+                div.append(nameButton)
+                nameButton.append(releaseSpan)
                 releaseSpan.append(releaseButton)
 
 
 
-                // nameButton.addEventListener("click", function(){
-                //     // create popup when clicked
-
-                // })
+                
                 
 
                 
