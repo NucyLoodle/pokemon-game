@@ -31,6 +31,10 @@ window.onload = async () => {
 };
 
 
+function showPopup() {
+    let popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
 
 
 viewParty.addEventListener('submit', function(e) {
@@ -61,13 +65,28 @@ viewParty.addEventListener('submit', function(e) {
 
                 nameButton = document.createElement("button")
                 nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
-                nameButton.addEventListener("click", function(){
-                    console.log("clicked")
-                    // create popup when clicked
-
-                })
+                nameButton.setAttribute("onclick", "showPopup()")
+                nameButton.setAttribute("class", "popup")
                 div.append(nameButton)
                 nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
+
+
+                releaseSpan = document.createElement("span")
+                releaseSpan.setAttribute("class", "popuptext")
+                releaseSpan.setAttribute("id", "myPopup")
+                nameButton.append(releaseSpan)
+
+                releaseButton = document.createElement("button")
+                releaseButton.innerText = `Release ${data[i]['pokemon_name'].toUpperCase()}?`
+                releaseSpan.append(releaseButton)
+
+
+
+                // nameButton.addEventListener("click", function(){
+                //     // create popup when clicked
+
+                // })
+                
 
                 
                 spriteImg = document.createElement("img")
