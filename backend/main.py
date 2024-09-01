@@ -138,10 +138,20 @@ def get_cpu_pokemon():
 @app.route("/battle/end", methods=['POST', 'GET'])
 def catch_pokemon():
     cpu_pokemon_name = session['cpu_pokemon_name']
+    user_id = session['id']
+    pokemon_id = mb.get_pokemon_id(cpu_pokemon_name)
+    pokemon_type = mb.get_pokemon_type(cpu_pokemon_name)
+    pokemon_sprite = mb.get_pokemon_sprite(cpu_pokemon_name)
+    hp = first_battle.get_hp_stat(cpu_pokemon_name)
+    level = 1
+    exp = mb.get_pokemon_exp(cpu_pokemon_name)
+    weight = mb.get_pokemon_weight(cpu_pokemon_name)
 
-    # call mb.get_pokemon_data(cpu_pokemon_name) ?
-    print(mb.get_pokemon_data(cpu_pokemon_name))
-    return mb.get_pokemon_data(cpu_pokemon_name)
+    add.add_new_pokemon(user_id, pokemon_id, cpu_pokemon_name)
+    add.add_pokemon_stats(user_id, cpu_pokemon_name, pokemon_type, hp, level, exp, weight)
+    add.add_pokemon_sprites(user_id, cpu_pokemon_name, pokemon_sprite)
+    add.add_pokemon_moves(user_id, cpu_pokemon_name)
+    return "success"
     
 
 

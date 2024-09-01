@@ -63,10 +63,20 @@ def get_pokemon_with_similar_hp(max_hp, user_id):
 
 
 
+
 # cpu will choose random pokemon from list
 
 def cpu_pokemon_choice(pokemon_names):
     return random.choice(pokemon_names)
+
+def get_pokemon_id(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    return data['id']
+
+def get_pokemon_type(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    return data['types'][0]['type']['name']
+
 
 # get moves - keeping cpu pokemon at level 1
 def get_moves(pokemon_name):
@@ -81,6 +91,14 @@ def get_moves(pokemon_name):
             del move_names[rand_num]
     return move_names
 
+def get_pokemon_exp(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    return data['base_experience']
+
+def get_pokemon_weight(pokemon_name):
+    data = fb.get_response_from_api(pokemon_name)
+    return data['weight']
+
 def get_pokemon_sprite(pokemon_name):
     data = fb.get_response_from_api(pokemon_name)
     return data['sprites']['versions']['generation-i']['yellow']['front_default']
@@ -90,5 +108,5 @@ def get_pokemon_sprite(pokemon_name):
 # get info about cpu pokemon
 
 def get_pokemon_data(cpu_pokemon_name):
-    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name), sprite = get_pokemon_sprite(cpu_pokemon_name) )
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", id = get_pokemon_id(cpu_pokemon_name), type = get_pokemon_type(cpu_pokemon_name), hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name), sprite = get_pokemon_sprite(cpu_pokemon_name) )
     return cpu_pokemon
