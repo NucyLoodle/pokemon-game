@@ -13,6 +13,9 @@
 		<link rel="stylesheet" href="../css/css-pokemon-gameboy.css">
 	</head>
 	<body>
+		<div id="overlay" onclick="off()">
+			<div id="text"></div>
+		</div>
 		<section id = "welcome">
 			{% block content %}
 			<p>Welcome back, {{ username }}!</p>

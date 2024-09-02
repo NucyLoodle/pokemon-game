@@ -14,6 +14,7 @@ const firstBattleButton = document.getElementById("firstBattleLink");
 const mainBattleButton = document.getElementById("mainBattleLink");
 usersPartyPokemon.style.display = "none"
 mainBattleButton.style.display = "none"
+releaseText = document.getElementById('text')
 
 
 const userFlag = 
@@ -29,6 +30,14 @@ window.onload = async () => {
         mainBattleButton.style.display = "flex"
     }
 };
+
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+  
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
 
 
 
@@ -80,6 +89,7 @@ viewParty.addEventListener('submit', function(e) {
                 releaseButton.innerText = `Release ${data[i]['pokemon_name'].toUpperCase()}?`
                 releaseButton.setAttribute('name', 'releaseButton')
                 releaseButton.setAttribute('value', `${data[i]['pokemon_name']}`)
+                //releaseButton.setAttribute('onclick', )
 
                 nameButton.addEventListener("click", function(){
                     pokemonSpan = document.getElementById(`${data[i]['pokemon_name']}`)
@@ -92,9 +102,13 @@ viewParty.addEventListener('submit', function(e) {
                 })
 
                 //releaseButton.addEventListener()
+
+
                 
                 releaseForm.addEventListener("submit", function(e) { 
-                    e.preventDefault()           
+                    
+                    e.preventDefault()
+                              
                     const formData = new FormData(this); 
                     formData.append(e.submitter.name, e.submitter.value);
                     const url = '/profile/release';
@@ -104,7 +118,18 @@ viewParty.addEventListener('submit', function(e) {
                         })
                             .then(response => response.text()) 
                             .then(data => {
+                                on() 
+                                console.log(data)
+                                // overlayDiv = document.createElement('div')
+                                // overlayDiv.setAttribute('id', 'overlay')
+                                // overlayDiv.setAttribute('onclick', 'off()')
+                                
 
+                                // releaseText = document.createElement('div')
+                                // releaseText.setAttribute('id', 'text')
+                                releaseText.innerText = data
+                                document.body.appendChild(overlayDiv)
+                                // overlayDiv.append(releaseText)
                             })
                         })
 
