@@ -57,14 +57,11 @@ viewParty.addEventListener('submit', function(e) {
                 // namePara = document.createElement("p")
                 // div.append(namePara)
                 // namePara.innerText = data[i]['pokemon_name'].toUpperCase()
-
+    
                 nameButton = document.createElement("button")
                 nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
                 //nameButton.setAttribute("onclick", "showPopup()")
                 nameButton.setAttribute("class", "popup")
-
-                
-                
                 nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
 
 
@@ -73,14 +70,16 @@ viewParty.addEventListener('submit', function(e) {
                 releaseSpan.setAttribute("id", `${data[i]['pokemon_name']}`)
                 releaseSpan.style.display = "none"
 
+                releaseForm = document.createElement("form")
+                releaseForm.setAttribute('id', 'releaseForm')
+                releaseForm.setAttribute('method', 'POST') // should this be delete
+                releaseForm.setAttribute('action', '/profile/release')
+                releaseSpan.append(releaseForm)
+
                 releaseButton = document.createElement("button")
                 releaseButton.innerText = `Release ${data[i]['pokemon_name'].toUpperCase()}?`
 
                 nameButton.addEventListener("click", function(){
-                    console.log("clicked")
-
-                    //if diaply = none, switch to flex and vice versa
-
                     pokemonSpan = document.getElementById(`${data[i]['pokemon_name']}`)
 
                     if (pokemonSpan.style.display == "none") {
@@ -88,15 +87,14 @@ viewParty.addEventListener('submit', function(e) {
                     } else {
                         pokemonSpan.style.display = "none"
                     }
-                    
-                    // create popup when clicked
-
                 })
+
+                //releaseButton.addEventListener()
                 
 
                 div.append(nameButton)
                 nameButton.append(releaseSpan)
-                releaseSpan.append(releaseButton)
+                releaseForm.append(releaseButton)
 
 
 
