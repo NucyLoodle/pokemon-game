@@ -37,6 +37,7 @@ function on() {
   
 function off() {
     document.getElementById("overlay").style.display = "none";
+    location.reload()
 }
 
 
@@ -63,10 +64,6 @@ viewParty.addEventListener('submit', function(e) {
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
 
-                // namePara = document.createElement("p")
-                // div.append(namePara)
-                // namePara.innerText = data[i]['pokemon_name'].toUpperCase()
-    
                 nameButton = document.createElement("button")
                 nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
                 //nameButton.setAttribute("onclick", "showPopup()")
@@ -101,10 +98,6 @@ viewParty.addEventListener('submit', function(e) {
                     }
                 })
 
-                //releaseButton.addEventListener()
-
-
-                
                 releaseForm.addEventListener("submit", function(e) { 
                     
                     e.preventDefault()
@@ -118,23 +111,10 @@ viewParty.addEventListener('submit', function(e) {
                         })
                             .then(response => response.text()) 
                             .then(data => {
-                                on() 
-                                console.log(data)
-                                // overlayDiv = document.createElement('div')
-                                // overlayDiv.setAttribute('id', 'overlay')
-                                // overlayDiv.setAttribute('onclick', 'off()')
-                                
-
-                                // releaseText = document.createElement('div')
-                                // releaseText.setAttribute('id', 'text')
+                                on()
                                 releaseText.innerText = data
-                                //document.body.appendChild(overlayDiv)
-                                // overlayDiv.append(releaseText)
                             })
                         })
-
-
-
                 div.append(nameButton)
                 nameButton.append(releaseSpan)
                 releaseForm.append(releaseButton)
