@@ -49,6 +49,7 @@ def first_battle_completed(user_id):
     user_pokemon_name = session['pokemon_name'] 
 
     if (flag == 'battleDone'):
+        session['flag'] = True
         query = """
                 UPDATE user_profile SET first_battle = true WHERE user_id = %s
                 """

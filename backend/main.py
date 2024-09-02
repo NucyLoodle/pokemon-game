@@ -83,12 +83,17 @@ def main():
     
 @app.route("/first-battle")
 def battle_page():
+    if 'loggedin' in session and 'flag' in session:
+        return redirect(url_for('main_battle_page'))
+         
     if 'loggedin' in session:
-        return render_template('first-battle.html') 
+        return render_template('battle_page')
+    
     return redirect(url_for('login'))
 
 @app.route("/first-battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
+
     if request.method == 'POST' and "userPokemonChoice" in request.form:
         user_pokemon_name = request.form['userPokemonChoice']
         user_id = session['id']
