@@ -6,6 +6,7 @@ import display_profile as dp
 import add_pokemon as add
 import main_battle as mb
 import release_pokemon as rp
+import re
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -77,17 +78,17 @@ def release_pokemon():
     print(pokemon_name)    
     return rp.delete_pokemon(user_id, pokemon_name)
 
-@app.route("/")
-def main():
-    return render_template('index.html')
+
     
 @app.route("/first-battle")
 def battle_page():
-    if 'loggedin' in session and 'flag' in session:
-        return redirect(url_for('main_battle_page'))
+    print(session['flag'])
+    # if 'loggedin' in session and session['flag'] == True:
+
+    #     return redirect(url_for('main_battle_page'))
          
     if 'loggedin' in session:
-        return render_template('battle_page')
+        return render_template('first-battle.html')
     
     return redirect(url_for('login'))
 
@@ -173,6 +174,55 @@ def logout():
     session.pop('username', None)
     # Redirect to login page
     return redirect(url_for('login'))
+
+
+@app.route('/', methods=['GET', 'POST'])
+def register():
+    # Output message if something goes wrong...
+    msg = ''
+    # Check if "username", "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        # Create variables for easy access
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        hash = password + app.secret_key
+        hash = hashlib.sha1(hash.encode())
+        password = hash.hexdigest()
+
+        queryOne = """
+                    INSERT INTO user_profile (email, user_name, first_battle)
+                    VALUES (%s, %s, %s);
+                    """
+        queryTwo =  """
+                    INSERT INTO passwords (user_id, password)
+                    VALUES 
+                    ((SELECT user_id FROM user_profile 
+                    WHERE email = %s 
+                    AND user_name = %s), %s);
+                    """
+        account = db.connect_db(queryOne, (email, username, 0,))
+        db.connect_db(queryTwo, (email, username, password,))
+        if account:
+            msg = 'Account already exists!'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers!'
+        elif not username or not password or not email:
+            msg = 'Please fill out the form!'
+        else:
+            # Hash the password
+            hash = password + app.secret_key
+            hash = hashlib.sha1(hash.encode())
+            password = hash.hexdigest()
+            msg = 'You have successfully registered!'
+    
+    elif request.method == 'POST':
+        # Form is empty... (no POST data)
+        msg = 'Please fill out the form!'
+    # Show registration form with message (if any)
+    return render_template('index.html', msg=msg)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
