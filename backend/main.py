@@ -5,6 +5,7 @@ import db_utils as db
 import display_profile as dp 
 import add_pokemon as add
 import main_battle as mb
+import release_pokemon as rp
 
 app = Flask(__name__ ,
             static_url_path='',
@@ -72,8 +73,9 @@ def display_pokemon():
 @app.route("/profile/release", methods=['GET', 'POST'])
 def release_pokemon():
     pokemon_name = request.form['releaseButton']
+    user_id = session['id']
     print(pokemon_name)    
-    return pokemon_name
+    return rp.delete_pokemon(user_id, pokemon_name)
 
 @app.route("/")
 def main():
