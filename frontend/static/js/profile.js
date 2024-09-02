@@ -12,9 +12,10 @@ const usersPartyPokemon = document.getElementById("usersPartyPokemon");
 const viewPartyButton = document.getElementById("viewPartyButton");
 const firstBattleButton = document.getElementById("firstBattleLink");
 const mainBattleButton = document.getElementById("mainBattleLink");
+const linksSection = document.getElementById('links')
 usersPartyPokemon.style.display = "none"
 mainBattleButton.style.display = "none"
-releaseText = document.getElementById('text')
+const releaseText = document.getElementById('text')
 
 
 const userFlag = 
@@ -158,3 +159,15 @@ viewParty.addEventListener('submit', function(e) {
             viewPartyButton.style.display = "none"
         })
     })   
+
+
+mainBattleButton.addEventListener("click", function(e) {
+    e.preventDefault()
+    if (sessionStorage.getItem("numOfPokemon") > 5) {
+        partyIsBig = document.createElement("p")
+        linksSection.append(partyIsBig)
+        partyIsBig.innerText = 
+        `You already have ${sessionStorage.getItem("numOfPokemon")} pokemon in your party.
+        Release a pokemon to catch another!`
+    }
+})
