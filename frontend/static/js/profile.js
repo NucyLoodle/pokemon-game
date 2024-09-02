@@ -170,5 +170,7 @@ mainBattleButton.addEventListener("click", function(e) {
         `You already have ${sessionStorage.getItem("numOfPokemon")} pokemon in your party.
         Release a pokemon to catch another!`
         mainBattleButton.style.display = "none"
+    } else {
+        location.href="/battle"
     }
 })
