@@ -14,7 +14,7 @@ app = Flask(__name__ ,
             template_folder='../frontend/templates')
 
 
-app.secret_key = 'BAD_SECRET_KEY'
+app.secret_key = 'fa5107419e490df4c861a681'
 
 @app.route("/login/")
 def login_page():
