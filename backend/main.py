@@ -165,7 +165,14 @@ def catch_pokemon():
     add.add_pokemon_moves(user_id, cpu_pokemon_name)
     return "success"
     
-
+@app.route("/logout")
+def logout():
+    # Remove session data, this will log the user out
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    # Redirect to login page
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
