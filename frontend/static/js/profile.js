@@ -128,7 +128,7 @@ viewParty.addEventListener('submit', function(e) {
                                 // releaseText = document.createElement('div')
                                 // releaseText.setAttribute('id', 'text')
                                 releaseText.innerText = data
-                                document.body.appendChild(overlayDiv)
+                                //document.body.appendChild(overlayDiv)
                                 // overlayDiv.append(releaseText)
                             })
                         })
