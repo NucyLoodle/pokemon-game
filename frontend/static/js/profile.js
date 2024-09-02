@@ -78,8 +78,17 @@ viewParty.addEventListener('submit', function(e) {
 
                 nameButton.addEventListener("click", function(){
                     console.log("clicked")
+
+                    //if diaply = none, switch to flex and vice versa
+
                     pokemonSpan = document.getElementById(`${data[i]['pokemon_name']}`)
-                    pokemonSpan.style.display = "flex"
+
+                    if (pokemonSpan.style.display == "none") {
+                        pokemonSpan.style.display = "flex"
+                    } else {
+                        pokemonSpan.style.display = "none"
+                    }
+                    
                     // create popup when clicked
 
                 })
