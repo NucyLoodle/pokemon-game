@@ -78,6 +78,8 @@ viewParty.addEventListener('submit', function(e) {
 
                 releaseButton = document.createElement("button")
                 releaseButton.innerText = `Release ${data[i]['pokemon_name'].toUpperCase()}?`
+                releaseButton.setAttribute('name', 'releaseButton')
+                releaseButton.setAttribute('value', `${data[i]['pokemon_name']}`)
 
                 nameButton.addEventListener("click", function(){
                     pokemonSpan = document.getElementById(`${data[i]['pokemon_name']}`)
@@ -91,6 +93,22 @@ viewParty.addEventListener('submit', function(e) {
 
                 //releaseButton.addEventListener()
                 
+                releaseForm.addEventListener("submit", function(e) { 
+                    e.preventDefault()           
+                    const formData = new FormData(this); 
+                    formData.append(e.submitter.name, e.submitter.value);
+                    const url = '/profile/release';
+                        fetch(url, { 
+                            method: 'post', 
+                            body: formData // send user choice through to python backend
+                        })
+                            .then(response => response.text()) 
+                            .then(data => {
+
+                            })
+                        })
+
+
 
                 div.append(nameButton)
                 nameButton.append(releaseSpan)
