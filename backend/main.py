@@ -70,7 +70,7 @@ def display_pokemon():
         user_id = session['id']
         return dp.get_pokemon_info(user_id)
     
-@app.route("/profile/release", methods=['GET', 'POST'])
+@app.route("/profile/release", methods=['DELETE'])
 def release_pokemon():
     pokemon_name = request.form['releaseButton']
     user_id = session['id']

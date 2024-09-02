@@ -72,7 +72,7 @@ viewParty.addEventListener('submit', function(e) {
 
                 releaseForm = document.createElement("form")
                 releaseForm.setAttribute('id', 'releaseForm')
-                releaseForm.setAttribute('method', 'POST') // should this be delete
+                releaseForm.setAttribute('method', 'DELETE') // should this be delete
                 releaseForm.setAttribute('action', '/profile/release')
                 releaseSpan.append(releaseForm)
 
@@ -99,7 +99,7 @@ viewParty.addEventListener('submit', function(e) {
                     formData.append(e.submitter.name, e.submitter.value);
                     const url = '/profile/release';
                         fetch(url, { 
-                            method: 'post', 
+                            method: 'DELETE', 
                             body: formData // send user choice through to python backend
                         })
                             .then(response => response.text()) 
