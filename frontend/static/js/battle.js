@@ -75,6 +75,7 @@ const userParty =
         .then(r=>r.json())
         .then(data => {    
     let numOfPokemon = data.length;
+    sessionStorage.setItem("numOfPokemon", `${numOfPokemon}`)
         for (let i = 0; i < numOfPokemon; i++) {
             div = document.createElement("div")
             div.setAttribute("class","partyPokemonStats")
@@ -268,31 +269,38 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
             location.href = '/profile'
         })
         
-        catchPokemonButton.style.display = "flex"
-        catchPokemonButton.setAttribute("name", "pokemonCaught")
-        catchPokemonButton.setAttribute("value", `${cpuPokemonName}`)
-        catchPokemonButton.textContent = `Catch ${cpuPokemonName}?`
-        
-        catchPokemonForm.addEventListener("submit", function(e) { 
-            e.preventDefault()           
-            //location.href = '/battle/end';
-            const formData = new FormData(this); 
-            formData.append(e.submitter.name, e.submitter.value);
-            const url = '/battle/end';
-                fetch(url, { 
-                    method: 'post', 
-                    body: formData // send user choice through to python backend
-                })
-                    .then(response => response.text()) 
-                    .then(data => {
-                    caughtPara = document.createElement("p")
-                    endBattleSection.append(caughtPara)
-                    caughtPara.innerText = `${cpuPokemonName} has been caught!`
-                    catchPokemonForm.style.display = "none"
-
+                // if num of pokemon in party less than 6
+        if (sessionStorage.getItem("numOfPokemon") < 6) {
+            catchPokemonButton.style.display = "flex"
+            catchPokemonButton.setAttribute("name", "pokemonCaught")
+            catchPokemonButton.setAttribute("value", `${cpuPokemonName}`)
+            catchPokemonButton.textContent = `Catch ${cpuPokemonName}?`
+            
+            catchPokemonForm.addEventListener("submit", function(e) { 
+                e.preventDefault()           
+                //location.href = '/battle/end';
+                const formData = new FormData(this); 
+                formData.append(e.submitter.name, e.submitter.value);
+                const url = '/battle/end';
+                    fetch(url, { 
+                        method: 'post', 
+                        body: formData // send user choice through to python backend
                     })
+                        .then(response => response.text()) 
+                        .then(data => {
+                        
+                        caughtPara = document.createElement("p")
+                        endBattleSection.append(caughtPara)
+                        caughtPara.innerText = `${cpuPokemonName} has been caught!`
+                        catchPokemonForm.style.display = "none"
 
-            })   
+                        })
+
+                })
+        }
+
+
+           
         }
 
     }
