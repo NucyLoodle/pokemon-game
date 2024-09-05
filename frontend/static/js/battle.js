@@ -8,6 +8,7 @@ const endBattleForm = document.getElementById('endBattleForm')
 const endBattleButton = document.getElementById('returnButton')
 const catchPokemonButton = document.getElementById('catchPokemon')
 const catchPokemonForm = document.getElementById('catchPokemonForm')
+const catchText = document.getElementById('text')
 
 userPartySection.style.display = "none"
 launchGame.style.display = "none"
@@ -259,6 +260,8 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
 
             catchPokemonForm.addEventListener("submit", function(e) {
                 e.preventDefault()
+                on()
+                catchText.innerText = `${cpuPokemonName} has been caught!`
 
                 const formData = new FormData(this);
                 formData.append(e.submitter.name, e.submitter.value);
@@ -270,8 +273,7 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
                         .then(response => response.text())
                         .then(data => {
 
-                            on()
-                            releaseText.innerText = `${cpuPokemonName} has been caught!`
+                            
 
                             // caughtPara = document.createElement("p")
                             // endBattleSection.append(caughtPara)
