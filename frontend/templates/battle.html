@@ -8,29 +8,29 @@
 		<title>Time to Battle!</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="../css/normalize.css">
-		<link rel="stylesheet" href="../css/battle-style.css">
-        <link rel="stylesheet" href="../css/css-pokemon-gameboy.css">
+		<link rel="stylesheet" href="/static/css/normalize.css">
+		<link rel="stylesheet" href="/static/css/battle-style.css">
+        <link rel="stylesheet" href="/static/css/css-pokemon-gameboy.css">
 	</head>
 	<body>
         <section id = "wildPokemon" class = "framed contains-code">
-            
+
         </section>
 
 		<section id= "userPokemonChoice" class= "framed contains-code">
             <p>Choose a pokemon from your party</p>
-            
-            <section id = "party">		
-                <div id = "usersPartyPokemon">	
+
+            <section id = "party">
+                <div id = "usersPartyPokemon">
                 </div>
             </section>
 
         </section>
 
         <section id = "launchGameSection">
-            <form class = "userinput" id ="launchGameForm" class= "framed buttons compact"> 
+            <form class = "userinput" id ="launchGameForm" class= "framed buttons compact">
                 <button type ="submit"  name = "launchBattle" value ="letsBattle" id ="launchGame" class = "fade-in choice">Let's Battle!</button>
-                
+
             </form>
         </section>
 
@@ -41,13 +41,13 @@
             <!-- <form> -->
                 <button name="returnToProfile" value="battleDone" id="returnButton">Return To Profile</button>
             <!-- </form> -->
-            <form class = "userinput" id="catchPokemonForm" class= "framed buttons compact"> 
+            <form class = "userinput" id="catchPokemonForm" class= "framed buttons compact">
                 <button type = "submit" id="catchPokemon" name="catch" value = "catchThePoke" action="/battle/end"></button>
             </form>
-            
-        </section> 
+
+        </section>
 
 
-		<script type="text/javascript" src="../js/battle.js"></script>
+		<script type="text/javascript" src="/static/js/battle.js"></script>
 	</body>
 </html>

@@ -8,9 +8,9 @@
 		<title>Pokemon Battle!</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="../css/normalize.css">
-		<link rel="stylesheet" href="../css/profile.css">
-		<link rel="stylesheet" href="../css/css-pokemon-gameboy.css">
+		<link rel="stylesheet" href="/static/css/normalize.css">
+		<link rel="stylesheet" href="static/css/profile.css">
+		<link rel="stylesheet" href= "/static/css/css-pokemon-gameboy.css">
 	</head>
 	<body>
 		<div id="overlay" onclick="off()">
@@ -23,10 +23,10 @@
 		</section>
 
 		<section id = "party">
-			<form id= "viewParty" method="POST" action="/profile/party"> 
+			<form id= "viewParty" method="POST" action="/profile/party">
                 <button name = "viewParty" value="viewParty" id = "viewPartyButton">View Your Party</button>
-			</form>			
-			<div class ="framed contains-code" id = "usersPartyPokemon">	
+			</form>
+			<div class ="framed contains-code" id = "usersPartyPokemon">
 			</div>
 		</section>
 		<section id = "links">
@@ -34,6 +34,6 @@
 			<a href="{{ url_for('main_battle_page') }}" id = "mainBattleLink">Battle</a>
 			<a href="{{url_for('logout') }}">Logout</a>
 		</section>
-		<script type="text/javascript" src="../js/profile.js"></script>
+		<script type="text/javascript" src="/static/js/profile.js"></script>
 	</body>
 </html>

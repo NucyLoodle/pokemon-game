@@ -8,18 +8,18 @@
 		<title>Time to Battle!</title>
 
 		<!-- external CSS link -->
-		<link rel="stylesheet" href="../css/normalize.css">
-		<link rel="stylesheet" href="../css/battle-style.css">
-        <link rel="stylesheet" href="../css/css-pokemon-gameboy.css">
+		<link rel="stylesheet" href="/static/css/normalize.css">
+		<link rel="stylesheet" href="/static/css/battle-style.css">
+        <link rel="stylesheet" href="/static/css/css-pokemon-gameboy.css">
 	</head>
 	<body>
 		<section id= "userPokemonChoice" class= "framed contains-code">
-            <p>Now, which Pokemon do you want? 
+            <p>Now, which Pokemon do you want?
             The three available Pokemon are BULBASAUR, CHARMANDER, and SQUIRTLE.</p>
-            <form class= "userinput" method="POST" action="/first-battle" id= "form" class= "framed buttons compact"> 
+            <form class= "userinput" method="POST" action="/first-battle" id= "form" class= "framed buttons compact">
                 <button name = "userPokemonChoice" value="bulbasaur" class = "fade-in choice">Bulbasaur</button>
                 <button name = "userPokemonChoice" value="charmander" class = "fade-in choice">Charmander</button>
-                <button name = "userPokemonChoice" value="squirtle" class = "fade-in choice">Squirtle</button>    
+                <button name = "userPokemonChoice" value="squirtle" class = "fade-in choice">Squirtle</button>
             </form>
         </section>
 
@@ -27,20 +27,20 @@
         </section>
 
         <section id = "launchGameSection">
-            <form class = "userinput" id ="launchGameForm" class= "framed buttons compact"> 
+            <form class = "userinput" id ="launchGameForm" class= "framed buttons compact">
                 <button type ="submit"  name = "launchBattle" value ="letsBattle" id ="launchGame" class = "fade-in choice">Let's Battle!</button>
-                
+
             </form>
         </section>
 
         <section id = "gamePlay" class="framed contains-code">
         </section>
         <section id = "endBattle">
-            <form class = "framed buttons compact" id="endBattleForm" method="POST" action="/profile"> 
+            <form class = "framed buttons compact" id="endBattleForm" method="POST" action="/profile">
                 <button name="returnToProfile" value="battleDone" id="returnButton" type="submit">Return To Profile</button>
-            </form> 
+            </form>
         </section>
 
-		<script type="text/javascript" src="../js/first-battle.js"></script>
+		<script type="text/javascript" src="/static/js/first-battle.js"></script>
 	</body>
 </html>

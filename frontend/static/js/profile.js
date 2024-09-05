@@ -18,12 +18,11 @@ mainBattleButton.style.display = "none"
 const releaseText = document.getElementById('text')
 
 
-const userFlag = 
+const userFlag =
     fetch('/profile/flag')
         .then(r=>r.json())
         .then(data => {
-    return data;
-});
+        });
 window.onload = async () => {
     let someData = await userFlag;
     if (someData['first_battle'] == 1) {
@@ -35,7 +34,7 @@ window.onload = async () => {
 function on() {
     document.getElementById("overlay").style.display = "block";
 }
-  
+
 function off() {
     document.getElementById("overlay").style.display = "none";
     location.reload()
@@ -45,22 +44,18 @@ function off() {
 
 viewParty.addEventListener('submit', function(e) {
     e.preventDefault();
-    const formData = new FormData(this); 
+    const formData = new FormData(this);
     formData.append(e.submitter.name, e.submitter.value);
     const url = '/profile/party';
-      fetch(url, { 
-          method: 'post', 
-          body: formData // send user choice through to python backend
+      fetch(url, {
+          method: 'post',
+          body: formData
       })
-        .then(response => response.json()) 
+        .then(response => response.text())
         .then(data => {
-            console.log(data)
-            console.log(data.length)
-            console.log(data[0])
-
             let numOfPokemon = data.length;
             for (let i = 0; i < numOfPokemon; i++) {
- 
+
                 div = document.createElement("div")
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
@@ -99,18 +94,18 @@ viewParty.addEventListener('submit', function(e) {
                         }
                     })
 
-                    releaseForm.addEventListener("submit", function(e) { 
-                        
+                    releaseForm.addEventListener("submit", function(e) {
+
                         e.preventDefault()
-                                
-                        const formData = new FormData(this); 
+
+                        const formData = new FormData(this);
                         formData.append(e.submitter.name, e.submitter.value);
                         const url = '/profile/release';
-                            fetch(url, { 
-                                method: 'DELETE', 
+                            fetch(url, {
+                                method: 'DELETE',
                                 body: formData // send user choice through to python backend
                             })
-                                .then(response => response.text()) 
+                                .then(response => response.text())
                                 .then(data => {
                                     on()
                                     releaseText.innerText = data
@@ -124,19 +119,19 @@ viewParty.addEventListener('submit', function(e) {
                     namePara.innerText = data[i]['pokemon_name'].toUpperCase()
                     div.append(namePara)
                 }
-                
 
 
 
-                
-                
 
-                
+
+
+
+
                 spriteImg = document.createElement("img")
                 spriteImg.setAttribute("src", `${data[i]["pokemon_sprite"]}`)
                 div.append(spriteImg)
 
-                
+
                 typePara = document.createElement("p")
                 div.append(typePara)
                 typePara.innerText = "Type: " + data[i]['pokemon_type']
@@ -158,7 +153,7 @@ viewParty.addEventListener('submit', function(e) {
             usersPartyPokemon.style.display = "flex"
             viewPartyButton.style.display = "none"
         })
-    })   
+    })
 
 
 mainBattleButton.addEventListener("click", function(e) {
@@ -166,7 +161,7 @@ mainBattleButton.addEventListener("click", function(e) {
     if (sessionStorage.getItem("numOfPokemon") > 5) {
         partyIsBig = document.createElement("p")
         linksSection.append(partyIsBig)
-        partyIsBig.innerText = 
+        partyIsBig.innerText =
         `You already have ${sessionStorage.getItem("numOfPokemon")} pokemon in your party.
         Release a pokemon to catch another!`
         mainBattleButton.style.display = "none"

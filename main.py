@@ -1,20 +1,64 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-import first_battle
+
+
 import hashlib
-import db_utils as db
-import display_profile as dp 
-import add_pokemon as add
-import main_battle as mb
-import release_pokemon as rp
+import backend.db_utils as db
+import backend.display_profile as dp
+import backend.add_pokemon as add
+import backend.main_battle as mb
+import backend.release_pokemon as rp
+import backend.first_battle as fb
 import re
 
+
 app = Flask(__name__ ,
-            static_url_path='',
-            static_folder='../frontend/static',
-            template_folder='../frontend/templates')
+            # static_url_path='',
+            static_folder='/home/nucyloodle/pokemon-game/frontend/static/',
+            template_folder='/home/nucyloodle/pokemon-game/frontend/templates/')
+app.config["DEBUG"] = True
+app.secret_key = "fa5107419e490df4c861a681"
 
+@app.route('/', methods=['GET', 'POST'])
+def register():
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        hash = password + app.secret_key
+        hash = hashlib.sha1(hash.encode())
+        password = hash.hexdigest()
 
-app.secret_key = 'fa5107419e490df4c861a681'
+        queryOne = """
+                    INSERT INTO user_profile (email, user_name, first_battle)
+                    VALUES (%s, %s, 0);
+                    """
+        queryTwo =  """
+                    INSERT INTO passwords (user_id, password)
+                    VALUES
+                    ((SELECT user_id FROM user_profile
+                    WHERE email = %s
+                    AND user_name = %s), %s);
+                    """
+        account = db.connect_db(queryOne, (email, username,))
+        db.connect_db(queryTwo, (email, username, password,))
+        if account:
+            msg = 'Account already exists!'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers!'
+        elif not username or not password or not email:
+            msg = 'Please fill out the form!'
+        else:
+            hash = password + app.secret_key
+            hash = hashlib.sha1(hash.encode())
+            password = hash.hexdigest()
+            msg = 'You have successfully registered!'
+
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return render_template('index.html', msg=msg)
 
 @app.route("/login/")
 def login_page():
@@ -31,18 +75,19 @@ def login():
         password = hash.hexdigest()
 
         query = """
-                    SELECT * FROM user_profile u 
-                    INNER JOIN passwords p 
+                    SELECT * FROM user_profile u
+                    INNER JOIN passwords p
                     ON u.user_id = p.user_id
-                    WHERE u.user_name = %s 
+                    WHERE u.user_name = %s
                     AND p.password = %s;
-                """    
+                """
         account = db.connect_db(query, (username, password,))
-        print(account)
         if account:
             session['loggedin'] = True
             session['id'] = account['user_id']
             session['username'] = account['user_name']
+            session['flag'] = account['first_battle']
+            msg = "correct"
             return redirect(url_for('profile'))
         else:
             msg = "wrong username/password"
@@ -52,53 +97,46 @@ def login():
 def first_battle_flag():
     if 'loggedin' in session:
         user_id = session['id']
-        print(dp.get_flag(user_id))
         return dp.get_flag(user_id)
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     if 'loggedin' in session:
-        user_id = session['id']
-        # print(dp.get_flag(user_id))
-        # if dp.get_flag(user_id)['first_battle'] == 1:
-        #     msg = "first battle completed"
         return render_template('profile.html', username=session['username'])
     return redirect(url_for('login'))
-    
+
 @app.route("/profile/party", methods=['GET', 'POST'])
 def display_pokemon():
     if request.form['viewParty'] == 'viewParty':
         user_id = session['id']
-        return dp.get_pokemon_info(user_id)
-    
+
+        if len(dp.get_pokemon_info(user_id)) == 0:
+            return {"num" : 0}
+        if len(dp.get_pokemon_info(user_id)) == 1:
+            return dp.get_pokemon_info(user_id)[0]
+        else:
+            return dp.get_pokemon_info(user_id)
+
+
 @app.route("/profile/release", methods=['DELETE'])
 def release_pokemon():
     pokemon_name = request.form['releaseButton']
     user_id = session['id']
-    print(pokemon_name)    
     return rp.delete_pokemon(user_id, pokemon_name)
 
-
-    
 @app.route("/first-battle")
 def battle_page():
-    print(session['flag'])
-    # if 'loggedin' in session and session['flag'] == True:
-
-    #     return redirect(url_for('main_battle_page'))
-         
     if 'loggedin' in session:
         return render_template('first-battle.html')
-    
     return redirect(url_for('login'))
+
 
 @app.route("/first-battle", methods=['POST', 'GET'])
 def get_user_cpu_pokemon():
-
     if request.method == 'POST' and "userPokemonChoice" in request.form:
         user_pokemon_name = request.form['userPokemonChoice']
         user_id = session['id']
-        data = first_battle.get_response_from_api(user_pokemon_name)
+        data = fb.get_response_from_api(user_pokemon_name)
         pokemon_id = data['id']
         pokemon_type = data['types'][0]['type']['name']
         hp = data['stats'][0]['base_stat']
@@ -114,17 +152,18 @@ def get_user_cpu_pokemon():
             add.add_pokemon_moves(user_id, user_pokemon_name)
         else:
             return jsonify ({"failure" :"You have already caught this pokemon"})
-        return first_battle.get_pokemon_data()
+        return fb.get_pokemon_data()
+
 
 @app.route("/first-battle/end", methods=['POST', 'GET'])
 def finish_battle():
     user_id = session['id']
-    return first_battle.first_battle_completed(user_id)
+    return fb.first_battle_completed(user_id)
 
 @app.route("/battle")
 def main_battle_page():
     if 'loggedin' in session:
-        return render_template('battle.html') 
+        return render_template('battle.html')
     return redirect(url_for('login'))
 
 @app.route("/battle/party" , methods=['POST', 'GET'])
@@ -141,13 +180,6 @@ def get_cpu_pokemon():
     session['cpu_pokemon_name'] = cpu_pokemon_name
     return mb.get_pokemon_data(cpu_pokemon_name)
 
-
-
-
-# @app.route("/battle/end" , methods=['POST', 'GET'])
-# def end_of_battle():
-#     return render_template('battle-end.html')
-
 @app.route("/battle/end", methods=['POST', 'GET'])
 def catch_pokemon():
     cpu_pokemon_name = session['cpu_pokemon_name']
@@ -155,7 +187,7 @@ def catch_pokemon():
     pokemon_id = mb.get_pokemon_id(cpu_pokemon_name)
     pokemon_type = mb.get_pokemon_type(cpu_pokemon_name)
     pokemon_sprite = mb.get_pokemon_sprite(cpu_pokemon_name)
-    hp = first_battle.get_hp_stat(cpu_pokemon_name)
+    hp = fb.get_hp_stat(cpu_pokemon_name)
     level = 1
     exp = mb.get_pokemon_exp(cpu_pokemon_name)
     weight = mb.get_pokemon_weight(cpu_pokemon_name)
@@ -165,64 +197,10 @@ def catch_pokemon():
     add.add_pokemon_sprites(user_id, cpu_pokemon_name, pokemon_sprite)
     add.add_pokemon_moves(user_id, cpu_pokemon_name)
     return "success"
-    
+
 @app.route("/logout")
 def logout():
-    # Remove session data, this will log the user out
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
-    # Redirect to login page
     return redirect(url_for('login'))
-
-
-@app.route('/', methods=['GET', 'POST'])
-def register():
-    # Output message if something goes wrong...
-    msg = ''
-    # Check if "username", "password" POST requests exist (user submitted form)
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        # Create variables for easy access
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-        hash = password + app.secret_key
-        hash = hashlib.sha1(hash.encode())
-        password = hash.hexdigest()
-
-        queryOne = """
-                    INSERT INTO user_profile (email, user_name, first_battle)
-                    VALUES (%s, %s, %s);
-                    """
-        queryTwo =  """
-                    INSERT INTO passwords (user_id, password)
-                    VALUES 
-                    ((SELECT user_id FROM user_profile 
-                    WHERE email = %s 
-                    AND user_name = %s), %s);
-                    """
-        account = db.connect_db(queryOne, (email, username, 0,))
-        db.connect_db(queryTwo, (email, username, password,))
-        if account:
-            msg = 'Account already exists!'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address!'
-        elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers!'
-        elif not username or not password or not email:
-            msg = 'Please fill out the form!'
-        else:
-            # Hash the password
-            hash = password + app.secret_key
-            hash = hashlib.sha1(hash.encode())
-            password = hash.hexdigest()
-            msg = 'You have successfully registered!'
-    
-    elif request.method == 'POST':
-        # Form is empty... (no POST data)
-        msg = 'Please fill out the form!'
-    # Show registration form with message (if any)
-    return render_template('index.html', msg=msg)
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5001)

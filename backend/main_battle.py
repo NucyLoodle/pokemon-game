@@ -1,7 +1,8 @@
 import requests
-import db_utils as db
+import backend.db_utils as db
 import random
-import first_battle as fb
+import backend.first_battle as fb
+import json
 
 
 
@@ -17,13 +18,13 @@ def get_pokemon_info_for_battle(user_id):
             WHERE pokemon_moves.pokemon_db_id IN (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s);
             """
     result = db.connect_db_multiple_results(query, (user_id,))
-    return result
+    return json.dumps(result)
 
 def get_maximum_user_hp(user_id):
     # get hp of user_pokemon
     query =  """
-                SELECT MAX(hp) 
-                FROM pokemon_stats 
+                SELECT MAX(hp)
+                FROM pokemon_stats
                 WHERE pokemon_stats.pokemon_db_id IN (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s);
                 """
     result = db.connect_db(query, (user_id,))
@@ -52,13 +53,13 @@ def get_pokemon_with_similar_hp(max_hp, user_id):
     query = """
             SELECT pokemon_name FROM pokemon WHERE pokemon.user_id = %s;
             """
-    party_pokemon = db.connect_db_multiple_results(query, (user_id,))    
+    party_pokemon = db.connect_db_multiple_results(query, (user_id,))
     party_names = []
 
     for i in range(0, len(party_pokemon)):
         party_names.append(party_pokemon[i]['pokemon_name'])
         pokemon_names.remove(party_names[i])
-        
+
     return pokemon_names
 
 

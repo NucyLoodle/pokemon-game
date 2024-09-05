@@ -1,7 +1,9 @@
-import db_utils as db
+import backend.db_utils as db
+import json
+
 
 def get_pokemon_info(user_id):
-    
+
     # access the db to get a list of user's pokemon and their stats
 
     query = """
@@ -12,7 +14,7 @@ def get_pokemon_info(user_id):
             WHERE pokemon_stats.pokemon_db_id IN (SELECT pokemon.pokemon_db_id FROM pokemon WHERE pokemon.user_id = %s);
             """
     result = db.connect_db_multiple_results(query, (user_id,))
-    return result
+    return json.dumps(result)
 
 def get_flag(user_id):
     query = """
