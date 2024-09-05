@@ -84,6 +84,7 @@ def get_pokemon_type(pokemon_name):
 def get_moves(pokemon_name):
     data = fb.get_response_from_api(pokemon_name)
     print(data, file=sys.stderr)
+    print(len(data), file=sys.stderr)
     move_names = []
     print(move_names, file=sys.stderr)
     for i in range(len(data)):
