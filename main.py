@@ -126,8 +126,11 @@ def release_pokemon():
 
 @app.route("/first-battle")
 def battle_page():
+    if session['flag'] == True:
+        return redirect(url_for('main_battle_page'))
     if 'loggedin' in session:
         return render_template('first-battle.html')
+
     return redirect(url_for('login'))
 
 
