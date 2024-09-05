@@ -56,17 +56,18 @@ viewParty.addEventListener('submit', function(e) {
         .then(response => response.json())
         .then(data => {
             let numOfPokemon = data.length;
+            if (numOfPokemon === 0) {
+                para = document.createElement('p')
+                para.innerText = "You haven't caught any pokemon yet!"
+                usersPartyPokemon.append(para)
+
+            }
             for (let i = 0; i < numOfPokemon; i++) {
 
                 div = document.createElement("div")
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
-                if (numOfPokemon === 0) {
-                    para = document.createElement('p')
-                    para.innerText = "You haven't caught any pokemon yet!"
-                    div.append(para)
-
-                }
+                
                 if (numOfPokemon > 1) {
                     nameButton = document.createElement("button")
                     nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
