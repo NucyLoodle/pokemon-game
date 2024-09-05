@@ -29,7 +29,7 @@ function on() {
 
 function off() {
     document.getElementById("overlay").style.display = "none";
-    location.reload()
+    location.href = "/profile"
 }
 
 
