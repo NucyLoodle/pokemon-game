@@ -56,6 +56,7 @@ viewParty.addEventListener('submit', function(e) {
         .then(response => response.json())
         .then(data => {
             let numOfPokemon = data.length;
+            sessionStorage.setItem("numOfPokemon")
             if (numOfPokemon === 0) {
                 para = document.createElement('p')
                 para.innerText = "You haven't caught any pokemon yet!"
