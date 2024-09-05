@@ -6,4 +6,4 @@ def delete_pokemon(user_id, pokemon_name):
             """
     result = db.connect_db(query, (pokemon_name, user_id,))
 
-    return f'{pokemon_name} released!'
+    return f'{pokemon_name.upper()} released!'

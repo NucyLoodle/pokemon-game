@@ -261,7 +261,7 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
             catchPokemonForm.addEventListener("submit", function(e) {
                 e.preventDefault()
                 on()
-                catchText.innerText = `${cpuPokemonName} has been caught!`
+                catchText.innerText = `${cpuPokemonName.toUpperCase()} has been caught!`
   
                 sessionStorage.setItem("numOfPokemon", (Number(sessionStorage.getItem("numOfPokemon")) + 1))
                 const formData = new FormData(this);
