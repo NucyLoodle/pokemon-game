@@ -201,10 +201,11 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
             if (cpuDamage == 0) {
                 return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()}. It had no effect!`
               } else {
-                createButtonsForUser(userPokemonMoves)
+                
                 return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
                 ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!`
               }
+              createButtonsForUser(userPokemonMoves)
         } else {
             document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
             document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
