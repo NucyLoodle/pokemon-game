@@ -53,7 +53,7 @@ viewParty.addEventListener('submit', function(e) {
           method: 'post',
           body: formData
       })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             let numOfPokemon = data.length;
             for (let i = 0; i < numOfPokemon; i++) {
