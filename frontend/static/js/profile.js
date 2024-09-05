@@ -114,7 +114,7 @@ viewParty.addEventListener('submit', function(e) {
                             })
                                 .then(response => response.text())
                                 .then(data => {
-                                    sessionStorage.setItem("numOfPokemon", (sessionStorage.getItem("numOfPokemon") - 1))
+                                    sessionStorage.setItem("numOfPokemon", (Number(sessionStorage.getItem("numOfPokemon")) - 1))
                                     on()
                                     releaseText.innerText = data
                                 })
