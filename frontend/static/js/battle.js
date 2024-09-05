@@ -262,7 +262,8 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
                 e.preventDefault()
                 on()
                 catchText.innerText = `${cpuPokemonName} has been caught!`
-                sessionStorage.setItem("numOfPokemon", Number((sessionStorage.getItem("numOfPokemon") + 1)))
+  
+                sessionStorage.setItem("numOfPokemon", (Number(sessionStorage.getItem("numOfPokemon")) + 1))
                 const formData = new FormData(this);
                 formData.append(e.submitter.name, e.submitter.value);
                 const url = '/battle/end';
