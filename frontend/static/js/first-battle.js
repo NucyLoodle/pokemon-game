@@ -120,13 +120,16 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
     userPokemonHp = sessionStorage.getItem("userPokemonHp") - cpuDamage
     sessionStorage.setItem("userPokemonHp", userPokemonHp)
     if (userPokemonHp > 0) {
-      if (cpuDamage == 0) {
-        return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()}. It had no effect!`
-      } else {
-        createButtonsForUser(userPokemonMoves)
-        return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
-        ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!`
-      }
+      if (userPokemonHp > 0) {
+        if (cpuDamage == 0) {
+            createButtonsForUser(userPokemonMoves)
+            return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()}. It had no effect!`
+            
+          } else {
+            createButtonsForUser(userPokemonMoves)
+            return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
+            ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!`
+          }
       
     } else {
       document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
