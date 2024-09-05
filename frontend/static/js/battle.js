@@ -199,13 +199,15 @@ function cpuTurn(cpuPokemonName, cpuPokemonMoves, userPokemonHp, userPokemonName
         sessionStorage.setItem("userPokemonHp", userPokemonHp)
         if (userPokemonHp > 0) {
             if (cpuDamage == 0) {
+                createButtonsForUser(userPokemonMoves)
                 return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()}. It had no effect!`
-              } else {
                 
+              } else {
+                createButtonsForUser(userPokemonMoves)
                 return `${cpuPokemonName.toUpperCase()} used ${cpuMove.toUpperCase()} causing ${cpuDamage} damage!
                 ${userPokemonName.toUpperCase()}'s hp was reduced to ${userPokemonHp}!`
               }
-              createButtonsForUser(userPokemonMoves)
+              
         } else {
             document.querySelectorAll('.oldPara').forEach(para => para.style.display = "none")
             document.querySelectorAll('button').forEach(button => button.style.display = "none") //hide user choice buttons after selection
