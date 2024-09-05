@@ -22,6 +22,15 @@ let cpuPokemonName;
 let cpuPokemonHp;
 let cpuPokemonMoves;
 
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+    location.reload()
+}
+
 
 function handleMovesArray(a) {
     a = a.map(function(x){ return x.toUpperCase(); })
@@ -261,10 +270,13 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
                         .then(response => response.text())
                         .then(data => {
 
-                        caughtPara = document.createElement("p")
-                        endBattleSection.append(caughtPara)
-                        caughtPara.innerText = `${cpuPokemonName} has been caught!`
-                        catchPokemonForm.style.display = "none"
+                            on()
+                            releaseText.innerText = `${cpuPokemonName} has been caught!`
+
+                            // caughtPara = document.createElement("p")
+                            // endBattleSection.append(caughtPara)
+                            // caughtPara.innerText = `${cpuPokemonName} has been caught!`
+                            catchPokemonForm.style.display = "none"
 
                         })
 
@@ -276,6 +288,8 @@ function endBattle(cpuPokemonHp, userPokemonHp) {
         }
 
     }
+
+
 
 
 
