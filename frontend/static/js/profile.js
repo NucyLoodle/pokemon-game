@@ -22,13 +22,15 @@ const userFlag =
     fetch('/profile/flag')
         .then(r=>r.json())
         .then(data => {
+            if (data['first_battle'] == 1) {
+                firstBattleButton.style.display = "none"
+                mainBattleButton.style.display = "flex"
+            }
         });
+
 window.onload = async () => {
     let someData = await userFlag;
-    if (someData['first_battle'] == 1) {
-        firstBattleButton.style.display = "none"
-        mainBattleButton.style.display = "flex"
-    }
+
 };
 
 function on() {
@@ -59,14 +61,17 @@ viewParty.addEventListener('submit', function(e) {
                 div = document.createElement("div")
                 div.setAttribute("class","partyPokemonStats")
                 usersPartyPokemon.append(div)
+                if (numOfPokemon === 0) {
+                    para = document.createElement('p')
+                    para.innerText = "You haven't caught any pokemon yet!"
+                    div.append(para)
 
+                }
                 if (numOfPokemon > 1) {
                     nameButton = document.createElement("button")
                     nameButton.setAttribute("value", `${data[i]['pokemon_name']}`)
                     nameButton.setAttribute("class", "popup")
                     nameButton.innerText = data[i]['pokemon_name'].toUpperCase()
-
-
                     releaseSpan = document.createElement("span")
                     releaseSpan.setAttribute("class", "popuptext")
                     releaseSpan.setAttribute("id", `${data[i]['pokemon_name']}`)
