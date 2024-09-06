@@ -1,0 +1,23 @@
+.welcome {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.welcome > h1 {
+    align-self: center;
+}
+
+.sprites {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

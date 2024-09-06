@@ -10,20 +10,25 @@
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="/static/css/normalize.css">
 		<link rel="stylesheet" href= "/static/css/css-pokemon-gameboy.css">
+		<link rel="stylesheet" href= "../static/css/css-pokemon-gameboy.css">
+		<link rel="stylesheet" href= "/static/css/index.css">
+		<link rel="stylesheet" href= "../static/css/index.css">
 	</head>
 	<body>
 		<div class="welcome">
 			<h1>Get ready to battle!</h1>
-			<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/1.png">
-			<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/4.png">
-			<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/7.png">
+			<section class="sprites">
+				<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/1.png">
+				<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/4.png">
+				<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/7.png">
+			</section>
 			<p>Inspired by Pokemon Red & Blue, this is a basic text-based game where you can choose one of the original starter pokemon, and then battle to collect other Gen I pokemon.</p>
 			<p>Note: type advantage is not at play here but may be in a future version...</p>
 		</div>
 		<div class="register">
 			<p>Please create an account to play. You can then save any pokemon you catch to your party!</p>
 			
-			<form action="{{ url_for('register') }}" method="post" autocomplete="off">
+			<form action="{{ url_for('register') }}" method="post" autocomplete="off" class="framed contains-code">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
@@ -40,10 +45,13 @@
 				<button type="submit" value="Register">Register</button>
 				
 			</form>
-			<p>Already got an account?</p>
-			<div class="links">
-				<button type="button" onclick="window.location.href='{{ url_for( 'login' ) }}';">Login</button>
-			</div>
+
+			<section class="login">
+				<p>Already got an account?</p>
+				<div class="links">
+					<button type="button" onclick="window.location.href='{{ url_for( 'login' ) }}';">Login</button>
+				</div>
+			</section>
 		</div>
 
 
