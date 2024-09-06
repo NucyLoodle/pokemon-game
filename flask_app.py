@@ -9,6 +9,7 @@ import backend.main_battle as mb
 import backend.release_pokemon as rp
 import backend.first_battle as fb
 import re
+import sys
 
 
 app = Flask(__name__ ,
@@ -45,6 +46,7 @@ def register():
         
                     """
         account = db.connect_db(queryThree, (email, username,))
+        print(len(account), file=sys.stderr)
         
         if account:
             msg = 'Account already exists!'
