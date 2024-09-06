@@ -15,9 +15,17 @@
     justify-content: space-evenly;
 }
 
-.login {
+.login, .framed.contains-code {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    height: 8em;
+}
+
+.msg{
+    display: block;
+    position: absolute;
+    bottom: 0;
+
 }
