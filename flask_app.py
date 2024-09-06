@@ -40,8 +40,12 @@ def register():
                     WHERE email = %s
                     AND user_name = %s), %s);
                     """
-        account = db.connect_db(queryOne, (email, username,))
-        db.connect_db(queryTwo, (email, username, password,))
+        queryThree = """
+                    SELECT * FROM user_profile WHERE email = %s AND user_name= %s;
+        
+                    """
+        account = db.connect_db(queryThree, (email, username,))
+        
         if account:
             msg = 'Account already exists!'
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
@@ -54,6 +58,8 @@ def register():
             hash = password + app.secret_key
             hash = hashlib.sha1(hash.encode())
             password = hash.hexdigest()
+            db.connect_db(queryOne,(email, username))
+            db.connect_db(queryTwo, (email, username, password,))
             msg = 'You have successfully registered!'
 
     elif request.method == 'POST':
