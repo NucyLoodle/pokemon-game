@@ -12,12 +12,14 @@
 		<link rel="stylesheet" href= "/static/css/css-pokemon-gameboy.css">
 	</head>
 	<body>
+		<div class="welcome">
+			<h1>Get ready to battle!</h1>
+			<p>Inspired by Pokemon Red & Blue, this is a basic text-based game where you can choose one of the original starter pokemon, and then battle to collect other Gen I pokemon.</p>
+			<p>Note: type advantage is not at play here but may be in a future version...</p>
+		</div>
 		<div class="register">
-			<h1>Register</h1>
-			<div class="links">
-				<a href="{{ url_for('login') }}">Login</a>
-				<a href="{{ url_for('register') }}" class="active">Register</a>
-			</div>
+			<p>Please create an account to play. You can then save any pokemon you catch to your party!</p>
+			
 			<form action="{{ url_for('register') }}" method="post" autocomplete="off">
 				<label for="username">
 					<i class="fas fa-user"></i>
@@ -33,7 +35,13 @@
 				<input type="email" name="email" placeholder="Email" id="email" required>
 				<div class="msg">{{ msg }}</div>
 				<input type="submit" value="Register">
+				
 			</form>
+			<p>Already got an account?</p>
+			<div class="links">
+				<button type="button" onclick="window.location.href='{{ url_for( 'login' ) }}';">Login</button>
+				<a href="{{ url_for('login') }}">Login</a>
+			</div>
 		</div>
 
 
