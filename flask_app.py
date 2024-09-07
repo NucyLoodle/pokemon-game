@@ -62,6 +62,7 @@ def register():
             db.connect_db(queryOne,(email, username))
             db.connect_db(queryTwo, (email, username, password,))
             msg = 'You have successfully registered!'
+            return redirect(url_for('login'))
 
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
