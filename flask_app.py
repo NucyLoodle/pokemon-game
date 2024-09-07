@@ -42,11 +42,10 @@ def register():
                     AND user_name = %s), %s);
                     """
         queryThree = """
-                    SELECT * FROM user_profile WHERE email = %s AND user_name= %s;
+                    SELECT * FROM user_profile WHERE email = %s OR user_name= %s;
         
                     """
         account = db.connect_db(queryThree, (email, username,))
-        print(len(account), file=sys.stderr)
         
         if account:
             msg = 'Account already exists!'
@@ -56,7 +55,7 @@ def register():
             msg = 'Username must contain only characters and numbers!'
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
-        else:
+        if not account:
             hash = password + app.secret_key
             hash = hashlib.sha1(hash.encode())
             password = hash.hexdigest()
