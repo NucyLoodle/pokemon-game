@@ -30,9 +30,12 @@
 			</div>
 		</section>
 		<section id = "links">
-			<a href="{{ url_for('battle_page') }}" id = "firstBattleLink">Battle</a>
+			<button type="button" id = "firstBattleLink" onclick="window.location.href='{{ url_for('battle_page') }}';">Battle</button>
+			<button type="button" id = "firstBattleLink" onclick="window.location.href='{{ url_for('main_battle_page') }}';">Battle</button>
+			<button type="button" id = "firstBattleLink" onclick="window.location.href='{{url_for('logout') }}';">Logout</button>
+			<!-- <a href="{{ url_for('battle_page') }}" id = "firstBattleLink">Battle</a>
 			<a href="{{ url_for('main_battle_page') }}" id = "mainBattleLink">Battle</a>
-			<a href="{{url_for('logout') }}">Logout</a>
+			<a href="{{url_for('logout') }}">Logout</a> -->
 		</section>
 		<script type="text/javascript" src="/static/js/profile.js"></script>
 	</body>
