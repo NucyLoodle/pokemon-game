@@ -30,7 +30,7 @@
 
 }
 
-.Fields {
+input {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
@@ -38,7 +38,7 @@
  }
 
 @media (max-width: 600px) {
-    .Fields {
+    input {
        flex-direction: column-reverse;
     }
  }
