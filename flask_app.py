@@ -189,7 +189,6 @@ def get_cpu_pokemon():
     pokemon_names = mb.get_pokemon_with_similar_hp(max_hp,user_id)
     cpu_pokemon_name = mb.cpu_pokemon_choice(pokemon_names)
     print(cpu_pokemon_name, file=sys.stderr)
-    #cpu_pokemon_name = "weedle"
     session['cpu_pokemon_name'] = cpu_pokemon_name
     return mb.get_pokemon_data(cpu_pokemon_name)
 
