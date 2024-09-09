@@ -30,15 +30,31 @@
 
 }
 
-input {
+input, form{
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
     justify-content: space-around;
+    
  }
 
-@media (max-width: 600px) {
+
+
+@media screen and (max-width: 1192px) {
     input {
-       flex-direction: column-reverse;
+       
+        width:100%;
+        margin: 1em
+    }
+    form {
+        
+        flex-direction: column-reverse;
+        
+    }
+
+    .login, .framed.contains-code { 
+        padding-bottom:13em
+    }
+    .login {
+        margin-top:2em
     }
  }
