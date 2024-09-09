@@ -14,6 +14,9 @@
   height: 3em;
 }
 
+#welcome, #party {
+  text-align: center;
+}
 
 /* Popup container - can be anything you want */
 .popup {
