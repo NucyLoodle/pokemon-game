@@ -13,6 +13,11 @@
 		<link rel="stylesheet" href= "/static/css/css-pokemon-gameboy.css">
 	</head>
 	<body>
+		<section id = "links">
+			<button type="button" id = "firstBattleLink" onclick="window.location.href='{{ url_for('battle_page') }}';">Battle</button>
+			<button type="button" id = "mainBattleLink" onclick="window.location.href='{{ url_for('main_battle_page') }}';">Battle</button>
+			<button type="button" onclick="window.location.href='{{url_for('logout') }}';">Logout</button>
+		</section>
 		<div id="overlay" onclick="off()">
 			<div id="text"></div>
 		</div>
@@ -29,11 +34,7 @@
 			<div class ="framed contains-code" id = "usersPartyPokemon">
 			</div>
 		</section>
-		<section id = "links">
-			<button type="button" id = "firstBattleLink" onclick="window.location.href='{{ url_for('battle_page') }}';">Battle</button>
-			<button type="button" id = "mainBattleLink" onclick="window.location.href='{{ url_for('main_battle_page') }}';">Battle</button>
-			<button type="button" onclick="window.location.href='{{url_for('logout') }}';">Logout</button>
-		</section>
+
 		<script type="text/javascript" src="/static/js/profile.js"></script>
 	</body>
 </html>
