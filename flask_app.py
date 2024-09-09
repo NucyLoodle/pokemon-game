@@ -190,7 +190,7 @@ def get_cpu_pokemon():
     #cpu_pokemon_name = mb.cpu_pokemon_choice(pokemon_names)
     cpu_pokemon_name = "weedle"
     session['cpu_pokemon_name'] = cpu_pokemon_name
-    print(mb.get_pokemon_data(cpu_pokemon_name))
+    print(mb.get_pokemon_data(cpu_pokemon_name), file=sys.stderr)
     return mb.get_pokemon_data(cpu_pokemon_name)
 
 @app.route("/battle/end", methods=['POST', 'GET'])
