@@ -6,6 +6,15 @@
 }
 
 
+#links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 8em;
+}
+
+
 /* Popup container - can be anything you want */
 .popup {
 position: relative;
