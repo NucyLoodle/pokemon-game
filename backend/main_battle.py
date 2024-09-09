@@ -83,10 +83,7 @@ def get_pokemon_type(pokemon_name):
 # get moves - keeping cpu pokemon at level 1
 def get_moves(pokemon_name):
     data = fb.get_response_from_api(pokemon_name)
-    print(data, file=sys.stderr)
-    print(len(data), file=sys.stderr)
     move_names = []
-    print(move_names, file=sys.stderr)
     for i in range(len(data['moves'])):
         if data['moves'][i]['version_group_details'][0]['move_learn_method']['name'] == "level-up" and data['moves'][i]['version_group_details'][0]['level_learned_at'] == 1:
             move_names.append(data['moves'][i]['move']['name'])
