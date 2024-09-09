@@ -29,3 +29,16 @@
     bottom: 0;
 
 }
+
+.Fields {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-around;
+ }
+
+@media (max-width: 600px) {
+    .Fields {
+       flex-direction: column-reverse;
+    }
+ }
