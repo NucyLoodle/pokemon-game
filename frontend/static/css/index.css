@@ -51,8 +51,8 @@ input, form{
         
     }
 
-    button {
-        margin-bottom: 2em;
+    #login {
+        margin-top: 2em;
     }
 
     .login, .framed.contains-code { 
