@@ -110,5 +110,5 @@ def get_pokemon_sprite(pokemon_name):
 # get info about cpu pokemon
 
 def get_pokemon_data(cpu_pokemon_name):
-    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", id = get_pokemon_id(cpu_pokemon_name), type = get_pokemon_type(cpu_pokemon_name), hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name), sprite = get_pokemon_sprite(cpu_pokemon_name) )
+    cpu_pokemon = dict(name = f"{cpu_pokemon_name}", id = get_pokemon_id(cpu_pokemon_name), type = get_pokemon_type(cpu_pokemon_name), hp = fb.get_hp_stat(cpu_pokemon_name), moves = get_moves(cpu_pokemon_name), sprite = get_pokemon_sprite(cpu_pokemon_name), base_exp = get_pokemon_exp(cpu_pokemon_name) )
     return cpu_pokemon
