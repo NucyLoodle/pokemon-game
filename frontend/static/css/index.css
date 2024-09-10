@@ -15,7 +15,7 @@
     justify-content: space-evenly;
 }
 
-.login, .framed.contains-code {
+.framed.contains-code {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,15 +51,9 @@ input, form{
         
     }
 
-    #login {
-        margin-top: 2em;
-    }
 
-    .login, .framed.contains-code { 
+    .framed.contains-code { 
         padding-bottom:13em;
         font-size: 50px
-    }
-    .login {
-        margin-top:2em
     }
  }
