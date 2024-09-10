@@ -26,9 +26,6 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        print(password, file=sys.stderr)
-
-
 
         queryOne = """
                     INSERT INTO user_profile (email, user_name, first_battle)
@@ -61,7 +58,6 @@ def register():
             password = hash.hexdigest()
             db.connect_db(queryOne,(email, username))
             db.connect_db(queryTwo, (email, username, password,))
-            print(password, file=sys.stderr)
             msg = 'You have successfully registered!'
             return redirect(url_for('login'))
 
