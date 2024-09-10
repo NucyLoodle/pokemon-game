@@ -61,7 +61,7 @@ input, form{
         font-size: 30px;
     }
 
-    welcome > p {
+    .welcome > p {
         font-size: 20px;
     }
  }
