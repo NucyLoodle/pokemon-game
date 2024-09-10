@@ -13,6 +13,9 @@
 		<link rel="stylesheet" href= "/static/css/index.css">
 	</head>
 	<body>
+		<section id = "links" class="framed primary">
+			<button type="button" onclick="window.location.href='{{url_for('register') }}';">Register</button>
+		</section>
 
 		<form action="{{ url_for('login') }}" method="post" class="framed contains-code">
 			<label for="username">
