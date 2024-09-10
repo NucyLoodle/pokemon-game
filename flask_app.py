@@ -56,9 +56,6 @@ def register():
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
         if not account:
-            hash = password + app.secret_key
-            hash = hashlib.sha1(hash.encode())
-            password = hash.hexdigest()
             db.connect_db(queryOne,(email, username))
             db.connect_db(queryTwo, (email, username, password,))
             msg = 'You have successfully registered!'
@@ -96,6 +93,7 @@ def login():
             session['username'] = account['user_name']
             session['flag'] = account['first_battle']
             msg = "correct"
+
             return redirect(url_for('profile'))
         else:
             msg = "wrong username/password"
