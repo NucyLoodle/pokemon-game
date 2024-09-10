@@ -61,7 +61,12 @@ input, form{
         font-size: 30px;
     }
 
-    .welcome > p {
+    .sprites {
+        width: 100%;
+        height: auto;
+    }
+
+    .welcome > p, .register > p {
         font-size: 20px;
     }
  }
