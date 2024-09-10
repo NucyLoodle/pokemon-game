@@ -27,10 +27,8 @@ def register():
         password = request.form['password']
         email = request.form['email']
         print(password, file=sys.stderr)
-        hash = password + app.secret_key
-        hash = hashlib.sha1(hash.encode())
-        password = hash.hexdigest()
-        print(password, file=sys.stderr)
+
+
 
         queryOne = """
                     INSERT INTO user_profile (email, user_name, first_battle)
