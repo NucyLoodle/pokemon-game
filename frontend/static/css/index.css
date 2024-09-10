@@ -51,8 +51,13 @@ input, form{
         
     }
 
+    button {
+        margin-bottom: 2em;
+    }
+
     .login, .framed.contains-code { 
-        padding-bottom:13em
+        padding-bottom:13em;
+        font-size: 50px
     }
     .login {
         margin-top:2em
