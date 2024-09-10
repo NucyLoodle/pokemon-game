@@ -15,7 +15,7 @@
     justify-content: space-evenly;
 }
 
-.framed.contains-code {
+.login, .framed.contains-code {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -54,6 +54,14 @@ input, form{
 
     .framed.contains-code { 
         padding-bottom:13em;
-        font-size: 50px
+        font-size: 30px
+    }
+
+    .login {
+        font-size: 30px;
+    }
+
+    welcome > p {
+        font-size: 20px;
     }
  }
